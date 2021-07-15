@@ -1,0 +1,17 @@
+{
+  "name": "@webmarkets/wm-mobile-menu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wm-mobile-menu.js",
+  "module": "wm-mobile-menu.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^2.0.0-rc.2",
+    "typescript": "^4.3.5"
+  }
+}
