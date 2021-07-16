@@ -27,6 +27,6 @@
         }
       ]
   },
-  "include": ["wc-src/**/*.ts"],
+  "include": ["*.ts"],
   "exclude": []
 }
