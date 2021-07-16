@@ -58,7 +58,10 @@ module.exports = function(eleventyConfig) {
   });
 
   // Copy the `img` and `css` folders to the output
-  eleventyConfig.addPassthroughCopy("src/assets/");
+  eleventyConfig.addPassthroughCopy("docs/assets/components");
+  eleventyConfig.addPassthroughCopy("docs/assets/css");
+  eleventyConfig.addPassthroughCopy("docs/assets/img");
+  eleventyConfig.addPassthroughCopy("docs/assets/scripts");
 
   // Customize Markdown library and settings:
   let markdownLibrary = markdownIt({
@@ -126,7 +129,7 @@ module.exports = function(eleventyConfig) {
 
     // These are all optional (defaults are shown):
     dir: {
-      input: "src/",
+      input: "docs/",
       includes: "includes",
       layouts: "layouts",
       data: "_data",
