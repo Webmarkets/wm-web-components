@@ -1,6 +1,6 @@
 {
-  "title": "Your Blog Name",
-  "url": "https://example.com/",
+  "title": "webmarkets Web Components",
+  "url": "https://webcomponents.webmarkets.com",
   "language": "en",
   "description": "I am writing about my experiences as a naval navel-gazer.",
   "feed": {
@@ -11,11 +11,11 @@
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
-    "url": "https://example.com/feed/feed.json"
+    "url": "https://webcomponents.webmarkets.com/feed/feed.json"
   },
   "author": {
     "name": "Your Name Here",
     "email": "youremailaddress@example.com",
-    "url": "https://example.com/about-me/"
+    "url": "https://webcomponents.webmarkets.com/about/"
   }
 }
