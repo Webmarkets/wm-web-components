@@ -4,7 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 
 export default [{
-  input: 'packages/build/wm-mobile-menu/wm-mobile-menu.js',
+  input: 'packages/tsc-build/wm-mobile-menu/wm-mobile-menu.js',
   output: {
     file: 'packages/wm-mobile-menu/build/wm-mobile-menu.bundled.js',
     format: 'esm',

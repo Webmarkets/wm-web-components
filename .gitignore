@@ -2,4 +2,4 @@ _site/
 node_modules/
 package-lock.json
 wc-build/
-packages/build
+packages/tsc-build

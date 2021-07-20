@@ -7,7 +7,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "inlineSources": true,
-    "outDir": "./packages/build",
+    "outDir": "./packages/tsc-build",
     "rootDir": "./packages",
     "strict": true,
     "noUnusedLocals": true,
