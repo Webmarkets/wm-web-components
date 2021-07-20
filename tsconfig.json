@@ -21,11 +21,11 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "plugins": [
-        {
-          "name": "ts-lit-plugin",
-          "strict": true
-        }
-      ]
+      {
+        "name": "ts-lit-plugin",
+        "strict": true
+      }
+    ]
   },
   "include": ["./packages/**/*.ts"],
   "exclude": []
