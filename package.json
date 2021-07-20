@@ -16,7 +16,7 @@
     "docs-start": "npm-run-all build:sass --parallel watch:*",
     "wc-clean": "rm -rf wc-build/",
     "wc-start": "vite --host",
-    "wc-build": "npm run wc-clean && tsc && rollup -c",
+    "wc-build": "npx tsc && rollup -c",
     "deploy": "npm run build && npx netlify deploy --prod"
   },
   "repository": {

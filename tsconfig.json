@@ -7,7 +7,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "inlineSources": true,
-    "outDir": "./",
+    "outDir": "./packages/build",
     "rootDir": "./packages",
     "strict": true,
     "noUnusedLocals": true,
@@ -27,6 +27,6 @@
         }
       ]
   },
-  "include": ["*.ts"],
+  "include": ["./packages/**/*.ts"],
   "exclude": []
 }
