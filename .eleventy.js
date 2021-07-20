@@ -59,7 +59,6 @@ module.exports = function(eleventyConfig) {
 
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("docs/assets/components");
-  eleventyConfig.addPassthroughCopy("docs/assets/css");
   eleventyConfig.addPassthroughCopy("docs/assets/img");
   eleventyConfig.addPassthroughCopy("docs/assets/scripts");
 
@@ -133,7 +132,7 @@ module.exports = function(eleventyConfig) {
       includes: "includes",
       layouts: "layouts",
       data: "_data",
-      output: "_site"
+      output: "docs-build"
     }
   };
 };

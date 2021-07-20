@@ -1,4 +1,4 @@
-_site/
+docs-build/
 node_modules/
 package-lock.json
 wc-build/
