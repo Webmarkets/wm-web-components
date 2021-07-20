@@ -14,9 +14,9 @@
     "debug": "DEBUG=* npx eleventy",
     "prestart": "npm run clean",
     "docs-start": "npm-run-all build:sass --parallel watch:*",
-    "wc-clean": "rm -rf wc-build/",
+    "wc-clean": "rm -rf packages/tsc-build",
     "wc-start": "vite --host",
-    "wc-build": "npx tsc && rollup -c",
+    "wc-build": "npm run wc-clean && npx tsc && rollup -c",
     "deploy": "npm run build && npx netlify deploy --prod"
   },
   "repository": {
