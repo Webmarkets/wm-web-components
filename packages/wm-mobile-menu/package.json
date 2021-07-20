@@ -1,9 +1,14 @@
 {
   "name": "@webmarkets/wm-mobile-menu",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "wm-mobile-menu.js",
   "module": "wm-mobile-menu.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Webmarkets/wm-web-components.git",
+    "directory": "packages/wm-mobile-menu"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,5 +18,8 @@
   "dependencies": {
     "lit": "^2.0.0-rc.2",
     "typescript": "^4.3.5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

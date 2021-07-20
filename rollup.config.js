@@ -12,9 +12,9 @@ const configs = [];
 
 packageNames.forEach((name) => {
   const esm = {
-    input: `packages/tsc-build/${name}/${name}.js`,
+    input: `packages/${name}/${name}.js`,
     output: {
-      file: `packages/${name}/build/${name}.bundled.js`,
+      file: `packages/${name}/dist/${name}.bundled.js`,
       format: 'esm',
     },
     onwarn(warning) {
