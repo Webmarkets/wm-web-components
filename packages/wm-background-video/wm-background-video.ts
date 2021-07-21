@@ -25,19 +25,27 @@ export class WebmarketsBackgroundVideo extends LitElement {
       min-width: 100%;
       transform: translate(-50%, -50%);
     }
+    @media only screen and (max-width: 1600px) {
+      #background__video  {
+        min-height: 100%;
+        min-width: auto;
+      }
+    }
   `;
 
   @property({ type: String, reflect: true }) mp4Src = "";
   @property({ type: String, reflect: true }) webmSrc = "";
   @property({ type: String, reflect: true }) imgSrc = "";
 
-
   render() {
     return html`<div id="background-video__container">
       <video id="background__video" autoplay playsinline muted autoplay loop>
         <source src=${this.mp4Src} type="video/mp4;" />
         <source src=${this.webmSrc} type="video/webm;" />
-        <img src=${this.imgSrc} title="Your browser does not support the <video> tag" />
+        <img
+          src=${this.imgSrc}
+          title="Your browser does not support the <video> tag"
+        />
       </video>
       <slot></slot>
     </div>`;

@@ -25,7 +25,10 @@ let WebmarketsBackgroundVideo = class WebmarketsBackgroundVideo extends LitEleme
       <video id="background__video" autoplay playsinline muted autoplay loop>
         <source src=${this.mp4Src} type="video/mp4;" />
         <source src=${this.webmSrc} type="video/webm;" />
-        <img src=${this.imgSrc} title="Your browser does not support the <video> tag" />
+        <img
+          src=${this.imgSrc}
+          title="Your browser does not support the <video> tag"
+        />
       </video>
       <slot></slot>
     </div>`;
@@ -44,6 +47,12 @@ WebmarketsBackgroundVideo.styles = css `
       top: 50%;
       min-width: 100%;
       transform: translate(-50%, -50%);
+    }
+    @media only screen and (max-width: 1600px) {
+      #background__video  {
+        min-height: 100%;
+        min-width: auto;
+      }
     }
   `;
 __decorate([
