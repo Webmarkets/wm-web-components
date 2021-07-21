@@ -17,7 +17,7 @@
     "wc-clean": "rm -rf packages/tsc-build",
     "wc-start": "vite --host",
     "wc-build": "npm run wc-clean && npx tsc && rollup -c",
-    "deploy": "npm run build && npx netlify deploy --prod"
+    "deploy": "npm run docs-build && npx netlify deploy --prod"
   },
   "repository": {
     "type": "git",
