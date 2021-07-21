@@ -32,7 +32,7 @@ let WebmarketsBackgroundVideo = class WebmarketsBackgroundVideo extends LitEleme
     }
 };
 WebmarketsBackgroundVideo.styles = css `
-    #back-vid-parent {
+    #background-video__container {
       overflow: hidden;
       z-index: 1;
       position: relative;
