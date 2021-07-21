@@ -57,8 +57,6 @@ module.exports = function(eleventyConfig) {
     return filterTagList([...tagSet]);
   });
 
-  // Copy the `img` and `css` folders to the output
-  eleventyConfig.addPassthroughCopy("docs/assets/components");
   eleventyConfig.addPassthroughCopy("docs/assets/img");
   eleventyConfig.addPassthroughCopy("docs/assets/scripts");
 

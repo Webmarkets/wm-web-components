@@ -1,14 +1,15 @@
-:root {
-  --theme-background-color: hsl(0, 0%, 100%);
+:root {  
   --color-black: #202123;
   --color-dark-gray: #32373e;
   --color-gray: #697a90;
   --color-light-gray: #b4bcc7;
   --color-very-light-gray: #e7ebed;
   --color-white: #ffffff;
-  --color-accent: #29B1ED;
-  --color-primary: #009245;
+  --color-accent: #00BDFD;
+  --color-primary: #0050FC;
   --color-accent-purple: #18112B;
+  --theme-light-background: #FAFAFA;
+  --theme-light-text-on-background: #000000;
   --media-s: 425px;
   --media-m: 768px;
   --media-l: 1200px;
