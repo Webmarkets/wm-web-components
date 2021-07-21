@@ -6,9 +6,10 @@
     "build:sass-docs": "sass  --no-source-map --style compressed docs/assets/sass/styles.scss docs-build/assets/css/styles.css",
     "build:sass": "npm-run-all --parallel build:sass-docs",
     "build:eleventy": "eleventy",
-    "clean": "rm -rf docs-build/",
-    "predocs-build": "npm run clean",
+    "docs-clean": "rm -rf docs-build/",
+    "predocs-build": "npm run docs-clean",
     "docs-build": "npm-run-all build:sass build:eleventy",
+    "docs-deploy": "npm run docs-build && npx netlify deploy --prod",
     "watch:sass": "sass  --no-source-map --watch docs/assets/sass:docs-build/assets/css",
     "watch:eleventy": "eleventy --serve",
     "debug": "DEBUG=* npx eleventy",
@@ -16,8 +17,7 @@
     "docs-start": "npm-run-all build:sass --parallel watch:*",
     "wc-clean": "rm -rf packages/tsc-build",
     "wc-start": "vite --host",
-    "wc-build": "npm run wc-clean && npx tsc && rollup -c",
-    "deploy": "npm run docs-build && npx netlify deploy --prod"
+    "wc-build": "npm run wc-clean && npx tsc && rollup -c"
   },
   "repository": {
     "type": "git",
