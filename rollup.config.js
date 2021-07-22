@@ -6,7 +6,8 @@ import replace from '@rollup/plugin-replace';
 const packageNames = [
   'wm-mobile-menu',
   'wm-modal',
-  'wm-background-video'
+  'wm-background-video',
+  'wm-text-slider'
 ];
 
 const configs = [];
