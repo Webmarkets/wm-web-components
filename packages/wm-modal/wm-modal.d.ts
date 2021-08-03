@@ -13,7 +13,7 @@ export declare class WebmarketsModal extends LitElement {
     autopopup: boolean;
     popupeveryvisit: boolean;
     popupdelay: number;
-    modalContainer: HTMLDivElement;
+    modalSlot: HTMLDivElement;
     connectedCallback(): void;
     disconnectedCallback(): void;
     _autoPopupModal(e: Event): void;

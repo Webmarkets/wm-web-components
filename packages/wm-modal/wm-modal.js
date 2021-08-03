@@ -27,7 +27,7 @@ let WebmarketsModal = class WebmarketsModal extends LitElement {
                 return;
             }
             // if the click is on the modal container do nothing
-            if (e.composedPath().includes(this.modalContainer)) {
+            if (e.composedPath().includes(this.modalSlot)) {
                 // console.log('modal container clicked');
             }
             else {
@@ -103,7 +103,9 @@ let WebmarketsModal = class WebmarketsModal extends LitElement {
     }
     render() {
         return html `${this.isOpen
-            ? html `<slot></slot>`
+            ? html `<div>
+        <slot id="modal__slot"></slot>
+      </div>`
             : ''}`;
     }
 };
@@ -134,8 +136,8 @@ __decorate([
     property({ type: Number, reflect: true })
 ], WebmarketsModal.prototype, "popupdelay", void 0);
 __decorate([
-    query('#modal__container')
-], WebmarketsModal.prototype, "modalContainer", void 0);
+    query('#modal__slot')
+], WebmarketsModal.prototype, "modalSlot", void 0);
 WebmarketsModal = __decorate([
     customElement("wm-modal")
 ], WebmarketsModal);

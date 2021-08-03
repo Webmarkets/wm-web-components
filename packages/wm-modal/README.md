@@ -16,6 +16,12 @@
     body[no-scroll] {
         overflow: hidden;
     }
+    wm-modal {
+      display: none;
+    }
+    wm-modal[isopen] {
+      display: block;
+    }
     #modal__container {
         width: 60%;
         height: 50%;
@@ -42,9 +48,26 @@
 ## Example HTML
 
 ```html
-<wm-modal>
+<wm-modal autopopulate>
     <div id="modal__container">
     </div>
 </wm-modal>
 ```
+
+## Javascript
+
+```js
+ // Modal
+ const WmModal = document.querySelector('wm-modal');
+ const modalCloseBtn = document.querySelector('#modal-close__button');
+
+ WmModal ? WmModal.addEventListener('clicked-away', (event) => toggleEquipmentModal(event)) : null;
+ modalCloseBtn ? modalCloseBtn.addEventListener('click', (event) => toggleEquipmentModal(event)) : null;
+
+ function toggleEquipmentModal(event) {
+      event.stopPropagation();
+     WmModal.toggleAttribute('isopen');
+     document.body.toggleAttribute('no-scroll');
+ }
+ ```
 

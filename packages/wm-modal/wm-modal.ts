@@ -30,8 +30,8 @@ export class WebmarketsModal extends LitElement {
   @property({type: Number, reflect: true }) popupdelay = 5000;
 
 
-  @query('#modal__container')
-  modalContainer!: HTMLDivElement;
+  @query('#modal__slot')
+  modalSlot!: HTMLDivElement;
 
   connectedCallback() {
     super.connectedCallback();
@@ -96,7 +96,7 @@ export class WebmarketsModal extends LitElement {
       return;
     }
     // if the click is on the modal container do nothing
-    if (e.composedPath().includes(this.modalContainer)) {
+    if (e.composedPath().includes(this.modalSlot)) {
       // console.log('modal container clicked');
     } else {
       // if it's not on the tainer dispatch the event
@@ -124,7 +124,9 @@ export class WebmarketsModal extends LitElement {
 
   render() {
     return html`${this.isOpen
-      ? html`<slot></slot>`
+      ? html`<div>
+        <slot id="modal__slot"></slot>
+      </div>`
       : ''}`;
   }
 }
