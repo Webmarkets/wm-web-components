@@ -6,7 +6,7 @@ To be clear these are components ready for use in production; however, this repo
 
 ## Components
 
-| Component | NPM Version | Bundled File
+| Component | NPM Version | JS Delivr File
 | ----------| ----------- | ------------
 | [`<wm-mobile-menu>`](https://github.com/Webmarkets/wm-web-components/tree/main/packages/wm-mobile-menu) | [![Published on npm](https://img.shields.io/npm/v/@webmarkets/wm-mobile-menu.svg)](https://www.npmjs.com/package/@webmarkets/wm-mobile-menu) | [JS Delivr File](https://cdn.jsdelivr.net/npm/@webmarkets/wm-mobile-menu@latest/dist/wm-mobile-menu.bundled.js)
 | [`<wm-modal>`](https://github.com/Webmarkets/wm-web-components/tree/main/packages/wm-modal) | [![Published on npm](https://img.shields.io/npm/v/@webmarkets/wm-modal.svg)](https://www.npmjs.com/package/@webmarkets/wm-modal) | [JS Delivr File](https://cdn.jsdelivr.net/npm/@webmarkets/wm-modal@latest/dist/wm-modal.bundled.js)
