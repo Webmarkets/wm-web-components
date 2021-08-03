@@ -17,6 +17,10 @@ let WebmarketsModal = class WebmarketsModal extends LitElement {
     constructor() {
         super(...arguments);
         this.isOpen = false;
+        this.popupeonce = false;
+        this.autopopup = false;
+        this.popupeveryvisit = false;
+        this.popupdelay = 5000;
         this._handleClickedAway = (e) => {
             // if the modal is open do nothing
             if (!this.isOpen) {
@@ -35,13 +39,52 @@ let WebmarketsModal = class WebmarketsModal extends LitElement {
     }
     connectedCallback() {
         super.connectedCallback();
+        window.addEventListener('load', this.autopopup ? (e) => this._autoPopupModal(e) : () => console.log('Not auto'));
         window.addEventListener('click', this._handleClickedAway);
         window.addEventListener("keydown", (e) => this._keyListener(e));
     }
     disconnectedCallback() {
+        window.removeEventListener('load', this.autopopup ? (e) => this._autoPopupModal(e) : () => console.log('Not auto'));
         window.removeEventListener('click', this._handleClickedAway);
         window.removeEventListener("keydown", (e) => this._keyListener(e));
         super.disconnectedCallback();
+    }
+    _autoPopupModal(e) {
+        e.stopPropagation();
+        // if popupeonce attribute is enabled go through this function
+        if (this.popupeonce) {
+            let popupHasBeenLoaded = localStorage.getItem("popup-loaded");
+            // if the popup-loaded localstorage item exists then we'll return
+            if (popupHasBeenLoaded) {
+                return;
+            }
+            // otherwise we'll open the popup
+            else {
+                // wait for however long the delay is
+                setTimeout(() => { this.isOpen = true; }, this.popupdelay);
+                // set a local storage item named popup-loaded
+                localStorage.setItem("popup-loaded", 'true');
+            }
+        }
+        // if popupeveryvisit attribute is enabled go through this function
+        if (this.popupeveryvisit) {
+            let popupHasBeenLoaded = sessionStorage.getItem("popup-loaded");
+            // if the popup-loaded localstorage item exists then we'll return
+            if (popupHasBeenLoaded) {
+                return;
+            }
+            // otherwise we'll open the popup
+            else {
+                // wait for however long the delay is
+                setTimeout(() => { this.isOpen = true; }, this.popupdelay);
+                // set a local storage item named popup-loaded
+                sessionStorage.setItem("popup-loaded", 'true');
+            }
+        }
+        // if popupeveryvisit or popuponce aren't enabled then open the popup after whatever the delay is
+        else {
+            setTimeout(() => { this.isOpen = true; }, this.popupdelay);
+        }
     }
     _dispatchClickedAway() {
         const options = {
@@ -60,9 +103,7 @@ let WebmarketsModal = class WebmarketsModal extends LitElement {
     }
     render() {
         return html `${this.isOpen
-            ? html `<div id="modal__container">
-          <slot></slot>
-        </div>`
+            ? html `<slot></slot>`
             : ''}`;
     }
 };
@@ -76,31 +117,22 @@ WebmarketsModal.styles = css `
       left: 0;
       background: rgba(0, 0, 0, 0.3);
     }
-    #modal__container {
-      width: 60%;
-      height: 50%;
-      display: flex;
-      z-index: 9999;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-height: 100px;
-      padding: 15px;
-      border-radius: 10px;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      overflow: auto;
-    }
-    @media only screen and (max-width: 905px) {
-      #modal__container {
-        width: 80%;
-        height: 60%;
-      }
-    }
   `;
 __decorate([
     property({ type: Boolean, reflect: true })
 ], WebmarketsModal.prototype, "isOpen", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], WebmarketsModal.prototype, "popupeonce", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], WebmarketsModal.prototype, "autopopup", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], WebmarketsModal.prototype, "popupeveryvisit", void 0);
+__decorate([
+    property({ type: Number, reflect: true })
+], WebmarketsModal.prototype, "popupdelay", void 0);
 __decorate([
     query('#modal__container')
 ], WebmarketsModal.prototype, "modalContainer", void 0);

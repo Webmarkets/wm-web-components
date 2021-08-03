@@ -21,47 +21,73 @@ export class WebmarketsModal extends LitElement {
       left: 0;
       background: rgba(0, 0, 0, 0.3);
     }
-    #modal__container {
-      width: 60%;
-      height: 50%;
-      display: flex;
-      z-index: 9999;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-height: 100px;
-      padding: 15px;
-      border-radius: 10px;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      overflow: auto;
-    }
-    @media only screen and (max-width: 905px) {
-      #modal__container {
-        width: 80%;
-        height: 60%;
-      }
-    }
   `;
 
   @property({ type: Boolean, reflect: true }) isOpen = false;
+  @property({type: Boolean, reflect: true }) popupeonce = false;
+  @property({type: Boolean, reflect: true }) autopopup = false;
+  @property({type: Boolean, reflect: true }) popupeveryvisit = false;
+  @property({type: Number, reflect: true }) popupdelay = 5000;
+
 
   @query('#modal__container')
   modalContainer!: HTMLDivElement;
 
   connectedCallback() {
     super.connectedCallback();
+    window.addEventListener('load', this.autopopup ? (e) => this._autoPopupModal(e) : () => console.log('Not auto'));
     window.addEventListener('click', this._handleClickedAway);
     window.addEventListener("keydown", (e: KeyboardEvent) =>
       this._keyListener(e)
     );
   }
   disconnectedCallback() {
+    window.removeEventListener('load', this.autopopup ? (e) => this._autoPopupModal(e) : () => console.log('Not auto'));
     window.removeEventListener('click', this._handleClickedAway);
     window.removeEventListener("keydown", (e: KeyboardEvent) =>
       this._keyListener(e)
     );
     super.disconnectedCallback();
+  }
+
+
+
+  _autoPopupModal(e: Event) {
+    e.stopPropagation();
+    // if popupeonce attribute is enabled go through this function
+    if(this.popupeonce) {
+      let popupHasBeenLoaded = localStorage.getItem("popup-loaded");
+      // if the popup-loaded localstorage item exists then we'll return
+      if(popupHasBeenLoaded) {
+        return;
+      } 
+      // otherwise we'll open the popup
+      else {
+        // wait for however long the delay is
+        setTimeout(() => { this.isOpen = true; }, this.popupdelay);
+        // set a local storage item named popup-loaded
+        localStorage.setItem("popup-loaded", 'true');
+      }
+    }
+    // if popupeveryvisit attribute is enabled go through this function
+    if(this.popupeveryvisit) {
+      let popupHasBeenLoaded = sessionStorage.getItem("popup-loaded");
+      // if the popup-loaded localstorage item exists then we'll return
+      if(popupHasBeenLoaded) {
+        return;
+      } 
+      // otherwise we'll open the popup
+      else {
+        // wait for however long the delay is
+        setTimeout(() => { this.isOpen = true; }, this.popupdelay);
+        // set a local storage item named popup-loaded
+        sessionStorage.setItem("popup-loaded", 'true');
+      }
+    }
+    // if popupeveryvisit or popuponce aren't enabled then open the popup after whatever the delay is
+    else {
+      setTimeout(() => { this.isOpen = true; }, this.popupdelay);
+    }
   }
 
   _handleClickedAway = (e: MouseEvent) => {
@@ -98,15 +124,7 @@ export class WebmarketsModal extends LitElement {
 
   render() {
     return html`${this.isOpen
-      ? html`<div id="modal__container">
-          <slot></slot>
-        </div>`
+      ? html`<slot></slot>`
       : ''}`;
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    "wm-modal": WebmarketsModal;
   }
 }

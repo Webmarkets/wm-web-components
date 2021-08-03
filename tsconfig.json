@@ -26,6 +26,6 @@
       }
     ]
   },
-  "include": ["./packages/**/*.ts"],
+  "include": ["./packages/**/*.ts",],
   "exclude": []
 }

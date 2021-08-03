@@ -9,17 +9,17 @@ import { LitElement } from "lit";
 export declare class WebmarketsModal extends LitElement {
     static styles: import("lit").CSSResultGroup;
     isOpen: boolean;
+    popupeonce: boolean;
+    autopopup: boolean;
+    popupeveryvisit: boolean;
+    popupdelay: number;
     modalContainer: HTMLDivElement;
     connectedCallback(): void;
     disconnectedCallback(): void;
+    _autoPopupModal(e: Event): void;
     _handleClickedAway: (e: MouseEvent) => void;
     _dispatchClickedAway(): void;
     _keyListener(e: KeyboardEvent): void;
     render(): import("lit").TemplateResult<1>;
-}
-declare global {
-    interface HTMLElementTagNameMap {
-        "wm-modal": WebmarketsModal;
-    }
 }
 //# sourceMappingURL=wm-modal.d.ts.map

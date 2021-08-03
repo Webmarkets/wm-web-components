@@ -11,9 +11,7 @@ import { customElement } from "lit/decorators.js";
 
 @customElement("wm-text-slider")
 export class WebmarketsTextSlider extends LitElement {
-  static styles = css`
-
-  `;
+  static styles = css``;
 
   render() {
     return html``;

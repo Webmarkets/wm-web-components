@@ -18,9 +18,7 @@ let WebmarketsTextSlider = class WebmarketsTextSlider extends LitElement {
         return html ``;
     }
 };
-WebmarketsTextSlider.styles = css `
-
-  `;
+WebmarketsTextSlider.styles = css ``;
 WebmarketsTextSlider = __decorate([
     customElement("wm-text-slider")
 ], WebmarketsTextSlider);
