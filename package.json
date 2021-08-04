@@ -15,8 +15,9 @@
     "debug": "DEBUG=* npx eleventy",
     "prestart": "npm run clean",
     "docs-start": "npm-run-all build:sass --parallel watch:*",
+    "demos-start": "vite --host",
+    "demos-build": "vite build",
     "package-clean": "rm -rf packages/tsc-build",
-    "package-start": "vite --host",
     "package-build": "npm run package-clean && npx tsc && rollup -c"
   },
   "repository": {

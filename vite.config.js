@@ -5,7 +5,7 @@ import { resolve } from 'path';
 export default defineConfig({
   root: 'demos/',
   build: {
-    outDir: '../build',
+    outDir: '../demos-build',
     manifest: true,
     rollupOptions: {
       input: {

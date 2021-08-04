@@ -1,7 +1,9 @@
 docs-build/
+demos-build/
 node_modules/
 package-lock.json
 wc-build/
 packages/tsc-build
 # Local Netlify folder
 .netlify
+*.cache
