@@ -17,8 +17,8 @@
     "docs-start": "npm-run-all build:sass --parallel watch:*",
     "demos-start": "vite --host",
     "predemos-build": "rimraf demos-build",
-    "demos-build": "vite build && firebase deploy --only hosting",
-    "demos-deploy": "vite build",
+    "demos-build": "vite build",
+    "demos-deploy": "vite build && firebase deploy --only hosting",
     "package-clean": "rm -rf packages/tsc-build",
     "package-build": "npm run package-clean && npx tsc && rollup -c"
   },

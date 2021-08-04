@@ -10,6 +10,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'demos/index.html'),
+        WmModal: resolve(__dirname, 'demos/wm-modal/index.html'),
+        WmBackgroundVideo: resolve(__dirname, 'demos/wm-background-video/index.html'),
       },
     },
   },
