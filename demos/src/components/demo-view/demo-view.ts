@@ -9,8 +9,19 @@ export class DemoView extends LitElement {
     return [
       css`
         ul{
-          padding: 1rem;
+          padding: 0;
           list-style-type: none;
+        }
+        ul li a {
+          padding: 1rem;
+          font-size: 2rem;
+          border-radius: 0.75rem;
+          display: flex;
+          text-decoration: none;
+          color: inherit;
+        }
+        ul li a:hover{
+          background-color: rgb(216 214 214 / 25%);
         }
        `,
     ];
