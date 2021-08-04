@@ -1,0 +1,14 @@
+wm-background-video {
+  width: 360px;
+  height: auto;
+}
+
+wm-background-video div {
+  min-height: 40vh;
+  background-color: #fff;
+  position: relative;
+  z-index: 12;
+  inset: 0;
+  padding: 1rem;
+  margin: 3rem;
+}

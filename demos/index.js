@@ -82,6 +82,11 @@ class DemoView extends LitElement {
         secondary: 'A popup, dialog, or modal for announcements or alerts',
         href: 'wm-modal/',
       },
+      {
+        name: 'WM Background Video',
+        secondary: 'Set a background video on a parent container',
+        href: 'wm-background-video/',
+      },
     ].sort(sortFn);
   }
 

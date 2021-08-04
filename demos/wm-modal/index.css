@@ -15,6 +15,7 @@ body[no-scroll] {
     transform: translate(-50%, -50%);
     background: #fff;
     overflow: auto;
+    flex-direction: column;
 }
 @media only screen and (max-width: 905px) {
   #modal__container {
