@@ -48,7 +48,7 @@
 ## Example HTML
 
 ```html
-<wm-modal autopopulate>
+<wm-modal autopopup>
     <div id="modal__container">
     </div>
 </wm-modal>
