@@ -1,10 +1,10 @@
 import {LitElement, html, css} from 'lit';
-import { customElement } from "lit/decorators.js";
+import { customElement, state } from "lit/decorators.js";
 
-export const tagName = 'demo-view';
+export const tagName = 'demo-list';
 
-@customElement('demo-view')
-export class DemoView extends LitElement {
+@customElement('demo-list')
+export class DemoList extends LitElement {
   static get styles() {
     return [
       css`
@@ -27,17 +27,30 @@ export class DemoView extends LitElement {
     ];
   }
 
+  @state()
+  demoListItems = [
+    {
+      href: '/wm-modal',
+      title: 'WM Modal',
+    },
+    {
+      href: '/wm-background-video',
+      title: 'WM Background Video',
+    },
+  ];
+
 
   render() {
+    const demoListItems = this.demoListItems.map((item) => {
+      return html`<li>
+      <a href=${item.href}>${item.title}</a>
+    </li>`;
+    });
+
     return html`
       <div class="demo-list">
         <ul>
-          <li>
-            <a href="/wm-modal">WM Modal</a>
-          </li>
-          <li>
-            <a href="/wm-background-video">WM Background Video</a>
-          </li>
+          ${demoListItems}
         </ul>
       </div>
     `;

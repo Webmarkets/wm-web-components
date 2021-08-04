@@ -5,9 +5,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement } from "lit/decorators.js";
-export const tagName = 'demo-view';
-let DemoView = class DemoView extends LitElement {
+import { customElement, state } from "lit/decorators.js";
+export const tagName = 'demo-list';
+let DemoList = class DemoList extends LitElement {
+    constructor() {
+        super(...arguments);
+        this.demoListItems = [
+            {
+                href: '/wm-modal',
+                title: 'WM Modal',
+            },
+            {
+                href: '/wm-background-video',
+                title: 'WM Background Video',
+            },
+        ];
+    }
     static get styles() {
         return [
             css `
@@ -30,22 +43,25 @@ let DemoView = class DemoView extends LitElement {
         ];
     }
     render() {
+        const demoListItems = this.demoListItems.map((item) => {
+            return html `<li>
+      <a href=${item.href}>${item.title}</a>
+    </li>`;
+        });
         return html `
       <div class="demo-list">
         <ul>
-          <li>
-            <a href="/wm-modal">WM Modal</a>
-          </li>
-          <li>
-            <a href="/wm-background-video">WM Background Video</a>
-          </li>
+          ${demoListItems}
         </ul>
       </div>
     `;
     }
 };
-DemoView = __decorate([
-    customElement('demo-view')
-], DemoView);
-export { DemoView };
-//# sourceMappingURL=demo-view.js.map
+__decorate([
+    state()
+], DemoList.prototype, "demoListItems", void 0);
+DemoList = __decorate([
+    customElement('demo-list')
+], DemoList);
+export { DemoList };
+//# sourceMappingURL=demo-list.js.map
