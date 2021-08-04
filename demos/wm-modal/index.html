@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WM Modal Demo</title>
-    <link rel="stylesheet" href="./index.css">
+    <style>
+        body[no-scroll] {
+            overflow: hidden;
+        }
+
+        #modal__container {
+            width: 60%;
+            height: 50%;
+            display: flex;
+            z-index: 9999;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-height: 100px;
+            padding: 15px;
+            border-radius: 10px;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            overflow: auto;
+            flex-direction: column;
+        }
+
+        @media only screen and (max-width: 905px) {
+            #modal__container {
+                width: 80%;
+                height: 60%;
+            }
+        }
+    </style>
     <script type="module" src="./index.js"></script>
 </head>
+
 <body>
     <h1>WM Modal</h1>
     <wm-modal autopopup popupdelay="0">
         <div id="modal__container">
             <h1>Testing Modal</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere non perferendis eius tenetur magnam? Nihil consequatur rem voluptatem numquam, obcaecati ut commodi, cum iure aspernatur et, qui placeat laudantium aliquid!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere non perferendis eius tenetur magnam?
+                Nihil consequatur rem voluptatem numquam, obcaecati ut commodi, cum iure aspernatur et, qui placeat
+                laudantium aliquid!</p>
         </div>
     </wm-modal>
 </body>
+
 </html>

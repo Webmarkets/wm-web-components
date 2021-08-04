@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WM Background Video Demo</title>
-    <link rel="stylesheet" href="./index.css">
+    <style>
+        wm-background-video {
+            width: 360px;
+            height: auto;
+        }
+        wm-background-video div {
+            min-height: 40vh;
+            max-width: 60%;
+            background-color: #fff;
+            position: relative;
+            z-index: 12;
+            inset: 0;
+            padding: 1rem;
+            margin: 4rem auto;
+        }
+    </style>
     <script type="module" src="./index.js"></script>
 </head>
+
 <body>
     <h1>WM Background Video</h1>
     <wm-background-video mp4Src="https://webmarketsonline.com/portals/0/videos/header_small.mp4">
         <div>
             <h1>Lorem Ipsum</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut alias minima deserunt sint cum, quas iusto, tempora facere beatae deleniti nobis ratione adipisci error nemo quae saepe enim! Suscipit, incidunt.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut alias minima deserunt sint cum, quas iusto,
+                tempora facere beatae deleniti nobis ratione adipisci error nemo quae saepe enim! Suscipit, incidunt.
+            </p>
         </div>
     </wm-background-video>
 </body>
+
 </html>
