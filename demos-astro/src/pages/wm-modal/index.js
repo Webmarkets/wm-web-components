@@ -1,5 +1,3 @@
-import '@webmarkets/wm-modal/dist/wm-modal.bundled.js'
-
 const WmModal = document.querySelector('wm-modal');
 const modalCloseBtn = document.querySelector('#modal-close__button');
 

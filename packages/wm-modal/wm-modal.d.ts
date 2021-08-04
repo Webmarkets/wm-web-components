@@ -6,6 +6,7 @@ import { LitElement } from "lit";
  * @csspart button - The button
  *
  */
+export declare const tagName = "wm-modal";
 export declare class WebmarketsModal extends LitElement {
     static styles: import("lit").CSSResultGroup;
     isOpen: boolean;

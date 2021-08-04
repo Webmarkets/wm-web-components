@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@webmarkets/wm-background-video@latest/dist/wm-background-video.bundled.js"></script>
+     <wm-background-video mp4Src="https://webmarketsonline.com/portals/0/videos/header_small.mp4">
+        <div>
+            <h1>Lorem Ipsum</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut alias minima deserunt sint cum, quas iusto,
+                tempora facere beatae deleniti nobis ratione adipisci error nemo quae saepe enim! Suscipit, incidunt.
+            </p>
+        </div>
+    </wm-background-video>
+</BaseLayout>
+
+<style>
+    wm-background-video {
+        width: 360px;
+        height: auto;
+    }
+    wm-background-video div {
+        min-height: 40vh;
+        max-width: 60%;
+        background-color: #fff;
+        position: relative;
+        z-index: 12;
+        inset: 0;
+        padding: 1rem;
+        margin: 4rem auto;
+    }
+</style>

@@ -1,0 +1,24 @@
+{
+  "name": "@example/framework-lit",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start:tsc": "tsc --watch",
+    "start:astro": "astro dev",
+    "start": "npm-run-all --parallel start:*",
+    "clean": "tsc --build --clean && rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc && astro build",
+    "deploy": "npm run build && firebase deploy --only hosting"
+  },
+  "devDependencies": {
+    "@astrojs/renderer-lit": "^0.1.0",
+    "astro": "^0.18.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@material/mwc-button": "^0.22.1",
+    "@webmarkets/wm-modal": "^1.0.4"
+  }
+}

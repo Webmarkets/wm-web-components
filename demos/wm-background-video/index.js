@@ -1,1 +1,0 @@
-import '@webmarkets/wm-background-video'

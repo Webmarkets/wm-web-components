@@ -13,6 +13,7 @@ import { customElement, property, query } from "lit/decorators.js";
  * @csspart button - The button
  *
  */
+export const tagName = 'wm-modal';
 let WebmarketsModal = class WebmarketsModal extends LitElement {
     constructor() {
         super(...arguments);
