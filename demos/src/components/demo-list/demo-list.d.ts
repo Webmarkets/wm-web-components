@@ -1,7 +1,7 @@
 import { LitElement } from 'lit';
 export declare const tagName = "demo-list";
 export declare class DemoList extends LitElement {
-    static get styles(): import("lit").CSSResultGroup[];
+    static get styles(): import("lit").CSSResult[];
     demoListItems: {
         href: string;
         title: string;

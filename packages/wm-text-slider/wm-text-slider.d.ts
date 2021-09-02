@@ -7,8 +7,8 @@ import { LitElement } from "lit";
  *
  */
 export declare class WebmarketsTextSlider extends LitElement {
-    static styles: import("lit").CSSResultGroup;
-    render(): import("lit").TemplateResult<1>;
+    static styles: import("lit").CSSResult;
+    render(): import("lit-html").TemplateResult<1>;
 }
 declare global {
     interface HTMLElementTagNameMap {

@@ -7,7 +7,7 @@ import { LitElement } from "lit";
  *
  */
 export declare class WebmarketsBackgroundVideo extends LitElement {
-    static styles: import("lit").CSSResultGroup;
+    static styles: import("lit").CSSResult;
     mp4Src: string;
     webmSrc: string;
     imgSrc: string;

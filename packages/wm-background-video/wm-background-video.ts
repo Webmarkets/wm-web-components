@@ -40,8 +40,8 @@ export class WebmarketsBackgroundVideo extends LitElement {
   render() {
     return html`<div id="background-video__container">
       <video id="background__video" autoplay playsinline muted autoplay loop>
-        <source src=${this.mp4Src} type="video/mp4;" />
         <source src=${this.webmSrc} type="video/webm;" />
+        <source src=${this.mp4Src} type="video/mp4;" />
         <img
           src=${this.imgSrc}
           title="Your browser does not support the <video> tag"
