@@ -67,7 +67,7 @@ export class LitGoogleMapsApi extends JsonpLibraryElement {
     mapsUrl = 'https://maps.googleapis.com/maps/api/js?callback=%%callback%%';
 
     @property({type : String})
-    version = '3.39';
+    version = 'weekly';
 
     @property({type : String})
     language = '';
