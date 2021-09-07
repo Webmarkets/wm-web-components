@@ -2,6 +2,8 @@
 
 This package is a fork of [lit-google-map](https://www.npmjs.com/package/lit-google-map) with some changes to the default map styles, additional options for the map marker, and it has been upgraded to Lit 2.0
 
+## [View Demo on Stackblitz](https://stackblitz.com/edit/vite-zhdaof?file=lit-google-map.js)
+
 ## Table of contents
 
 [How to use](#How-to-use)
