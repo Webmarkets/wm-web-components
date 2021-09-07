@@ -18,7 +18,7 @@ let WebmarketsModal = class WebmarketsModal extends LitElement {
     constructor() {
         super(...arguments);
         this.isOpen = false;
-        this.popupeonce = false;
+        this.popuponce = false;
         this.autopopup = false;
         this.popupeveryvisit = false;
         this.popupdelay = 5000;
@@ -52,8 +52,8 @@ let WebmarketsModal = class WebmarketsModal extends LitElement {
     }
     _autoPopupModal(e) {
         e.stopPropagation();
-        // if popupeonce attribute is enabled go through this function
-        if (this.popupeonce) {
+        // if popuponce attribute is enabled go through this function
+        if (this.popuponce) {
             let popupHasBeenLoaded = localStorage.getItem("popup-loaded");
             // if the popup-loaded localstorage item exists then we'll return
             if (popupHasBeenLoaded) {
@@ -126,7 +126,7 @@ __decorate([
 ], WebmarketsModal.prototype, "isOpen", void 0);
 __decorate([
     property({ type: Boolean, reflect: true })
-], WebmarketsModal.prototype, "popupeonce", void 0);
+], WebmarketsModal.prototype, "popuponce", void 0);
 __decorate([
     property({ type: Boolean, reflect: true })
 ], WebmarketsModal.prototype, "autopopup", void 0);

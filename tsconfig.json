@@ -27,5 +27,5 @@
     ]
   },
   "include": ["./packages/**/*.ts",],
-  "exclude": []
+  "exclude": ["./packages/wm-google-map/**/*.ts"]
 }

@@ -7,7 +7,7 @@ const packageNames = [
   'wm-mobile-menu',
   'wm-modal',
   'wm-background-video',
-  'wm-text-slider'
+  'wm-text-slider',
 ];
 
 const configs = [];

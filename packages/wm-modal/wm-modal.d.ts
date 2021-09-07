@@ -10,7 +10,7 @@ export declare const tagName = "wm-modal";
 export declare class WebmarketsModal extends LitElement {
     static styles: import("lit").CSSResult;
     isOpen: boolean;
-    popupeonce: boolean;
+    popuponce: boolean;
     autopopup: boolean;
     popupeveryvisit: boolean;
     popupdelay: number;
