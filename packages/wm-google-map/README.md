@@ -31,19 +31,19 @@ or its minified version:
 Use component in any place you want (remember to fill in Google Maps API key):
 
 ```html
-<lit-google-map api-key="YOUR_GOOGLE_MAPS_API_KEY">    
-</lit-google-map>
+<wm-google-map api-key="YOUR_GOOGLE_MAPS_API_KEY">    
+</wm-google-map>
 ```
 
 You can also include any number of map markers:
 
 ```html
-<lit-google-map api-key="YOUR_GOOGLE_MAPS_API_KEY">
-    <lit-google-map-marker slot="markers" latitude="49.4404582" longitude="20.2700361">
-    </lit-google-map-marker>  
-    <lit-google-map-marker slot="markers" latitude="50.797444" longitude="20.4600623">
-    </lit-google-map-marker>
-</lit-google-map>
+<wm-google-map api-key="YOUR_GOOGLE_MAPS_API_KEY">
+    <wm-google-map-marker slot="markers" latitude="49.4404582" longitude="20.2700361">
+    </wm-google-map-marker>  
+    <wm-google-map-marker slot="markers" latitude="50.797444" longitude="20.4600623">
+    </wm-google-map-marker>
+</wm-google-map>
 ```
 
 ## How to build
@@ -80,8 +80,8 @@ npm run bundle
 Example:
 
 ```html
-<lit-google-map api-key="SOME_API_KEY" zoom="6" map-type="satellite" center-latitude="51.8436554" center-longitude="19.5070867">    
-</lit-google-map>
+<wm-google-map api-key="SOME_API_KEY" zoom="6" map-type="satellite" center-latitude="51.8436554" center-longitude="19.5070867">    
+</wm-google-map>
 ```
 
 ## Marker element attributes
@@ -95,17 +95,17 @@ Example:
 Example:
 
 ```html
-<lit-google-map-marker slot="markers" latitude="49.4404582" longitude="20.2700361">
-</lit-google-map-marker>
+<wm-google-map-marker slot="markers" latitude="49.4404582" longitude="20.2700361">
+</wm-google-map-marker>
 ```
 
 Markers can also have associated InfoWindow with html content:
 
 ```html
-<lit-google-map-marker slot="markers" latitude="50.797444" longitude="20.4600623">
+<wm-google-map-marker slot="markers" latitude="50.797444" longitude="20.4600623">
     <p>Some description</p>
     <img src="some_image.jpg" alt="some image">
-</lit-google-map-marker>
+</wm-google-map-marker>
 ```
 
 ## License

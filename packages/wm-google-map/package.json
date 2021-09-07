@@ -1,6 +1,6 @@
 {
     "name": "@webmarkets/wm-google-map",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Google Maps web components based on Lit",
     "license": "MIT",
     "repository": {
@@ -26,5 +26,8 @@
         "rollup": "^1.30.0",
         "rollup-plugin-terser": "^5.2.0",
         "typescript": "^4.4.2"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
