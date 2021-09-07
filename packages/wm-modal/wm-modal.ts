@@ -26,7 +26,7 @@ export class WebmarketsModal extends LitElement {
   `;
 
   @property({ type: Boolean, reflect: true }) isOpen = false;
-  @property({type: Boolean, reflect: true }) popupeonce = false;
+  @property({type: Boolean, reflect: true }) popuponce = false;
   @property({type: Boolean, reflect: true }) autopopup = false;
   @property({type: Boolean, reflect: true }) popupeveryvisit = false;
   @property({type: Number, reflect: true }) popupdelay = 5000;
@@ -56,8 +56,8 @@ export class WebmarketsModal extends LitElement {
 
   _autoPopupModal(e: Event) {
     e.stopPropagation();
-    // if popupeonce attribute is enabled go through this function
-    if(this.popupeonce) {
+    // if popuponce attribute is enabled go through this function
+    if(this.popuponce) {
       let popupHasBeenLoaded = localStorage.getItem("popup-loaded");
       // if the popup-loaded localstorage item exists then we'll return
       if(popupHasBeenLoaded) {
