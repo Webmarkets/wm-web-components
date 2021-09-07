@@ -1,6 +1,6 @@
 # lit-google-map
 
-This project is port of [google-map](https://www.webcomponents.org/element/GoogleWebComponents/google-map) webcomponent based on [LitElement](https://lit-element.polymer-project.org/) library.
+This project is a fork of [lit-google-map](https://www.npmjs.com/package/lit-google-map) with some changes to the default map styles, additional options for the map marker, and it has been upgraded to Lit 2.0
 
 ## Table of contents
 
