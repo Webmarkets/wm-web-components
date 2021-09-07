@@ -1,6 +1,6 @@
-# lit-google-map
+# wm-google-map
 
-This project is a fork of [lit-google-map](https://www.npmjs.com/package/lit-google-map) with some changes to the default map styles, additional options for the map marker, and it has been upgraded to Lit 2.0
+This package is a fork of [lit-google-map](https://www.npmjs.com/package/lit-google-map) with some changes to the default map styles, additional options for the map marker, and it has been upgraded to Lit 2.0
 
 ## Table of contents
 
@@ -16,7 +16,7 @@ This project is a fork of [lit-google-map](https://www.npmjs.com/package/lit-goo
 
 ## How to use
 
-Include lit-google-map bundle in HTML file:
+Include wm-google-map bundle in HTML file:
 
 ```html
 <script src="wm-google-map.bundle.js"></script>
