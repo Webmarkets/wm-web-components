@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { customElement, property, query, state, queryAssignedNodes } from 'lit/decorators.js';
+import { customElement, property, query, state, queryAssignedNodes } from 'lit/decorators';
 import { Loader } from '@googlemaps/js-api-loader';
 
 @customElement('wm-google-map')

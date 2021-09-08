@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators";
 import {LitGoogleMapsApi} from './lit-google-maps-api';
 import { WebmarketsGoogleMapMarker } from './wm-google-map-marker';
 import {LitSelector} from './lit-selector';

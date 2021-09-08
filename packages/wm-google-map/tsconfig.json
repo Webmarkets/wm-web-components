@@ -1,25 +1,10 @@
 {
-    "compilerOptions": {
-        "target": "ES2017",
-        "module": "ES2015",
-        "noImplicitAny": false,
-        "sourceMap": false,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "removeComments": true,
-        "moduleResolution": "node",
-        "outDir": "./build",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "baseUrl": ".",
-        "paths": {
-            "lit-html": ["node_modules/lit-html/lit-html"],
-            "lit-element": ["node_modules/lit-element/lit-element"]
-        }
-    },
-    "include": [
-        "src/**/*.ts"
-    ],
-    "exclude": []
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": ".",
+    "outDir": ".",
+    "tsBuildInfoFile": ".tsbuildinfo"
+  },
+  "include": ["*.ts"]
 }
