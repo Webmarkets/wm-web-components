@@ -137,7 +137,7 @@ let LitGoogleMapsApi = class LitGoogleMapsApi extends JsonpLibraryElement {
         this.apiKey = '';
         this.clientId = '';
         this.mapsUrl = 'https://maps.googleapis.com/maps/api/js?callback=%%callback%%';
-        this.version = '3.39';
+        this.version = 'weekly';
         this.language = '';
     }
     get libraryUrl() {
