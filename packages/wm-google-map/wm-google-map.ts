@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { customElement, property, query, state, queryAssignedNodes } from 'lit/decorators';
+import { customElement, property, query, state, queryAssignedNodes } from 'lit/decorators.js';
 import { Loader } from '@googlemaps/js-api-loader';
 
 @customElement('wm-google-map')
@@ -14,9 +14,9 @@ export class WebmarketsGoogleMap extends LitElement {
   @property({ type: String, reflect: true, attribute: 'api-key' })
   apiKey = 'AIzaSyC0460_sJ5K4hOyvCHVr_BwgxNdBpaPoy0';
   @property({ type: Number, reflect: true, attribute: 'lat' })
-  lat = 43.6554718;
-  @property({ type: Number, reflect: true, attribute: 'long' })
-  lng = -116.3537875;
+  lat = 0;
+  @property({ type: Number, reflect: true, attribute: 'lng' })
+  lng = 0;
   @property({ type: Number, reflect: true, attribute: 'zoom' })
   zoom = 14;
   @property({type : Object, reflect: false, attribute: 'styles'})
@@ -26,8 +26,7 @@ export class WebmarketsGoogleMap extends LitElement {
   @property({type: Boolean, reflect: true, attribute: 'auto-open-marker'})
   autoOpenMarker = false;
   @property({type: String})
-  infoWindowContent =
-  '<div><p>Info Window</p></div>';
+  infoWindowContent = '';
 
 
   @state()
@@ -36,8 +35,6 @@ export class WebmarketsGoogleMap extends LitElement {
   marker?: google.maps.Marker;
   @state()
   infoWindow?: google.maps.InfoWindow;
-  @state()
-  _allText = '';
 
   @query('#map')
   mapContainer!: HTMLElement;
@@ -123,9 +120,6 @@ export class WebmarketsGoogleMap extends LitElement {
     if (!this.infoWindow) return;
     // open the info window for the map and marker
     this.infoWindow.open(this.map, this.marker);
-    // this.dispatchEvent(
-    //   new CustomEvent("google-map-marker-open", { bubbles: true })
-    // );
   }
 
   render() {
