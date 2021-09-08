@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query, state, queryAssignedNodes } from 'lit/decorators.js';
 import { Loader } from '@googlemaps/js-api-loader';
 
 @customElement('wm-google-map')
@@ -36,9 +36,14 @@ export class WebmarketsGoogleMap extends LitElement {
   marker?: google.maps.Marker;
   @state()
   infoWindow?: google.maps.InfoWindow;
+  @state()
+  _allText = '';
 
   @query('#map')
   mapContainer!: HTMLElement;
+
+  @queryAssignedNodes()
+  _infoWindowContentNodes: any;
 
   connectedCallback() {
     super.connectedCallback();
@@ -59,6 +64,16 @@ export class WebmarketsGoogleMap extends LitElement {
         ? () => this._autoOpenInfoWindow()
         : () => console.log("Not auto")
     );
+  }
+  // TODO We need to figure out how to treat marker content as a slot
+  // https://lit.dev/docs/components/shadow-dom/#accessing-slotted-children
+
+  handleSlotchange(e: any) {
+    const childNodes = e.target.assignedNodes({flatten: true});
+    // ... do something with childNodes ...
+    this.infoWindowContent = Array.prototype.map.call(childNodes, (node) => {
+      return node.innerHTML ? node.innerHTML : ''
+    }).join('');
   }
 
   private _initMap() {
@@ -104,17 +119,20 @@ export class WebmarketsGoogleMap extends LitElement {
 
 
   _autoOpenInfoWindow() {
+    // if there is nothing in the info window return
     if (!this.infoWindow) return;
-
+    // open the info window for the map and marker
     this.infoWindow.open(this.map, this.marker);
-    this.dispatchEvent(
-      new CustomEvent("google-map-marker-open", { bubbles: true })
-    );
+    // this.dispatchEvent(
+    //   new CustomEvent("google-map-marker-open", { bubbles: true })
+    // );
   }
 
   render() {
     return html`
-      <div id="map"></div>
+      <div id="map">
+        <slot @slotchange=${this.handleSlotchange}></slot>      
+      </div>
     `;
   }
 }
