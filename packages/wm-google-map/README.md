@@ -1,7 +1,12 @@
 # wm-google-map
 
+This is a component for adding a Google Map on page with minimal styles
+
+## Example
+
 ```html
 <wm-google-map
+      api-key=""
       lat="43.612255"
       lng="-116.292516"
       show-marker
