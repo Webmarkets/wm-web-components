@@ -28,7 +28,7 @@ export class WebmarketsBackgroundVideo extends LitElement {
     @media only screen and (max-width: 1600px) {
       #background__video  {
         min-height: 100%;
-        min-width: auto;
+        min-width: 100%;
       }
     }
   `;

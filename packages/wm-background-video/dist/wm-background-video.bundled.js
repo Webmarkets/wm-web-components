@@ -58,7 +58,7 @@ const W=(t,i)=>"method"===i.kind&&i.descriptor&&!("value"in i.descriptor)?{...i,
     @media only screen and (max-width: 1600px) {
       #background__video  {
         min-height: 100%;
-        min-width: auto;
+        min-width: 100%;
       }
     }
   `,F([Y({type:String,reflect:!0})],G.prototype,"mp4Src",void 0),F([Y({type:String,reflect:!0})],G.prototype,"webmSrc",void 0),F([Y({type:String,reflect:!0})],G.prototype,"imgSrc",void 0),G=F([(t=>i=>"function"==typeof i?((t,i)=>(window.customElements.define(t,i),i))(t,i):((t,i)=>{const{kind:s,elements:e}=i;return{kind:s,elements:e,finisher(i){window.customElements.define(t,i)}}})(t,i))("wm-background-video")],G);export{G as WebmarketsBackgroundVideo};
