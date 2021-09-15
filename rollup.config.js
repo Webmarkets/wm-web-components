@@ -8,7 +8,8 @@ const packageNames = [
   'wm-modal',
   'wm-background-video',
   'wm-text-slider',
-  'wm-google-map'
+  'wm-google-map',
+  'wm-form'
 ];
 
 const configs = [];
