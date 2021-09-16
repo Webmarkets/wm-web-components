@@ -7,21 +7,20 @@ export const tagName = 'wm-form';
 @customElement('wm-form')
 export class WebmarketsForm extends LitElement {
   static styles = css`
-    .contact-form {
+    .wm-form {
       display: flex;
       flex-wrap: wrap;
       width: 100%;
       font-family: inherit;
     }
 
-    .contact-form input[type='text'],
-    .contact-form input[type='email'],
-    .contact-form textarea,
-    .contact-form input[type='tel'],
-    .contact-form select {
+    .wm-form input[type='text'],
+    .wm-form input[type='email'],
+    .wm-form textarea,
+    .wm-form input[type='tel'],
+    .wm-form select {
       box-sizing: border-box;
       border: 1px solid #dcdcdc;
-      background: transparent;
       color: inherit;
       height: 58px;
       width: 100%;
@@ -35,15 +34,19 @@ export class WebmarketsForm extends LitElement {
       font-family: inherit;
     }
 
-    .contact-form textarea {
-      height: 160px;
+    .wm-form select {
+      color: black;
     }
 
-    .contact-form .w-50 {
+    .wm-form textarea {
+      min-height: 160px;
+    }
+
+    .wm-form .w-50 {
       width: 100%;
     }
 
-    .contact-form div {
+    .wm-form div {
       box-sizing: border-box;
       display: flex;
       flex-flow: column;
@@ -51,43 +54,43 @@ export class WebmarketsForm extends LitElement {
       width: 100%;
     }
 
-    .contact-form label {
-      font-size: 15px;
-      color: #424242;
-      margin: 0;
+    .wm-form label {
+      font-size: 1rem;
+      color: inherit;
+      margin-bottom: 0.25rem;
       font-weight: normal;
       text-align: left;
     }
 
-    .contact-form .contact-form-submit__container {
+    .wm-form .wm-form-submit__container {
       display: block;
     }
 
-    .contact-form .contact-form-submit__container--wide {
+    .wm-form .wm-form-submit__container--wide {
       display: flex;
     }
 
-    .contact-form input[type='submit'] {
+    .wm-form input[type='submit'] {
       display: inline-block;
-      font-size: 26px;
+      font-size: 1.5rem;
       line-height: 1.2;
       text-align: center;
-      color: #fff !important;
+      color: #ffffff;
       padding: 12px 52px;
-      margin: 4px 0;
+      margin: 0.25rem 0;
       background-color: var(--wm-theme-primary, #15222b);
       border: none;
       border-radius: var(--wm-form-submit-button-radius, 0px);
-      transition: all 450ms;
+      transition: ease-in-out 350ms;
     }
 
-    .contact-form input[type='submit']:hover {
+    .wm-form input[type='submit']:hover {
       opacity: 0.8;
       cursor: pointer;
     }
 
     @media only screen and (min-width: 768px) {
-      .contact-form .w-50 {
+      .wm-form .w-50 {
         width: 50%;
       }
     }
@@ -128,7 +131,7 @@ export class WebmarketsForm extends LitElement {
     return html`
       <form
         action=${`https://submit-form.com/${this.formSparkID}`}
-        class="contact-form"
+        class="wm-form"
       >
         <input type="hidden" name="_redirect" value=${this.redirectURL} />
         <input type="hidden" name="_append" value="false" />
@@ -144,7 +147,7 @@ export class WebmarketsForm extends LitElement {
           this.fields === 'default'
             ? html`
               <div class="w-50">
-                <label for="Name">Name</label>
+                <label for="Name">Name *</label>
                 <input
                   required
                   id="contact-name"
@@ -154,7 +157,7 @@ export class WebmarketsForm extends LitElement {
                 />
               </div>
               <div class="w-50">
-                <label for="Email">Email</label>
+                <label for="Email">Email *</label>
                 <input
                   required
                   id="contact-email"
@@ -164,7 +167,7 @@ export class WebmarketsForm extends LitElement {
                 />
               </div>
               <div class="w-50">
-                <label for="Number">Phone Number</label>
+                <label for="Number">Phone Number *</label>
                 <input
                   required
                   id="contact-number"
@@ -174,19 +177,19 @@ export class WebmarketsForm extends LitElement {
                 />
               </div>
               <div class="w-50">
-                <label for="Referral">How did you hear about us?</label>
+                <label for="Referral">How did you hear about us? *</label>
                 <select name="Referral" id="contact-location" required>
                   <option disabled selected>==SELECT AN OPTION==</option>
                   ${referralOptionsElements}
                 </select>
               </div>
               <div>
-                <label for="Messages">Messages</label>
+                <label for="Message">Message *</label>
                 <textarea
                   required
                   id="contact-message"
-                  name="Messages"
-                  placeholder="Messages"
+                  name="Message"
+                  placeholder="Message"
                 ></textarea>
               </div>
             `
@@ -196,7 +199,7 @@ export class WebmarketsForm extends LitElement {
           this.fields.includes('name')
             ? html`
               <div>
-                <label for="Name">Name</label>
+                <label for="Name">Name *</label>
                 <input
                   required
                   id="contact-name"
@@ -212,7 +215,7 @@ export class WebmarketsForm extends LitElement {
           this.fields.includes('email')
             ? html`
               <div>
-                <label for="Email">Email</label>
+                <label for="Email">Email *</label>
                 <input
                   required
                   id="contact-email"
@@ -228,7 +231,7 @@ export class WebmarketsForm extends LitElement {
           this.fields.includes('phone')
             ? html`
               <div>
-                <label for="Number">Phone Number</label>
+                <label for="Number">Phone Number *</label>
                 <input
                   required
                   id="contact-number"
@@ -244,7 +247,7 @@ export class WebmarketsForm extends LitElement {
           this.fields.includes('referral')
             ? html`
               <div>
-                <label for="Referral">How did you hear about us?</label>
+                <label for="Referral">How did you hear about us? *</label>
                 <select name="Referral" id="contact-location" required>
                   <option disabled selected>==SELECT AN OPTION==</option>
                   ${referralOptionsElements}
@@ -257,7 +260,7 @@ export class WebmarketsForm extends LitElement {
           this.fields.includes('message')
             ? html`
               <div>
-                <label for="Message">Message</label>
+                <label for="Message">Message *</label>
                 <textarea
                   required
                   id="contact-message"
@@ -280,8 +283,8 @@ export class WebmarketsForm extends LitElement {
             : ''
         }
 
-        <div class="contact-form-submit__container ${
-          this.fullWidthButton ? 'contact-form-submit__container--wide' : ''
+        <div class="wm-form-submit__container ${
+          this.fullWidthButton ? 'wm-form-submit__container--wide' : ''
         }">
           <input type="submit" title="Submit" />
         </div>
