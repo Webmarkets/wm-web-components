@@ -133,7 +133,7 @@ const Z=(t,i)=>"method"===i.kind&&i.descriptor&&!("value"in i.descriptor)?{...i,
               </div>
             `:""}
         ${this.fields.includes("referral")?k`
-              <div class="w-50">
+              <div>
                 <label for="Referral">How did you hear about us?</label>
                 <select name="Referral" id="contact-location" required>
                   <option disabled selected>==SELECT AN OPTION==</option>

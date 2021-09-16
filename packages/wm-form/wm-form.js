@@ -141,7 +141,7 @@ let WebmarketsForm = class WebmarketsForm extends LitElement {
             : ''}
         ${this.fields.includes('referral')
             ? html `
-              <div class="w-50">
+              <div>
                 <label for="Referral">How did you hear about us?</label>
                 <select name="Referral" id="contact-location" required>
                   <option disabled selected>==SELECT AN OPTION==</option>
