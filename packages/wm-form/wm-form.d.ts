@@ -5,6 +5,7 @@ export declare class WebmarketsForm extends LitElement {
     formSparkID: string;
     redirectURL: string;
     fields: string;
+    fullWidthButton: boolean;
     _getFormattedDate(): string;
     render(): import("lit-html").TemplateResult<1>;
 }

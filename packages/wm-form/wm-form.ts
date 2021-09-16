@@ -59,6 +59,14 @@ export class WebmarketsForm extends LitElement {
       text-align: left;
     }
 
+    .contact-form .contact-form-submit__container {
+      display: block;
+    }
+
+    .contact-form .contact-form-submit__container--wide {
+      display: flex;
+    }
+
     .contact-form input[type='submit'] {
       display: inline-block;
       font-size: 26px;
@@ -68,7 +76,8 @@ export class WebmarketsForm extends LitElement {
       padding: 12px 52px;
       margin: 4px 0;
       background-color: var(--wm-theme-primary, #15222b);
-      border: 2px solid var(--wm-theme-primary, #15222b);
+      border: none;
+      border-radius: var(--wm-form-submit-button-radius, 0px);
       transition: all 450ms;
     }
 
@@ -92,6 +101,9 @@ export class WebmarketsForm extends LitElement {
 
   @property({ type: String, reflect: true, attribute: 'fields' })
   fields = 'default';
+
+  @property({ type: Boolean, reflect: true, attribute: 'full-width-button' })
+  fullWidthButton = false;
 
   // @state()
   // _name = '';
@@ -154,8 +166,9 @@ export class WebmarketsForm extends LitElement {
           tabindex="-1"
           autocomplete="off"
         />
-        ${this.fields === 'default'
-          ? html`
+        ${
+          this.fields === 'default'
+            ? html`
               <div class="w-50">
                 <label for="Name">Name</label>
                 <input
@@ -208,9 +221,11 @@ export class WebmarketsForm extends LitElement {
                 ></textarea>
               </div>
             `
-          : ''}
-        ${this.fields.includes('name')
-          ? html`
+            : ''
+        }
+        ${
+          this.fields.includes('name')
+            ? html`
               <div>
                 <label for="Name">Name</label>
                 <input
@@ -222,9 +237,11 @@ export class WebmarketsForm extends LitElement {
                 />
               </div>
             `
-          : ''}
-        ${this.fields.includes('email')
-          ? html`
+            : ''
+        }
+        ${
+          this.fields.includes('email')
+            ? html`
               <div>
                 <label for="Email">Email</label>
                 <input
@@ -236,9 +253,11 @@ export class WebmarketsForm extends LitElement {
                 />
               </div>
             `
-          : ''}
-        ${this.fields.includes('phone')
-          ? html`
+            : ''
+        }
+        ${
+          this.fields.includes('phone')
+            ? html`
               <div>
                 <label for="Number">Phone Number</label>
                 <input
@@ -250,9 +269,11 @@ export class WebmarketsForm extends LitElement {
                 />
               </div>
             `
-          : ''}
-        ${this.fields.includes('referral')
-          ? html`
+            : ''
+        }
+        ${
+          this.fields.includes('referral')
+            ? html`
               <div class="w-50">
                 <label for="Referral">How did you hear about us?</label>
                 <select name="Referral" id="contact-location" required>
@@ -266,9 +287,11 @@ export class WebmarketsForm extends LitElement {
                 </select>
               </div>
             `
-          : ''}
-        ${this.fields.includes('message')
-          ? html`
+            : ''
+        }
+        ${
+          this.fields.includes('message')
+            ? html`
               <div>
                 <label for="Message">Message</label>
                 <textarea
@@ -279,19 +302,23 @@ export class WebmarketsForm extends LitElement {
                 ></textarea>
               </div>
             `
-          : ''}
-      
-        ${this.fields === ''
-          ? html`
+            : ''
+        }
+        ${
+          this.fields === ''
+            ? html`
               <div>
                 <p style="color: red; font-size: 1.5rem;">
                   Please provide a valid field value
                 </p>
               </div>
             `
-          : ''}
+            : ''
+        }
 
-        <div>
+        <div class="contact-form-submit__container ${
+          this.fullWidthButton ? 'contact-form-submit__container--wide' : ''
+        }">
           <input type="submit" title="Submit" />
         </div>
       </form>

@@ -14,6 +14,7 @@ let WebmarketsForm = class WebmarketsForm extends LitElement {
         this.formSparkID = '';
         this.redirectURL = '';
         this.fields = 'default';
+        this.fullWidthButton = false;
     }
     // @state()
     // _name = '';
@@ -197,7 +198,6 @@ let WebmarketsForm = class WebmarketsForm extends LitElement {
               </div>
             `
             : ''}
-      
         ${this.fields === ''
             ? html `
               <div>
@@ -208,7 +208,7 @@ let WebmarketsForm = class WebmarketsForm extends LitElement {
             `
             : ''}
 
-        <div>
+        <div class="contact-form-submit__container ${this.fullWidthButton ? 'contact-form-submit__container--wide' : ''}">
           <input type="submit" title="Submit" />
         </div>
       </form>
@@ -268,6 +268,14 @@ WebmarketsForm.styles = css `
       text-align: left;
     }
 
+    .contact-form .contact-form-submit__container {
+      display: block;
+    }
+
+    .contact-form .contact-form-submit__container--wide {
+      display: flex;
+    }
+
     .contact-form input[type='submit'] {
       display: inline-block;
       font-size: 26px;
@@ -277,7 +285,8 @@ WebmarketsForm.styles = css `
       padding: 12px 52px;
       margin: 4px 0;
       background-color: var(--wm-theme-primary, #15222b);
-      border: 2px solid var(--wm-theme-primary, #15222b);
+      border: none;
+      border-radius: var(--wm-form-submit-button-radius, 0px);
       transition: all 450ms;
     }
 
@@ -301,6 +310,9 @@ __decorate([
 __decorate([
     property({ type: String, reflect: true, attribute: 'fields' })
 ], WebmarketsForm.prototype, "fields", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true, attribute: 'full-width-button' })
+], WebmarketsForm.prototype, "fullWidthButton", void 0);
 WebmarketsForm = __decorate([
     customElement('wm-form')
 ], WebmarketsForm);
