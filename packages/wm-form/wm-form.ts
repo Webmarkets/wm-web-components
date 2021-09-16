@@ -39,6 +39,7 @@ export class WebmarketsForm extends LitElement {
     }
 
     .wm-form textarea {
+      color: black;
       min-height: 160px;
     }
 

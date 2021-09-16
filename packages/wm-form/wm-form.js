@@ -213,6 +213,7 @@ WebmarketsForm.styles = css `
     }
 
     .wm-form textarea {
+      color: black;
       min-height: 160px;
     }
 
