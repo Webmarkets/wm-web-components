@@ -105,52 +105,26 @@ export class WebmarketsForm extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'full-width-button' })
   fullWidthButton = false;
 
-  // @state()
-  // _name = '';
-  // @state()
-  // _email = '';
-  // @state()
-  // _phone = '';
-  // @state()
-  // _message = '';
-  // @state()
-  // _referralSource = '';
+  @property({ type: Array, reflect: true, attribute: 'referral-options' })
+  referralOptions = [
+    'Google Search',
+    'Family/Friend Referral',
+    'Social Media',
+    'Other',
+  ];
 
   _getFormattedDate() {
     let formattedDate = new Date().toLocaleString();
     return formattedDate;
   }
 
-  // _postSubmission(e: any) {
-  //   e.preventDefault();
-  //   const formSubmission = {
-  //     Name: this._name,
-  //     Email: this._email,
-  //     'Phone Number': this._phone,
-  //     Message: this._message,
-  //     'Referral Source': this._referralSource,
-  //     'Submitted Date': this._getFormattedDate()
-  //   };
-
-  //   // console.log(formSubmission);
-
-  //   fetch(`https://submit-form.com/${this.formSparkID}`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Accept: 'application/json'
-  //     },
-  //     body: JSON.stringify(formSubmission)
-  //   })
-  //     .then(function(response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function(error) {
-  //       console.error(error);
-  //     });
-  // }
-
   render() {
+    const referralOptionsElements = this.referralOptions.map((option: any) => {
+      return html`
+      <option value=${option}>${option}</option>
+      `;
+    });
+
     return html`
       <form
         action=${`https://submit-form.com/${this.formSparkID}`}
@@ -203,12 +177,7 @@ export class WebmarketsForm extends LitElement {
                 <label for="Referral">How did you hear about us?</label>
                 <select name="Referral" id="contact-location" required>
                   <option disabled selected>==SELECT AN OPTION==</option>
-                  <option value="Google Search">Google Search</option>
-                  <option value="Family/Friend Referral">
-                    Family/Friend Referral
-                  </option>
-                  <option value="Social Media">Social Media</option>
-                  <option value="Other">Other</option>
+                  ${referralOptionsElements}
                 </select>
               </div>
               <div>
@@ -278,12 +247,7 @@ export class WebmarketsForm extends LitElement {
                 <label for="Referral">How did you hear about us?</label>
                 <select name="Referral" id="contact-location" required>
                   <option disabled selected>==SELECT AN OPTION==</option>
-                  <option value="Google Search">Google Search</option>
-                  <option value="Family/Friend Referral">
-                    Family/Friend Referral
-                  </option>
-                  <option value="Social Media">Social Media</option>
-                  <option value="Other">Other</option>
+                  ${referralOptionsElements}
                 </select>
               </div>
             `

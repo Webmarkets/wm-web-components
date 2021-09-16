@@ -6,6 +6,7 @@ export declare class WebmarketsForm extends LitElement {
     redirectURL: string;
     fields: string;
     fullWidthButton: boolean;
+    referralOptions: string[];
     _getFormattedDate(): string;
     render(): import("lit-html").TemplateResult<1>;
 }
