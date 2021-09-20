@@ -234,7 +234,7 @@ const Z=(t,i)=>"method"===i.kind&&i.descriptor&&!("value"in i.descriptor)?{...i,
       font-size: 1.5rem;
       line-height: 1.2;
       text-align: center;
-      color: #ffffff;
+      color: var(--wm-theme-on-primary, #ffffff);
       padding: 12px 52px;
       margin: 0.25rem 0;
       background-color: var(--wm-theme-primary, #15222b);

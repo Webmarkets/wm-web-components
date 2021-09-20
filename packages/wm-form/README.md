@@ -12,7 +12,8 @@ This form uses [Formspark](https://formspark.io) as the backend.
 
 ## Styles 
 
-- `--wm-theme-primary` - Color for the submitt button
+- `--wm-theme-primary` - Background color for the submit button
+- `--wm-theme-on-primary` - Text color for the submit button
 - `--wm-form-submit-button-radius` - Border radius value for the submit button
 
 ```css
