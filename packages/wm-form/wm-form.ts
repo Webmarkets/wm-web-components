@@ -74,13 +74,12 @@ export class WebmarketsForm extends LitElement {
     .wm-form input[type='submit'] {
       display: inline-block;
       font-size: 1.5rem;
-      line-height: 1.2;
       text-align: center;
       color: var(--wm-theme-on-primary, #ffffff);
       padding: 12px 52px;
       margin: 0.25rem 0;
       background-color: var(--wm-theme-primary, #15222b);
-      border: none;
+      border: var(--wm-form-submit-button-border, none);
       border-radius: var(--wm-form-submit-button-radius, 0px);
       transition: ease-in-out 350ms;
     }
@@ -88,6 +87,12 @@ export class WebmarketsForm extends LitElement {
     .wm-form input[type='submit']:hover {
       opacity: 0.8;
       cursor: pointer;
+    }
+
+    .disclaimer__text {
+      margin: 0;
+      color: var(--wm-form-disclaimer-color, red);
+      font-weight: var(--wm-form-disclaimer-font-weight, 600);
     }
 
     @media only screen and (min-width: 768px) {
@@ -105,6 +110,9 @@ export class WebmarketsForm extends LitElement {
 
   @property({ type: String, reflect: true, attribute: 'fields' })
   fields = 'default';
+
+  @property({ type: String, reflect: true, attribute: 'disclaimer' })
+  disclaimer = '';
 
   @property({ type: Boolean, reflect: true, attribute: 'full-width-button' })
   fullWidthButton = false;
@@ -193,6 +201,14 @@ export class WebmarketsForm extends LitElement {
                   placeholder="Message"
                 ></textarea>
               </div>
+              ${
+                this.disclaimer
+                  ? html`
+              <div>
+                <p class="disclaimer__text">${this.disclaimer}</p>
+              </div>`
+                  : ''
+              }
             `
             : ''
         }
@@ -270,6 +286,14 @@ export class WebmarketsForm extends LitElement {
                 ></textarea>
               </div>
             `
+            : ''
+        }
+        ${
+          this.fields.includes('disclaimer') && this.disclaimer
+            ? html`
+        <div>
+          <p class="disclaimer__text">${this.disclaimer}</p>
+        </div>`
             : ''
         }
         ${

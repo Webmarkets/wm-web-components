@@ -5,6 +5,7 @@ export declare class WebmarketsForm extends LitElement {
     formSparkID: string;
     redirectURL: string;
     fields: string;
+    disclaimer: string;
     fullWidthButton: boolean;
     referralOptions: string[];
     _getFormattedDate(): string;
