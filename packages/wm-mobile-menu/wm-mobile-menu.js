@@ -11,6 +11,7 @@ import { customElement, property } from "lit/decorators.js";
  *
  * @slot - This element has a slot
  */
+export const tagName = 'wm-mobile-menu';
 let MobileMenu = class MobileMenu extends LitElement {
     constructor() {
         super(...arguments);

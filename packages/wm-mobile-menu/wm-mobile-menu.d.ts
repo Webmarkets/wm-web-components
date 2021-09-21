@@ -4,6 +4,7 @@ import { LitElement } from "lit";
  *
  * @slot - This element has a slot
  */
+export declare const tagName = "wm-mobile-menu";
 export declare class MobileMenu extends LitElement {
     isOpen: boolean;
     render(): import("lit-html").TemplateResult<1>;
