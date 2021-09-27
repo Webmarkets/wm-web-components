@@ -187,7 +187,7 @@ const Z=(t,i)=>"method"===i.kind&&i.descriptor&&!("value"in i.descriptor)?{...i,
     .wm-form select {
       box-sizing: border-box;
       border: 1px solid #dcdcdc;
-      color: inherit;
+      color: var(--wm-form-input-color, #000000);
       height: 58px;
       width: 100%;
       border-radius: 5px;

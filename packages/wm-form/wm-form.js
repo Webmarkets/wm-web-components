@@ -208,7 +208,7 @@ WebmarketsForm.styles = css `
     .wm-form select {
       box-sizing: border-box;
       border: 1px solid #dcdcdc;
-      color: inherit;
+      color: var(--wm-form-input-color, #000000);
       height: 58px;
       width: 100%;
       border-radius: 5px;
