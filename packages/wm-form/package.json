@@ -1,6 +1,6 @@
 {
   "name": "@webmarkets/wm-form",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "main": "dist/wm-form.es.js",
   "exports": {
     ".": "./dist/wm-form.es.js"

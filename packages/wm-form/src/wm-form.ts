@@ -178,12 +178,12 @@ export class WebmarketsForm extends LitElement {
                 />
               </div>
               <div class="w-50">
-                <label for="Number">Phone Number *</label>
+                <label for="Phone">Phone Number *</label>
                 <input
                   required
                   id="contact-number"
                   type="tel"
-                  name="Number"
+                  name="Phone"
                   placeholder="Phone Number"
                 />
               </div>
@@ -243,12 +243,12 @@ export class WebmarketsForm extends LitElement {
         ${this.fields.includes("phone")
           ? html`
               <div>
-                <label for="Number">Phone Number *</label>
+                <label for="Phone">Phone Number *</label>
                 <input
                   required
                   id="contact-number"
                   type="tel"
-                  name="Number"
+                  name="Phone"
                   placeholder="Phone Number"
                 />
               </div>
