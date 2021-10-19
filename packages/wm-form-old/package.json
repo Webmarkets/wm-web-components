@@ -1,0 +1,24 @@
+{
+  "name": "@webmarkets/wm-form",
+  "version": "1.1.9",
+  "description": "",
+  "main": "wm-form.js",
+  "module": "wm-form.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Webmarkets/wm-web-components.git",
+    "directory": "packages/wm-form"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^2.0.0-rc.2",
+    "typescript": "^4.3.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

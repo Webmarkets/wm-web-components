@@ -1,24 +1,24 @@
 {
   "name": "@webmarkets/wm-form",
-  "version": "1.1.9",
-  "description": "",
-  "main": "wm-form.js",
-  "module": "wm-form.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Webmarkets/wm-web-components.git",
-    "directory": "packages/wm-form"
+  "version": "1.1.10",
+  "main": "dist/wm-form.es.js",
+  "exports": {
+    ".": "./dist/wm-form.es.js"
   },
+  "types": "types/wm-form.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc && vite build"
   },
-  "keywords": [],
-  "license": "ISC",
   "dependencies": {
-    "lit": "^2.0.0-rc.2",
-    "typescript": "^4.3.5"
+    "lit": "^2.0.0"
   },
-  "publishConfig": {
-    "access": "public"
+  "devDependencies": {
+    "vite": "^2.6.4",
+    "typescript": "^4.3.2"
   }
 }
