@@ -7,11 +7,11 @@ import { customElement } from "lit/decorators.js";
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement("mailchimp-form")
-export class MailchimpForm extends LitElement {
+@customElement("wm-mailchimp-form")
+export class WebmarketsMailchimpForm extends LitElement {
   static styles = css`
     #mc_embed_signup {
-      background: var(--wm-mailchimp-background, white);
+      background: var(--wm-mailchimp-background, #fff);
       clear: left;
       font: 1rem "Poppins", Arial, sans-serif;
       border-radius: 1rem;
