@@ -24,19 +24,19 @@
 ### HTML
 
 ```html
-  <responsive-navbar>
+  <wm-responsive-navbar>
     <ul slot="navlinks" class="navlinks__list">
       <li><a href="/#">Home</a></li>
       <li><a href="/#">About</a></li>
       <li><a href="/#">Contact</a></li>
     </ul>
-  </responsive-navbar>
+  </wm-responsive-navbar>
 ```
 
 ### CSS
 
 ```css
-responsive-navbar {
+wm-responsive-navbar {
   --navbar-background-color: #000000;
   --menu-background-color: #000000;
   color: #ffffff;
