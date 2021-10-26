@@ -1,11 +1,11 @@
 {
-  "name": "wm-responsive-navbar",
-  "version": "0.0.0",
-  "main": "dist/my-element.es.js",
+  "name": "@webmarkets/wm-responsive-navbar",
+  "version": "1.0.0",
+  "main": "dist/wm-responsive-navbar.es.js",
   "exports": {
-    ".": "./dist/my-element.es.js"
+    ".": "./dist/wm-responsive-navbar.es.js"
   },
-  "types": "types/my-element.d.ts",
+  "types": "types/wm-responsive-navbar.d.ts",
   "files": [
     "dist",
     "types"
@@ -18,7 +18,13 @@
     "lit": "^2.0.0"
   },
   "devDependencies": {
-    "vite": "^2.6.4",
-    "typescript": "^4.3.2"
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-replace": "^3.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

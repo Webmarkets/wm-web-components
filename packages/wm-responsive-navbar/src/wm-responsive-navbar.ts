@@ -2,10 +2,10 @@ import { html, css, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { menuIcon, closeIcon } from "./icons";
 
-export const tagName = 'responsive-navbar';
+export const tagName = 'wm-responsive-navbar';
 
-@customElement("responsive-navbar")
-export class ResponsiveNavbar extends LitElement {
+@customElement("wm-responsive-navbar")
+export class WebmarketsResponsiveNavbar extends LitElement {
   static styles = css`
     header {
       width: 100%;
@@ -103,6 +103,6 @@ export class ResponsiveNavbar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "responsive-navbar": ResponsiveNavbar;
+    "responsive-navbar": WebmarketsResponsiveNavbar;
   }
 }
