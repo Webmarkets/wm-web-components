@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
+import { closeIcon } from "./icons";
 
 export const tagName = "wm-modal";
 
@@ -12,7 +13,7 @@ export class WebmarketsModal extends LitElement {
     #modal__slot {
       display: none;
     }
-    :host([open])   {
+    :host([open]) {
       display: block;
       z-index: 9998;
       position: fixed;
@@ -25,6 +26,11 @@ export class WebmarketsModal extends LitElement {
     :host([open]) #modal__slot {
       display: block;
     }
+    #close-icon__span {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
     #modal__container {
       width: 60%;
       height: 50%;
@@ -34,8 +40,8 @@ export class WebmarketsModal extends LitElement {
       top: 50%;
       left: 50%;
       min-height: 100px;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 1rem;
+      border-radius: 0.5rem;
       transform: translate(-50%, -50%);
       background: #fff;
       overflow: auto;
@@ -50,6 +56,8 @@ export class WebmarketsModal extends LitElement {
 
   @property({ type: Boolean, reflect: true, attribute: "open" })
   open = false;
+  @property({type: Boolean, reflect: true, attribute: 'hide-close-icon'})
+  hideCloseIcon = false;
   @property({ type: Boolean, reflect: true, attribute: "popup-once" })
   popupOnce = false;
   @property({ type: Boolean, reflect: true, attribute: "auto-popup" })
@@ -102,7 +110,7 @@ export class WebmarketsModal extends LitElement {
       else {
         // wait for however long the delay is
         setTimeout(() => {
-          this.openModal()
+          this.openModal();
         }, this.popupDelay);
         // set a local storage item named popup-loaded
         localStorage.setItem("popup-loaded", "true");
@@ -119,7 +127,7 @@ export class WebmarketsModal extends LitElement {
       else {
         // wait for however long the delay is
         setTimeout(() => {
-          this.openModal()
+          this.openModal();
         }, this.popupDelay);
         // set a local storage item named popup-loaded
         sessionStorage.setItem("popup-loaded", "true");
@@ -128,7 +136,7 @@ export class WebmarketsModal extends LitElement {
     // if popupeveryvisit or popuponce aren't enabled then open the popup after whatever the delay is
     else {
       setTimeout(() => {
-        this.openModal()
+        this.openModal();
       }, this.popupDelay);
     }
   }
@@ -154,7 +162,7 @@ export class WebmarketsModal extends LitElement {
    */
   public openModal() {
     this.open = true;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   }
 
   /**
@@ -162,7 +170,7 @@ export class WebmarketsModal extends LitElement {
    */
   public closeModal() {
     this.open = false;
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   }
 
   /**
@@ -184,18 +192,21 @@ export class WebmarketsModal extends LitElement {
     // if they press the ESC key start recording
     if (e.key === "Escape") {
       // e.preventDefault();
-      this.closeModal()
+      this.closeModal();
       // document.body.toggleAttribute("no-scroll");
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
   }
 
   render() {
     return html`<slot name="modal" id="modal__slot">
       <div id="modal__container">
-        <slot name="modal-contents">
-
-        </slot>
+        ${this.hideCloseIcon
+          ? ""
+          : html`<slot name="close-icon" @click=${this.closeModal}
+              ><span id="close-icon__span">${closeIcon}</span></slot
+            >`}
+        <slot name="modal-content"> </slot>
       </div>
     </slot>`;
   }

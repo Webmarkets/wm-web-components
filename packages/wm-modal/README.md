@@ -2,72 +2,39 @@
 
 ## Available Attributes
 
-`auto-popup` - Makes the modal automatically popup when the tag is added to the page. It defaults to display after 5 seconds.
+- `auto-popup` - Makes the modal automatically popup when the tag is added to the page. It defaults to display after 5 seconds.
+- `hide-close-icon` - Hides the close icon from the top right corner of the modal
 
 **Requires `auto-popup` Attribute**
 
 - `popup-every-visit` - Makes the modal popup every single user visit
 - `popupe-once` - Makes the modal popup only once permanently unless the user cleares their local storage cache
-- `popup-delay` - This is a numeric value in miliseconds. If not specified the value is 5000 
+- `popup-delay` - This is a numeric value in miliseconds. If not specified the value is 5000
 
-## Example CSS
+## Required CSS
 
-```css 
-    body[no-scroll] {
-        overflow: hidden;
-    }
-    wm-modal {
-      display: none;
-    }
-    wm-modal[open] {
-      display: block;
-    }
-    #modal__container {
-        width: 60%;
-        height: 50%;
-        display: flex;
-        z-index: 9999;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        min-height: 100px;
-        padding: 15px;
-        border-radius: 10px;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        overflow: auto;
-    }
-    @media only screen and (max-width: 905px) {
-      #modal__container {
-        width: 80%;
-        height: 60%;
-      }
-    }
+This CSS property is required to avoid a flash of the slotted element
+
+```css
+*:not(:defined) {
+  display: none;
+}
 ```
 
 ## Example HTML
 
 ```html
 <wm-modal auto-popup>
-    <div slot="modal" id="modal__container">
-    </div>
+  <div slot="modal-content">
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quae
+      exercitationem, ea nam molestias explicabo nisi veritatis nulla, omnis
+      ducimus quis commodi facere minus optio itaque et esse asperiores qui?
+      Natus quos magnam fugit eaque nostrum cupiditate amet beatae voluptas
+      quasi aliquid similique porro cum, recusandae, a minus consequatur
+      adipisci doloribus debitis nulla! Ut aperiam voluptatum repudiandae sed,
+      dolore ratione!
+    </p>
+  </div>
 </wm-modal>
 ```
-
-## Javascript
-
-```js
- // Modal
- const WmModal = document.querySelector('wm-modal');
- const modalCloseBtn = document.querySelector('#modal-close__button');
-
- WmModal ? WmModal.addEventListener('clicked-away', (event) => toggleEquipmentModal(event)) : null;
- modalCloseBtn ? modalCloseBtn.addEventListener('click', (event) => toggleEquipmentModal(event)) : null;
-
- function toggleEquipmentModal(event) {
-      event.stopPropagation();
-     WmModal.toggleAttribute('isopen');
-     document.body.toggleAttribute('no-scroll');
- }
- ```
-
