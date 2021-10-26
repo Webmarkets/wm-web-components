@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + Lit App</title>
+  <style>
+    wm-background-video {
+      width: 360px;
+      height: auto;
+    }
+
+    wm-background-video div {
+      min-height: 40vh;
+      max-width: 60%;
+      background-color: #fff;
+      position: relative;
+      z-index: 12;
+      inset: 0;
+      padding: 1rem;
+      margin: 4rem auto;
+    }
+  </style>
+  <script type="module" src="/src/wm-background-video.ts"></script>
+</head>
+
+<body>
+  <wm-background-video mp4Src="https://webmarketsonline.com/portals/0/videos/header_small.mp4">
+    <div>
+      <h1>Lorem Ipsum</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut alias minima deserunt sint cum, quas iusto,
+        tempora facere beatae deleniti nobis ratione adipisci error nemo quae saepe enim! Suscipit, incidunt.
+      </p>
+    </div>
+  </wm-background-video>
+</body>
+
+</html>
