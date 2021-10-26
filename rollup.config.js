@@ -5,20 +5,15 @@ import replace from '@rollup/plugin-replace';
 
 const packageNames = [
   'wm-mobile-menu',
-  'wm-modal',
-  'wm-background-video',
-  'wm-text-slider',
-  'wm-google-map',
-  'wm-form'
 ];
 
 const configs = [];
 
 packageNames.forEach((name) => {
   const esm = {
-    input: `packages/${name}/${name}.js`,
+    input: `packages/rollup-packages/${name}/${name}.js`,
     output: {
-      file: `packages/${name}/dist/${name}.bundled.js`,
+      file: `packages/rollup-packages/${name}/dist/${name}.bundled.js`,
       format: 'esm',
     },
     onwarn(warning) {

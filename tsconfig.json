@@ -26,6 +26,6 @@
       }
     ]
   },
-  "include": ["./packages/**/*.ts",],
-  "exclude": ["./packages/wm-google-map-old/**/*.ts"]
+  "include": ["./packages/rollup-packages/**/*.ts",],
+  "exclude": ["./packages/rollup-packages/wm-google-map-old/**/*.ts"]
 }

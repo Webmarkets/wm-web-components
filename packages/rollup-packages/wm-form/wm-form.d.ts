@@ -1,4 +1,4 @@
-import { LitElement } from 'lit';
+import { LitElement } from "lit";
 export declare const tagName = "wm-form";
 export declare class WebmarketsForm extends LitElement {
     static styles: import("lit").CSSResult;
