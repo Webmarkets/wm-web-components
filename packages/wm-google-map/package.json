@@ -1,11 +1,11 @@
 {
   "name": "@webmarkets/wm-google-map",
-  "version": "1.2.0",
-  "main": "dist/my-element.es.js",
+  "version": "1.2.1",
+  "main": "dist/wm-google-map.es.js",
   "exports": {
-    ".": "./dist/my-element.es.js"
+    ".": "./dist/wm-google-map.es.js"
   },
-  "types": "types/my-element.d.ts",
+  "types": "types/wm-google-map.d.ts",
   "files": [
     "dist",
     "types"
