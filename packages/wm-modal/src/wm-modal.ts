@@ -102,7 +102,7 @@ export class WebmarketsModal extends LitElement {
       else {
         // wait for however long the delay is
         setTimeout(() => {
-          this.open = true;
+          this.openModal()
         }, this.popupDelay);
         // set a local storage item named popup-loaded
         localStorage.setItem("popup-loaded", "true");
@@ -119,7 +119,7 @@ export class WebmarketsModal extends LitElement {
       else {
         // wait for however long the delay is
         setTimeout(() => {
-          this.open = true;
+          this.openModal()
         }, this.popupDelay);
         // set a local storage item named popup-loaded
         sessionStorage.setItem("popup-loaded", "true");
@@ -128,7 +128,7 @@ export class WebmarketsModal extends LitElement {
     // if popupeveryvisit or popuponce aren't enabled then open the popup after whatever the delay is
     else {
       setTimeout(() => {
-        this.open = true;
+        this.openModal()
       }, this.popupDelay);
     }
   }
@@ -145,16 +145,32 @@ export class WebmarketsModal extends LitElement {
       // if it's not on the tainer dispatch the event
       // console.log('window clicked');
       // this._dispatchClickedAway();
-      this.toggleModal();
+      this.closeModal();
     }
   };
 
   /**
+   * Open the modal
+   */
+  public openModal() {
+    this.open = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Close the modal
+   */
+  public closeModal() {
+    this.open = false;
+    document.body.style.overflow = '';
+  }
+
+  /**
    * Toggle the open property of the modal
    */
-  public toggleModal () {
-    this.open = !this.open;
-  }
+  // public toggleModal () {
+  //   this.open = !this.open;
+  // }
 
   // _dispatchClickedAway() {
   //   const options = {
@@ -168,9 +184,9 @@ export class WebmarketsModal extends LitElement {
     // if they press the ESC key start recording
     if (e.key === "Escape") {
       // e.preventDefault();
-      this.open = false;
-      document.body.toggleAttribute("no-scroll");
-      document.body.style.overflow = 'hidden';
+      this.closeModal()
+      // document.body.toggleAttribute("no-scroll");
+      document.body.style.overflow = '';
     }
   }
 
