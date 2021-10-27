@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite'
+import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,5 +12,9 @@ export default defineConfig({
     // rollupOptions: {
     //   external: /^lit/
     // }
-  }
+  },
+  plugins: [
+    replace({ "Reflect.decorate": "undefined", preventAssignment: true }),
+    resolve(),
+  ],
 })
