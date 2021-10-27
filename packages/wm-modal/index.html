@@ -15,7 +15,12 @@
 </head>
 
 <body>
-  <wm-modal open hide-close-icon>
+  
+  <button id="btn">
+    Open Modal
+  </button>
+  
+  <wm-modal auto-popup>
     <div slot="modal-content">
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quae exercitationem, ea nam molestias
         explicabo nisi veritatis nulla, omnis ducimus quis commodi facere minus optio itaque et esse asperiores qui?
@@ -72,6 +77,14 @@
         reiciendis?</p>
     </div>
   </wm-modal>
+  <script>
+    var btn = document.querySelector('#btn')
+    var modal = document.querySelector('wm-modal')
+    btn.addEventListener('click', (e) => {
+      // e.stopPropagation()
+      modal.openModal();
+    })
+  </script>
 </body>
 
 </html>

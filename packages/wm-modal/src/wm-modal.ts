@@ -13,7 +13,10 @@ export class WebmarketsModal extends LitElement {
     #modal__slot {
       display: none;
     }
-    :host([open]) {
+    #scrim__container {
+      display: none;
+    }
+    :host([open]) #scrim__container {
       display: block;
       z-index: 9998;
       position: fixed;
@@ -56,7 +59,7 @@ export class WebmarketsModal extends LitElement {
 
   @property({ type: Boolean, reflect: true, attribute: "open" })
   open = false;
-  @property({type: Boolean, reflect: true, attribute: 'hide-close-icon'})
+  @property({ type: Boolean, reflect: true, attribute: "hide-close-icon" })
   hideCloseIcon = false;
   @property({ type: Boolean, reflect: true, attribute: "popup-once" })
   popupOnce = false;
@@ -75,10 +78,9 @@ export class WebmarketsModal extends LitElement {
     window.addEventListener(
       "load",
       this.autoPopup
-        ? (e) => this._autoPopupModal(e)
+        ? () => this._autoPopupModal()
         : () => console.log("Not auto")
     );
-    window.addEventListener("click", this._handleClickedAway);
     window.addEventListener("keydown", (e: KeyboardEvent) =>
       this._keyListener(e)
     );
@@ -87,18 +89,16 @@ export class WebmarketsModal extends LitElement {
     window.removeEventListener(
       "load",
       this.autoPopup
-        ? (e) => this._autoPopupModal(e)
+        ? () => this._autoPopupModal()
         : () => console.log("Not auto")
     );
-    // window.removeEventListener("click", this._handleClickedAway);
     window.removeEventListener("keydown", (e: KeyboardEvent) =>
       this._keyListener(e)
     );
     super.disconnectedCallback();
   }
 
-  private _autoPopupModal(e: Event) {
-    e.stopPropagation();
+  private _autoPopupModal() {
     // if popuponce attribute is enabled go through this function
     if (this.popupOnce) {
       let popupHasBeenLoaded = localStorage.getItem("popup-loaded");
@@ -141,7 +141,7 @@ export class WebmarketsModal extends LitElement {
     }
   }
 
-  private _handleClickedAway = (e: MouseEvent) => {
+  private _handleScrimClick = (e: MouseEvent) => {
     // if the modal is not open do nothing
     if (!this.open) {
       return;
@@ -199,15 +199,17 @@ export class WebmarketsModal extends LitElement {
   }
 
   render() {
-    return html`<slot name="modal" id="modal__slot">
-      <div id="modal__container">
-        ${this.hideCloseIcon
-          ? ""
-          : html`<slot name="close-icon" @click=${this.closeModal}
-              ><span id="close-icon__span">${closeIcon}</span></slot
-            >`}
-        <slot name="modal-content"> </slot>
-      </div>
-    </slot>`;
+    return html`<div id="scrim__container" @click=${this._handleScrimClick}>
+      <slot name="modal" id="modal__slot">
+        <div id="modal__container">
+          ${this.hideCloseIcon
+            ? ""
+            : html`<slot name="close-icon" @click=${this.closeModal}
+                ><span id="close-icon__span">${closeIcon}</span></slot
+              >`}
+          <slot name="modal-content"> </slot>
+        </div>
+      </slot>
+    </div>`;
   }
 }
