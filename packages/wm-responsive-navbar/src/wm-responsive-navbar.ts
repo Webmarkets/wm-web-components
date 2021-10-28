@@ -9,7 +9,6 @@ export class WebmarketsResponsiveNavbar extends LitElement {
   static styles = css`
     header {
       width: 100%;
-      min-height: 64px;
       display: flex;
     }
     .nav {
@@ -27,7 +26,6 @@ export class WebmarketsResponsiveNavbar extends LitElement {
     }
     @media only screen and (max-width: 475px) {
       .nav {
-        padding: 0.5rem 2rem 0.5rem 0;
         justify-content: initial;
       }
       #menu-icon__button {
@@ -40,19 +38,19 @@ export class WebmarketsResponsiveNavbar extends LitElement {
         margin-right: 0.5rem;
         color: inherit;
       }
-      .navlinks__container {
+      .nav-links__container {
         width: 100%;
-        height: 91vh;
+        height: 93vh;
         display: none;
         background-color: var(--menu-background-color, #ffffff);
         position: absolute;
-        top: 9vh;
+        top: 7vh;
         right: 0;
         bottom: 0;
         left: 0;
         z-index: 9999;
       }
-      .navlinks__container--open {
+      .nav-links__container--open {
         display: block;
       }
     }
@@ -75,7 +73,7 @@ export class WebmarketsResponsiveNavbar extends LitElement {
   render() {
     return html` <header>
       <nav class="nav ${this.navAlign === 'right' ? 'nav--align-right' : ''}">
-        <button id="menu-icon__button" @click=${this._toggleMenu}>
+        <button id="menu-icon__button" @click=${this._toggleMenu} title="${this.menuOpen ? `close` : `open`} menu">
           ${this.menuOpen
             ? html`<slot name="close-icon"><span>${closeIcon}</span></slot>`
             : html`<slot name="menu-icon"><span>${menuIcon}</span></slot>`}
@@ -85,11 +83,11 @@ export class WebmarketsResponsiveNavbar extends LitElement {
           </slot>
         </div>
         <div
-          class="navlinks__container ${this.menuOpen
-            ? "  navlinks__container--open"
+          class="nav-links__container ${this.menuOpen
+            ? "  nav-links__container--open"
             : ""}"
         >
-          <slot name="navlinks"></slot>
+          <slot name="nav-links"></slot>
         </div>
       </nav>
     </header>`;
