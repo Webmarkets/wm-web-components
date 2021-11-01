@@ -1,81 +1,125 @@
 import { html, css, LitElement } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 
-/**
- * An example element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
- */
 @customElement("wm-mailchimp-form")
 export class WebmarketsMailchimpForm extends LitElement {
   static styles = css`
+    .wm-mailchimp-form {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      font-family: inherit;
+    }
+    .wm-mailchimp-form div {
+      box-sizing: border-box;
+      display: flex;
+      flex-flow: column;
+      padding: 0.8rem;
+      width: 100%;
+    }
+
+    .w-50 {
+      width: 100%;
+    }
     #mc_embed_signup {
       background: var(--wm-mailchimp-background, #fff);
       clear: left;
-      font: 1rem "Poppins", Arial, sans-serif;
-      border-radius: 1rem;
-      color: var(--wm-mailchimp-text, #2f3335);
+      font-family: inherit;
+      /* border-radius: 1rem; */
+      color: var(--wm-mailchimp-text, #000000);
     }
     #mc_embed_signup input.button {
-      font: 1.1em "Poppins";
+      margin: 1rem 0;
+      padding: 14px 24px;
       border-radius: 3rem;
       height: auto;
       padding: 0.5rem 1.5rem;
       display: inline-flex;
-      text-align: center;
       font-size: 1.2rem;
       line-height: 1;
-      padding: 14px 24px;
       color: var(--wm-mailchimp-background, white);
       border: 2px solid var(--wm-mailchimp-accent, #39b44a);
       background-color: var(--wm-mailchimp-accent, #39b44a);
-      -webkit-border-radius: 999px;
-      -moz-border-radius: 999px;
-      border-radius: 999px;
+      /* border-radius: 999px; */
+      cursor: pointer;
       transition: all 300ms ease-in;
     }
+
     #mc_embed_signup input.button:hover {
+      opacity: 0.8;
+    }
+    /* #mc_embed_signup input.button:hover {
       background: var(--wm-mailchimp-background, white);
       color: var(--wm-mailchimp-accent, #39b44a);
-    }
+    } */
     #mc_embed_signup .mc-field-group input {
-      border-radius: 1rem;
-      border-color: var(--wm-mailchimp-text, #2f3335);
+      border-radius: var(--wm-mailchimp, 0px);
+      border-color: var(--wm-mailchimp-text, #000000);
     }
   `;
+
+  @property({ type: String, reflect: true, attribute: "fields" })
+  fields = "default";
+
+  @property({ type: Boolean, reflect: true, attribute: "show-labels" })
+  showLabels = true;
+
+  @property({ type: String, reflect: true, attribute: "form-action-url" })
+  formActionURL = "";
 
   render() {
     return html`
       <!-- Begin Mailchimp Signup Form -->
-      <link
+      <!-- <link
         href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css"
         rel="stylesheet"
         type="text/css"
-      />
+      /> -->
       <div id="mc_embed_signup">
         <form
-          action="https://franmetrics.us19.list-manage.com/subscribe/post?u=ff4082d1ac23791f7f3fbbb77&amp;id=c3b9dd0bc6"
+          action=${this.formActionURL}
           method="POST"
           id="mc-embedded-subscribe-form"
           name="mc-embedded-subscribe-form"
-          class="validate"
+          class="wm-mailchimp-form validate"
           target="_blank"
           novalidate
         >
+          <slot name="form-label">
+            <p>Subscribe</p>
+          </slot>
           <div id="mc_embed_signup_scroll">
-            <h2>Subscribe</h2>
-            <div class="mc-field-group">
-              <label for="mce-EMAIL">Email Address</label>
-              <input
-                type="email"
-                value=""
-                required
-                name="EMAIL"
-                class="required email"
-                id="mce-EMAIL"
-              />
-            </div>
+            ${this.fields === "default"
+              ? html`
+                  <div class="w-50">
+                    <label for="mce-EMAIL">Email Address</label>
+                    <input
+                      type="email"
+                      value=""
+                      required
+                      name="EMAIL"
+                      class="required email"
+                      id="mce-EMAIL"
+                    />
+                  </div>
+                `
+              : ""}
+            ${this.fields === "email"
+              ? html`
+                  <div class="w-50">
+                    <label for="mce-EMAIL">Email Address</label>
+                    <input
+                      type="email"
+                      value=""
+                      required
+                      name="EMAIL"
+                      class="required email"
+                      id="mce-EMAIL"
+                    />
+                  </div>
+                `
+              : ""}
+
             <div id="mce-responses" class="clear">
               <div
                 class="response"
@@ -137,6 +181,41 @@ export class WebmarketsMailchimpForm extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "mailchimp-form": WebmarketsMailchimpForm;
+    "wm-mailchimp-form": WebmarketsMailchimpForm;
   }
 }
+
+// Franmetrics CSS
+// #mc_embed_signup {
+//   background: white;
+//   clear: left;
+//   font: 1rem "Poppins", Arial, sans-serif;
+//   border-radius: 1rem;
+//   color: var(--button-color3);
+// }
+// #mc_embed_signup input.button {
+//   font: 1.1em "Poppins";
+//   border-radius: 3rem;
+//   height: auto;
+//   padding: 0.5rem 1.5rem;
+//   display: inline-flex;
+//   text-align: center;
+//   font-size: 1.2rem;
+//   line-height: 1;
+//   padding: 14px 24px;
+//   color: #fff;
+//   border: 2px solid var(--accent-color);
+//   background-color: var(--accent-color);
+//   -webkit-border-radius: 999px;
+//   -moz-border-radius: 999px;
+//   border-radius: 999px;
+//   transition: all 300ms ease-in;
+// }
+// #mc_embed_signup input.button:hover {
+//   background: white;
+//   color: var(--accent-color);
+// }
+// #mc_embed_signup .mc-field-group input {
+//   border-radius: 1rem;
+//   border-color: var(--button-color3);
+// }

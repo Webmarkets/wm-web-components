@@ -5,9 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit App</title>
+    <style>
+      div:first-of-type{
+        display: flex;
+        max-width: 800px;
+      }
+    </style>
     <script type="module" src="/src/wm-mailchimp-form.ts"></script>
   </head>
   <body>
-    <wm-mailchimp-form></wm-mailchimp-form>
+    <div>
+      <wm-mailchimp-form form-action-url="https://franmetrics.us19.list-manage.com/subscribe/post?u=ff4082d1ac23791f7f3fbbb77&amp;id=c3b9dd0bc6">
+      </wm-mailchimp-form>
+    </div>
+    
   </body>
 </html>
