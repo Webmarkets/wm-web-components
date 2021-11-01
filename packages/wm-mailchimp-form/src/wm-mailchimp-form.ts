@@ -199,18 +199,20 @@ export class WebmarketsMailchimpForm extends LitElement {
             : ""}
           ${this.fields === "email"
             ? html`
-                <div>
+                 <div>
                   ${this.hideLabels
                     ? ""
-                    : html` <label for="mce-EMAIL">Email Address</label>`}
+                    : html`<label for=${`MERGE${this.emailMergeID}`}
+                        >Email Address</label
+                      >`}
                   <input
                     type="email"
                     value=""
                     required
-                    name="EMAIL"
-                    placeholder="Email"
+                    name=${`MERGE${this.emailMergeID}`}
+                    placeholder="Email Address"
                     class="required email"
-                    id="mce-EMAIL"
+                    id=${`MERGE${this.emailMergeID}`}
                   />
                 </div>
               `
