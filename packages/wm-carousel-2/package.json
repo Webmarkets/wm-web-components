@@ -1,0 +1,24 @@
+{
+  "name": "wm-carousel-2",
+  "version": "0.0.0",
+  "main": "dist/wm-carousel-2.es.js",
+  "exports": {
+    ".": "./dist/wm-carousel-2.es.js"
+  },
+  "types": "types/wm-carousel-2.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "lit": "^2.0.0"
+  },
+  "devDependencies": {
+    "vite": "^2.6.4",
+    "typescript": "^4.3.2"
+  }
+}
