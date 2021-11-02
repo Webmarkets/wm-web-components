@@ -15,6 +15,10 @@ export class WebmarketsMailchimpForm extends LitElement {
       font-size: 2rem;
       font-weight: 700;
     }
+    .field-shift {
+      left: -9999px;
+      position: absolute;
+    }
     .wm-mailchimp-form {
       display: flex;
       flex-wrap: wrap;
@@ -141,6 +145,41 @@ export class WebmarketsMailchimpForm extends LitElement {
         >
           <input type="hidden" name="u" value=${this.mailchimpUValue} />
           <input type="hidden" name="id" valu=${this.mailchimpIdValue} />
+
+          <!-- people should not fill these in and expect good things -->
+          <div
+            class="field-shift"
+            aria-label="Please leave the following three fields empty"
+          >
+            <label for="b_name">Name: </label>
+            <input
+              type="text"
+              name="b_name"
+              tabindex="-1"
+              value=""
+              placeholder="Freddie"
+              id="b_name"
+            />
+
+            <label for="b_email">Email: </label>
+            <input
+              type="email"
+              name="b_email"
+              tabindex="-1"
+              value=""
+              placeholder="youremail@gmail.com"
+              id="b_email"
+            />
+
+            <label for="b_comment">Comment: </label>
+            <textarea
+              name="b_comment"
+              tabindex="-1"
+              placeholder="Please comment"
+              id="b_comment"
+            ></textarea>
+          </div>
+
           ${this.fields === "default"
             ? html`
                 <div class="w-50">
