@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     lib: {
-      entry: "src/mailchimp-form.ts",
+      entry: "src/wm-mailchimp-form.ts",
       formats: ["es"],
     },
     rollupOptions: {
