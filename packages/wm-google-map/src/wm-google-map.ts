@@ -7,7 +7,10 @@ import {
   queryAssignedNodes,
 } from "lit/decorators.js";
 import { Loader } from "@googlemaps/js-api-loader";
-import WmGoogleMapMarker from "./WmGoogleMapMarker";
+import WmGoogleMapMarker from "./WmGoogleMapMarker"
+
+export { default as WmGoogleMapMarker }  from "./WmGoogleMapMarker";
+
 
 @customElement("wm-google-map")
 export class WebmarketsGoogleMap extends LitElement {
