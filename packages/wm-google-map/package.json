@@ -1,6 +1,6 @@
 {
   "name": "@webmarkets/wm-google-map",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "main": "dist/wm-google-map.es.js",
   "exports": {
     ".": "./dist/wm-google-map.es.js"
@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build"
   },
   "dependencies": {

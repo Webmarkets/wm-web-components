@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Lit App</title>
-    <style>
-      section{
-        display: flex;
-      }
-      wm-google-map {
-        height: 450px;
-        width: 100%;
-      }
-    </style>
-    <script type="module" src="/src/wm-google-map.ts"></script>
-  </head>
-  <body>
-    <section>
-      <wm-google-map></wm-google-map>
-    </section>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + Lit App</title>
+  <style>
+    section {
+      display: flex;
+    }
+
+    wm-google-map {
+      height: 450px;
+      width: 100%;
+    }
+  </style>
+  <script type="module" src="/src/wm-google-map.ts"></script>
+</head>
+
+<body>
+  <section>
+    <wm-google-map api-key="" lat="43.655613" lng="-116.3536647">
+    </wm-google-map>
+  </section>
+  <script type="module" src="./src/app.ts"></script>
+</body>
+
 </html>
