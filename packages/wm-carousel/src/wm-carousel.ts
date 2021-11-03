@@ -89,7 +89,6 @@ export class WebMarketsCarousel extends LitElement {
         ${this._carouselChildren.map((item) => {
           return item;
         })}
-        <!-- <slot name="carousel-items"></slot> -->
       </div>
       <div class="carousel-buttons">
         <button @click=${this.previousSlide}>Previous</button>
@@ -127,7 +126,8 @@ export class WebMarketsCarousel extends LitElement {
     if (
       this._carouselChildren.length < this._numCards ||
       this._currentIndex < (this._numCards + 2) / 2 ||
-      this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2
+      this._carouselChildren.length - this._currentIndex <
+        (this._numCards + 2) / 2
     ) {
       rendering = true;
     }
@@ -195,7 +195,11 @@ export class WebMarketsCarousel extends LitElement {
   private getActiveSlideSet(): CarouselItem[] {
     let slideSet: CarouselItem[] = [];
     if (this._notLooping) {
-      for (let i = this._currentIndex - 1; i < this._currentIndex + this._numCards + 1; i++) {
+      for (
+        let i = this._currentIndex - 1;
+        i < this._currentIndex + this._numCards + 1;
+        i++
+      ) {
         if (i >= 0 && i < this._carouselChildren.length) {
           console.log(i);
           slideSet.push(this._carouselChildren[i]);
@@ -242,7 +246,10 @@ export class WebMarketsCarousel extends LitElement {
     } else {
       currentAtZero = true;
     }
-    if (this._currentIndex < this._carouselChildren.length - this._numCards - 1) {
+    if (
+      this._currentIndex <
+      this._carouselChildren.length - this._numCards - 1
+    ) {
       set[set.length - 1].setStyle(
         baseStyle +
           `
