@@ -92,8 +92,8 @@ export class WebMarketsCarousel extends LitElement {
         <!-- <slot name="carousel-items"></slot> -->
       </div>
       <div class="carousel-buttons">
+        <button @click=${this.previousSlide}>Previous</button>
         <button @click=${this.nextSlide}>Next</button>
-        <button @click=${this.lastSlide}>Last</button>
       </div>
     `;
   }
@@ -146,7 +146,7 @@ export class WebMarketsCarousel extends LitElement {
   /**
    * Cycles to the previous Carousel item
    */
-  public lastSlide() {
+  public previousSlide() {
     this._handleSpin(-1);
   }
 
