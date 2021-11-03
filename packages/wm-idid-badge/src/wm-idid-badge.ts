@@ -1,8 +1,9 @@
 import { html, css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import ididBadgeAvif from './idid-badge.avif'
-import ididBadgeWebp from './idid-badge.webp'
-import ididBadgePng from './idid-badge.png'
+import ididBadgeAvif from './idid-badge.avif?url'
+import ididBadgeWebp from './idid-badge.webp?url'
+import ididBadgePng from './idid-badge.png?url'
+
 /**
  * An example element.
  *
