@@ -1,17 +1,18 @@
 {
-  "name": "wm-carousel",
-  "version": "0.0.0",
-  "main": "dist/my-element.es.js",
+  "name": "@webmarkets/wm-carousel",
+  "version": "1.0.0",
+  "main": "dist/wm-carousel.es.js",
   "exports": {
-    ".": "./dist/my-element.es.js"
+    ".": "./dist/wm-carousel.es.js"
   },
-  "types": "types/my-element.d.ts",
+  "types": "types/wm-carousel.d.ts",
   "files": [
     "dist",
     "types"
   ],
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build"
   },
   "dependencies": {
@@ -20,5 +21,8 @@
   "devDependencies": {
     "vite": "^2.6.4",
     "typescript": "^4.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
