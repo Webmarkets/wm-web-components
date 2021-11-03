@@ -1,6 +1,6 @@
 {
   "name": "wm-web-components",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "webmarkets web components",
   "scripts": {
     "build:sass-docs": "sass  --no-source-map --style compressed docs/assets/sass/styles.scss docs-build/assets/css/styles.css",
