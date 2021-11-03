@@ -190,6 +190,7 @@ export class WebmarketsGoogleMap extends LitElement {
           new google.maps.Marker({
             position: { lat: marker.lat, lng: marker.lng },
             map: this.map,
+            icon: marker.icon,
           });
         });
       })
