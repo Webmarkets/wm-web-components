@@ -1,6 +1,9 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import CarouselItem from "./Carousel_Item";
+import CarouselItem from "./Carousel_Item_v2";
+
+//TODO: Default mobile responsiveness
+//TODO: Handle slot cards
 
 /**
  * A carousel with adaptable contents
@@ -23,14 +26,39 @@ export class WebMarketsCarousel extends LitElement {
       overflow: hidden;
       height: 400px;
     }
+    .carousel-item-wrapper {
+      padding: var(--carousel-item-gap, 0.5rem);
+      box-sizing: border-box;
+      display: none;
+    }
+    .carousel-item {
+      color: var(--wm-carousel-item-color, black);
+      padding: var(--wm-carousel-item-padding, 1rem);
+      border-radius: 1rem;
+      background-color: var(--wm-carousel-item-background-color, #aaaaaa);
+    }
+    .carousel-item h3 {
+      margin-top: 0;
+    }
+    .carousel-item p {
+      margin-bottom: 0;
+    }
   `;
   // Properties for settings
-  @property({ type: Number, reflect: true, attribute: "numcards" })
+  @property({ type: Number, reflect: true, attribute: "num-cards" })
   _numCards: number = 3;
 
   // I kinda don't want to use this
-  @property({ type: String, reflect: true, attribute: "cardsdata" })
+  @property({ type: String, reflect: true, attribute: "cards-data" })
   _cardsData: string = "";
+
+  // Property for transition time in ms
+  @property({ type: Number, reflect: true, attribute: "transition-time" })
+  _transitionTime: number = 1000;
+
+  // Property for looping
+  @property({ type: Boolean, reflect: true, attribute: "no-loop" })
+  _notLooping: boolean = false;
 
   // Current index determines which cards are active
   @state()
@@ -39,37 +67,40 @@ export class WebMarketsCarousel extends LitElement {
   @state()
   private _carouselChildren: CarouselItem[] = [];
 
+  // Tracks if the carousel is currently spinning
+  private _isSpinning: boolean = false;
+
   /**
    * Runs on component initialization
    */
   private _init() {
-    // test if the slot is being used
-    if (this.children.length > 0) {
-      console.log("slotted!");
+    // push all children in slot to the array
+    while (this.children.length > 0) {
+      let item = this.children[0];
+      this._carouselChildren.push(new CarouselItem(undefined, undefined, item));
     }
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this._init();
+    this.renderActiveSlideSet();
   }
 
   render() {
     return html`
+      <slot name="carousel-items"></slot>
       <div class="carousel-supreme">
-        <!-- <slot name="carousel-items"></slot> -->
         ${this._carouselChildren.map((item) => {
-          return html` <div class="carousel-card" style=${item.style}>
-            <h3>${item.title}</h3>
-            <p>${item.description}</p>
-          </div>`;
+          return item;
         })}
+        <!-- <slot name="carousel-items"></slot> -->
       </div>
       <div class="carousel-buttons">
         <button @click=${this.nextSlide}>Next</button>
         <button @click=${this.lastSlide}>Last</button>
       </div>
     `;
+  }
+
+  public connectedCallback() {
+    super.connectedCallback();
+    this._init();
   }
 
   /**
@@ -93,7 +124,11 @@ export class WebMarketsCarousel extends LitElement {
    */
   public addCarouselItems(items: CarouselItem[]) {
     let rendering = false;
-    if (this._carouselChildren.length < this._numCards) {
+    if (
+      this._carouselChildren.length < this._numCards ||
+      this._currentIndex < (this._numCards + 2) / 2 ||
+      this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2
+    ) {
       rendering = true;
     }
     this._carouselChildren.push(...items);
@@ -106,21 +141,27 @@ export class WebMarketsCarousel extends LitElement {
    * Cycles to the next Carousel item
    */
   public nextSlide() {
-    this._currentIndex++;
-    if (this._currentIndex == this._carouselChildren.length) {
-      this._currentIndex = 0;
-    }
-    this.renderActiveSlideSet();
+    this._handleSpin(1);
   }
   /**
    * Cycles to the previous Carousel item
    */
   public lastSlide() {
-    this._currentIndex--;
-    if (this._currentIndex < 0) {
-      this._currentIndex = this._carouselChildren.length - 1;
+    this._handleSpin(-1);
+  }
+
+  private _handleSpin(diff: number) {
+    if (!this._isSpinning) {
+      const oldIndex = this._currentIndex;
+      this._currentIndex = this._calcIndex(diff);
+      if (this._currentIndex !== oldIndex) {
+        this._isSpinning = true;
+        this.renderActiveSlideSet();
+        setTimeout(() => {
+          this._isSpinning = false;
+        }, this._transitionTime);
+      }
     }
-    this.renderActiveSlideSet();
   }
 
   /**
@@ -128,13 +169,22 @@ export class WebMarketsCarousel extends LitElement {
    * @param diff The index of the offset to find
    * @returns An in-bounds index that is offset from the current index
    */
-  private calcIndex(diff: number) {
+  private _calcIndex(diff: number) {
     let index = this._currentIndex + diff;
-    while (index < 0) {
-      index += this._carouselChildren.length;
-    }
-    while (index >= this._carouselChildren.length) {
-      index -= this._carouselChildren.length;
+    if (this._notLooping) {
+      // debugger;
+      if (index < 0) {
+        index = 0;
+      } else if (index > this._carouselChildren.length - this._numCards) {
+        index = this._carouselChildren.length - this._numCards;
+      }
+    } else {
+      while (index < 0) {
+        index += this._carouselChildren.length;
+      }
+      while (index >= this._carouselChildren.length) {
+        index -= this._carouselChildren.length;
+      }
     }
     return index;
   }
@@ -144,51 +194,95 @@ export class WebMarketsCarousel extends LitElement {
    */
   private getActiveSlideSet(): CarouselItem[] {
     let slideSet: CarouselItem[] = [];
-    // Figure out how many cards are surrounding the current card
-    let layers = Math.ceil(this._numCards / 2);
-    for (let i = 0 - layers; i <= layers; i++) {
-      // For each card, add in order
-      slideSet.push(this._carouselChildren[this.calcIndex(i)]);
-    }
-    // Check if the desired number of active cards is even.
-    if (this._numCards % 2 === 0) {
-      slideSet.push(this._carouselChildren[this.calcIndex(layers + 1)]);
+    if (this._notLooping) {
+      for (let i = this._currentIndex - 1; i < this._currentIndex + this._numCards + 1; i++) {
+        if (i >= 0 && i < this._carouselChildren.length) {
+          console.log(i);
+          slideSet.push(this._carouselChildren[i]);
+        }
+      }
+    } else {
+      // Figure out how many cards are surrounding the current card
+      let layers = Math.ceil(this._numCards / 2);
+      for (let i = 0 - layers; i <= layers; i++) {
+        // For each card, add in order
+        slideSet.push(this._carouselChildren[this._calcIndex(i)]);
+      }
+      // Check if the desired number of active cards is even.
+      if (this._numCards % 2 === 0) {
+        slideSet.push(this._carouselChildren[this._calcIndex(layers + 1)]);
+      }
     }
     return slideSet;
   }
   private renderActiveSlideSet() {
+    // debugger;
+    let currentAtZero = false;
+    let currentAtEnd = false;
     let set = this.getActiveSlideSet();
+    console.log(set);
     let width = 100 / this._numCards;
-    let leftAmount = 0;
-    set[0].style = `
+
+    const baseStyle = css`
       display: inline-block;
       width: ${width}%;
-      transition: 500ms all;
+      transition: ${this._transitionTime}ms all;
       position: absolute;
-      visibility: hidden;
-      opacity:0;
       top: 0;
-      left: ${0 - width}%;`;
-    set[set.length - 1].style = `
-          display: inline-block;
-          width: ${width}%;
-          transition: 500ms all;
-          position: absolute;
+    `;
+    //TODO: Handle not looping
+    if (this._currentIndex !== 0) {
+      set[0].setStyle(
+        baseStyle +
+          `
+      transform: translateX(-100%);
+      visibility: hidden;
+      opacity:0;`
+      );
+    } else {
+      currentAtZero = true;
+    }
+    if (this._currentIndex < this._carouselChildren.length - this._numCards - 1) {
+      set[set.length - 1].setStyle(
+        baseStyle +
+          `
           visibility: hidden;
           opacity:0;
-          top: 0;
-          left: 100%;`;
-    for (let i = 1; i < set.length - 1; i++) {
-      set[i].style = `
-        display: inline-block;
-        width: ${width}%;
-        transition: 500ms all;
-        position: absolute;
-        visibility: visible;
-        top: 0;
-        opacity: 1;
-        left: ${leftAmount}%;`;
-      leftAmount += width;
+          transform: translateX(${this._numCards * 100}%);`
+      );
+    } else {
+      currentAtEnd = true;
+    }
+    if (currentAtZero) {
+      for (let i = 0; i < set.length - 1; i++) {
+        set[i].setStyle(
+          baseStyle +
+            `
+          visibility: visible;
+          opacity: 1;
+          transform: translateX(${i * 100}%);`
+        );
+      }
+    } else if (currentAtEnd) {
+      for (let i = 1; i < set.length; i++) {
+        set[i].setStyle(
+          baseStyle +
+            `
+          visibility: visible;
+          opacity: 1;
+          transform: translateX(${(i - 1) * 100}%);`
+        );
+      }
+    } else {
+      for (let i = 1; i < set.length - 1; i++) {
+        set[i].setStyle(
+          baseStyle +
+            `
+          visibility: visible;
+          opacity: 1;
+          transform: translateX(${(i - 1) * 100}%);`
+        );
+      }
     }
     this.requestUpdate();
   }
