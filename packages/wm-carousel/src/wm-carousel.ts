@@ -4,7 +4,6 @@ import CarouselItem from "./Carousel_Item";
 import { nextIcon, lastIcon } from "./icons";
 
 //TODO: Default mobile responsiveness
-//TODO: Handle slot cards
 
 /**
  * A carousel with adaptable contents
