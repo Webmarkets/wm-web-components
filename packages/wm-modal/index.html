@@ -1,90 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Lit App</title>
+    <style>
+      *:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="/src/wm-modal.ts"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + Lit App</title>
-  <style>
-    *:not(:defined) {
-      display: none
-    }
-  </style>
-  <script type="module" src="/src/wm-modal.ts"></script>
-</head>
+  <body>
+    <button id="btn">Open Modal</button>
 
-<body>
-  
-  <button id="btn">
-    Open Modal
-  </button>
-  
-  <wm-modal auto-popup>
-    <div slot="modal-content">
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quae exercitationem, ea nam molestias
-        explicabo nisi veritatis nulla, omnis ducimus quis commodi facere minus optio itaque et esse asperiores qui?
-        Natus quos magnam fugit eaque nostrum cupiditate amet beatae voluptas quasi aliquid similique porro cum,
-        recusandae, a minus consequatur adipisci doloribus debitis nulla! Ut aperiam voluptatum repudiandae sed, dolore
-        ratione!
-        Iste, accusantium atque deleniti sapiente optio, quod consequuntur fuga, ducimus ex earum tempora assumenda
-        architecto. Tenetur adipisci suscipit veniam dignissimos. Unde laborum deleniti numquam? Doloribus praesentium
-        incidunt tenetur sed at.
-        Temporibus voluptates molestias, odio facere hic ducimus facilis incidunt suscipit vero. Exercitationem, eum
-        eius. Odio repellendus velit facilis mollitia nobis maxime nulla placeat, est quisquam repellat accusamus
-        incidunt inventore totam!
-        Ullam voluptatum aspernatur consequuntur? Autem fuga exercitationem cum voluptates in rerum qui temporibus,
-        dolorum numquam, excepturi culpa nulla deleniti adipisci fugiat. Aperiam totam suscipit tempora earum porro nemo
-        quidem dignissimos!
-        Temporibus maiores aliquam, repellendus modi deleniti voluptas animi explicabo nam dolorem assumenda aperiam
-        veniam eveniet quo voluptate aspernatur nulla ducimus error nemo rem excepturi saepe. Quidem, quaerat vitae.
-        Suscipit, exercitationem!
-        Placeat illo aliquid dolorem omnis eos alias et. Dolor aspernatur quia in labore sapiente amet! Neque
-        exercitationem autem maxime, commodi fugit quasi expedita sed facilis praesentium at sint rerum unde?
-        Impedit tempore vitae necessitatibus sunt laboriosam cumque blanditiis. Repudiandae impedit maxime aliquam
-        cupiditate corrupti amet totam nemo. Sequi eius beatae, perferendis reprehenderit ullam dicta blanditiis
-        voluptatem dignissimos laudantium harum saepe!
-        Illo deleniti odit accusamus consequuntur asperiores reiciendis deserunt autem voluptate quos labore, dicta
-        delectus facere ex perferendis, assumenda, beatae aliquid esse ipsa. Perferendis nisi laudantium eligendi iste
-        ab dolorum accusamus!
-        Molestiae repudiandae error nesciunt animi quasi atque velit ipsa autem harum nobis quas voluptates et eveniet a
-        veniam, vero consectetur nisi, dolorem iure facilis deleniti quae totam corrupti voluptatibus! Accusamus!
-        Quos excepturi quas quidem nostrum amet a non animi doloribus, repudiandae corporis omnis, veniam placeat alias,
-        modi saepe molestias distinctio quod dolores. Expedita eum voluptatum ut nulla eius voluptates aliquam.
-        Cupiditate autem ipsa facere enim non expedita quidem, molestiae neque corporis dolore nisi atque officiis
-        provident accusantium dignissimos ipsam maxime obcaecati ullam modi delectus. Accusantium nesciunt dicta
-        similique reiciendis ullam?
-        Eum quas enim corrupti, cupiditate tempora porro, quae tenetur temporibus unde qui officiis perferendis
-        incidunt, culpa eveniet distinctio fugit aut nesciunt deserunt perspiciatis repudiandae non quasi sed. Neque,
-        quis saepe!
-        Voluptatum veniam, debitis nesciunt quis ea pariatur eum laudantium eaque consequatur animi eos tempora
-        inventore voluptatem fugiat sunt fugit ipsa libero obcaecati ullam rem aspernatur delectus fuga, sed magnam.
-        Tempore!
-        Ut, molestiae hic. Dolore cum cumque dolorem repellat distinctio adipisci, quidem voluptate corporis eaque
-        quibusdam! Omnis placeat tempora molestias quaerat. Veritatis ipsa quis assumenda nemo, culpa explicabo quo odio
-        error?
-        In voluptatibus reprehenderit veritatis eaque ad optio voluptas? Cum dolor doloribus suscipit explicabo, magni
-        voluptate deserunt impedit at placeat, et odit ea amet quidem laudantium aliquid eaque ipsam nihil eum?
-        Consequatur cupiditate sapiente aut soluta repellat rerum, ratione error dignissimos dicta quasi repudiandae,
-        nesciunt magnam quisquam similique nam quam, iusto veniam? Dolore, et commodi nulla eos at eius id amet.
-        Ut totam iste esse optio repellat soluta voluptatibus itaque! Repudiandae, iste fugiat doloremque facere et
-        eligendi facilis itaque culpa ipsa modi ipsam nesciunt labore adipisci illo maiores eveniet? Veritatis, ducimus.
-        Voluptas necessitatibus quas libero, voluptatibus modi enim eius dolorum sapiente quaerat maiores, nam
-        accusantium quae provident ut quis repudiandae officiis. Quis ad neque, fugit libero quam adipisci distinctio
-        eligendi! Magnam?
-        Repellat suscipit nisi dolor voluptate quia, quae consequuntur, ullam quod non dicta rem neque? Reprehenderit
-        consequuntur nihil libero minus fugit magni molestias modi, reiciendis doloremque eum molestiae. Fuga, eveniet
-        reiciendis?</p>
-    </div>
-  </wm-modal>
-  <script>
-    var btn = document.querySelector('#btn')
-    var modal = document.querySelector('wm-modal')
-    btn.addEventListener('click', (e) => {
-      // e.stopPropagation()
-      modal.openModal();
-    })
-  </script>
-</body>
-
+    <wm-modal auto-popup unset-dimensions>
+      <div slot="modal-content">
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quae exercitationem, ea nam molestias
+          explicabo nisi veritatis nulla, omnis ducimus quis commodi facere minus optio itaque et esse asperiores qui?
+          Natus quos magnam fugit eaque nostrum cupiditate amet beatae voluptas quasi aliquid similique porro cum,
+          recusandae, a minus consequatur adipisci doloribus debitis nulla! Ut aperiam voluptatum repudiandae sed,
+          dolore ratione! Iste, accusantium atque deleniti sapiente optio, quod consequuntur fuga, ducimus ex earum
+          tempora assumenda architecto. Tenetur adipisci suscipit veniam dignissimos. Unde laborum deleniti numquam?
+          Doloribus praesentium incidunt tenetur sed at. Temporibus voluptates molestias, odio facere hic ducimus
+          facilis incidunt suscipit vero. Exercitationem, eum eius. Odio repellendus velit facilis mollitia nobis maxime
+          nulla placeat, est quisquam repellat accusamus incidunt inventore totam! Ullam voluptatum aspernatur
+          consequuntur? Autem fuga exercitationem cum voluptates in rerum qui temporibus, dolorum numquam, excepturi
+          culpa nulla deleniti adipisci fugiat. Aperiam totam suscipit tempora earum porro nemo quidem dignissimos!
+          Temporibus maiores aliquam, repellendus modi deleniti voluptas animi explicabo nam dolorem assumenda aperiam
+          veniam eveniet quo voluptate aspernatur nulla ducimus error nemo rem excepturi saepe. Quidem, quaerat vitae.
+          Suscipit, exercitationem! Placeat illo aliquid dolorem omnis eos alias et. Dolor aspernatur quia in labore
+          sapiente amet! Neque exercitationem autem maxime, commodi fugit quasi expedita sed facilis praesentium at sint
+          rerum unde? Impedit tempore vitae necessitatibus sunt laboriosam cumque blanditiis. Repudiandae impedit maxime
+          aliquam cupiditate corrupti amet totam nemo. Sequi eius beatae, perferendis reprehenderit ullam dicta
+          blanditiis voluptatem dignissimos laudantium harum saepe! Illo deleniti odit accusamus consequuntur asperiores
+          reiciendis deserunt autem voluptate quos labore, dicta delectus facere ex perferendis, assumenda, beatae
+          aliquid esse ipsa. Perferendis nisi laudantium eligendi iste ab dolorum accusamus! Molestiae repudiandae error
+          nesciunt animi quasi atque velit ipsa autem harum nobis quas voluptates et eveniet a veniam, vero consectetur
+          nisi, dolorem iure facilis deleniti quae totam corrupti voluptatibus! Accusamus! Quos excepturi quas quidem
+          nostrum amet a non animi doloribus, repudiandae corporis omnis, veniam placeat alias, modi saepe molestias
+          distinctio quod dolores. Expedita eum voluptatum ut nulla eius voluptates aliquam. Cupiditate autem ipsa
+          facere enim non expedita quidem, molestiae neque corporis dolore nisi atque officiis provident accusantium
+          dignissimos ipsam maxime obcaecati ullam modi delectus. Accusantium nesciunt dicta similique reiciendis ullam?
+          Eum quas enim corrupti, cupiditate tempora porro, quae tenetur temporibus unde qui officiis perferendis
+          incidunt, culpa eveniet distinctio fugit aut nesciunt deserunt perspiciatis repudiandae non quasi sed. Neque,
+          quis saepe! Voluptatum veniam, debitis nesciunt quis ea pariatur eum laudantium eaque consequatur animi eos
+          tempora inventore voluptatem fugiat sunt fugit ipsa libero obcaecati ullam rem aspernatur delectus fuga, sed
+          magnam. Tempore! Ut, molestiae hic. Dolore cum cumque dolorem repellat distinctio adipisci, quidem voluptate
+          corporis eaque quibusdam! Omnis placeat tempora molestias quaerat. Veritatis ipsa quis assumenda nemo, culpa
+          explicabo quo odio error? In voluptatibus reprehenderit veritatis eaque ad optio voluptas? Cum dolor doloribus
+          suscipit explicabo, magni voluptate deserunt impedit at placeat, et odit ea amet quidem laudantium aliquid
+          eaque ipsam nihil eum? Consequatur cupiditate sapiente aut soluta repellat rerum, ratione error dignissimos
+          dicta quasi repudiandae, nesciunt magnam quisquam similique nam quam, iusto veniam? Dolore, et commodi nulla
+          eos at eius id amet. Ut totam iste esse optio repellat soluta voluptatibus itaque! Repudiandae, iste fugiat
+          doloremque facere et eligendi facilis itaque culpa ipsa modi ipsam nesciunt labore adipisci illo maiores
+          eveniet? Veritatis, ducimus. Voluptas necessitatibus quas libero, voluptatibus modi enim eius dolorum sapiente
+          quaerat maiores, nam accusantium quae provident ut quis repudiandae officiis. Quis ad neque, fugit libero quam
+          adipisci distinctio eligendi! Magnam? Repellat suscipit nisi dolor voluptate quia, quae consequuntur, ullam
+          quod non dicta rem neque? Reprehenderit consequuntur nihil libero minus fugit magni molestias modi, reiciendis
+          doloremque eum molestiae. Fuga, eveniet reiciendis?
+        </p>
+      </div>
+    </wm-modal>
+    <script>
+      var btn = document.querySelector("#btn");
+      var modal = document.querySelector("wm-modal");
+      btn.addEventListener("click", (e) => {
+        // e.stopPropagation()
+        modal.openModal();
+      });
+    </script>
+  </body>
 </html>

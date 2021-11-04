@@ -69,32 +69,20 @@ export class WebmarketsModal extends LitElement {
   popupEveryVisit = false;
   @property({ type: Number, reflect: true, attribute: "popup-delay" })
   popupDelay = 5000;
+  @property({ type: Boolean, reflect: true, attribute: "unset-dimensions" })
+  unsetDimensions: boolean = false;
 
   @query("#modal__slot")
   modalSlot!: HTMLDivElement;
 
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener(
-      "load",
-      this.autoPopup
-        ? () => this._autoPopupModal()
-        : () => console.log("Not auto")
-    );
-    window.addEventListener("keydown", (e: KeyboardEvent) =>
-      this._keyListener(e)
-    );
+    window.addEventListener("load", this.autoPopup ? () => this._autoPopupModal() : () => console.log("Not auto"));
+    window.addEventListener("keydown", (e: KeyboardEvent) => this._keyListener(e));
   }
   disconnectedCallback() {
-    window.removeEventListener(
-      "load",
-      this.autoPopup
-        ? () => this._autoPopupModal()
-        : () => console.log("Not auto")
-    );
-    window.removeEventListener("keydown", (e: KeyboardEvent) =>
-      this._keyListener(e)
-    );
+    window.removeEventListener("load", this.autoPopup ? () => this._autoPopupModal() : () => console.log("Not auto"));
+    window.removeEventListener("keydown", (e: KeyboardEvent) => this._keyListener(e));
     super.disconnectedCallback();
   }
 
@@ -201,7 +189,7 @@ export class WebmarketsModal extends LitElement {
   render() {
     return html`<div id="scrim__container" @click=${this._handleScrimClick}>
       <slot name="modal" id="modal__slot">
-        <div id="modal__container">
+        <div id="modal__container" style=${this.unsetDimensions ? "width: unset; height: unset;" : ""}>
           ${this.hideCloseIcon
             ? ""
             : html`<slot name="close-icon" @click=${this.closeModal}
