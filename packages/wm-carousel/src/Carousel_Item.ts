@@ -1,4 +1,4 @@
-import { LitElement } from "lit";
+// import { LitElement } from "lit";
 
 /**
  * A class for standardizing HTML slides.
