@@ -1,11 +1,11 @@
 {
-  "name": "wm-mailchimp-form",
-  "version": "0.0.0",
-  "main": "dist/mailchimp-form.es.js",
+  "name": "@webmarkets/wm-mailchimp-form",
+  "version": "1.0.0",
+  "main": "dist/wm-mailchimp-form.es.js",
   "exports": {
-    ".": "./dist/mailchimp-form.es.js"
+    ".": "./dist/wm-mailchimp-form.es.js"
   },
-  "types": "types/mailchimp-form.d.ts",
+  "types": "types/wm-mailchimp-form.d.ts",
   "files": [
     "dist",
     "types"
