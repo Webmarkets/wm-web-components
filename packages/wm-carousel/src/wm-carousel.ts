@@ -17,10 +17,10 @@ import { nextIcon, lastIcon } from "./icons";
 export class WebMarketsCarousel extends LitElement {
   static styles = css`
     :host {
+      width: 100%;
       display: block;
       position: relative;
       padding: 0 3.5rem;
-      margin: 2rem 0;
     }
     .carousel-supreme {
       position: relative;
@@ -163,7 +163,7 @@ export class WebMarketsCarousel extends LitElement {
     return html`
       ${this._style}
       <slot name="carousel-style"></slot>
-      <slot name="carousel-items" id="carousel-items"></slot>
+      <slot name="carousel-items"></slot>
       <div class="carousel-supreme">
         ${this._carouselChildren.map((item) => {
           return item;
