@@ -133,6 +133,7 @@ export class MyElement extends LitElement {
 
   render() {
     return html`
+     <slot name="prev-button">
       <button class="btn-prev" @click=${() => this._move("left")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -144,6 +145,7 @@ export class MyElement extends LitElement {
           <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
         </svg>
       </button>
+      </slot>
       <div id="contents">
         ${this.items.map(
           ({ contents, title }) => html`
@@ -154,6 +156,7 @@ export class MyElement extends LitElement {
           `
         )}
       </div>
+      <slot name="next-button">
       <button class="btn-next" @click=${() => this._move("right")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -165,6 +168,7 @@ export class MyElement extends LitElement {
           <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
         </svg>
       </button>
+      </slot>
     `;
   }
 
