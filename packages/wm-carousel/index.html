@@ -9,7 +9,13 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <wm-carousel id="carousel" num-cards="2" transition-time="750">
+    <wm-carousel id="carousel" num-cards="2" transition-time="750" auto-play>
+      <style slot="carousel-style">
+        .extra-cool-card {
+          background-color: green;
+          border-radius: 50px;
+        }
+      </style>
       <div class="extra-cool-card" slot="carousel-items">
         <h1>Extra Cool Card</h1>
         <p>
@@ -41,10 +47,16 @@
       <div class="extra-cool-card" slot="carousel-items">
         <h1>Extra Cool Card</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod consequatur ullam perferendis impedit
+          assumenda, quibusdam commodi placeat maxime voluptates quia asperiores optio est quo nobis at voluptatum illo
+          ratione nam. Facilis beatae animi, praesentium nostrum cumque sint at commodi ipsam ab quis totam esse
+          cupiditate minus reprehenderit et, quidem consectetur sunt quas sapiente error necessitatibus blanditiis
+          numquam omnis! Dolor, cupiditate. Culpa repudiandae animi ratione, mollitia dolorem dicta ducimus! Facilis
+          necessitatibus recusandae sed voluptatibus, ipsa sunt id vitae quaerat dignissimos in quisquam officia
+          explicabo expedita deserunt quas deleniti blanditiis dolorem ratione.
         </p>
       </div>
+      <button class="next-btn" slot="next-btn">a;lsfkj;lasfjd;lasfj</button>
     </wm-carousel>
     <script type="module" src="app.ts"></script>
   </body>

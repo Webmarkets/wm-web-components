@@ -1,0 +1,9 @@
+.extra-cool-card {
+  background-color: green;
+  border-radius: 1rem;
+}
+
+::slotted(.extra-cool-card) {
+  background-color: green;
+  border-radius: 10px;
+}

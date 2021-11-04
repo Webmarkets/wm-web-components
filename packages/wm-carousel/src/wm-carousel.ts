@@ -1,6 +1,7 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import CarouselItem from "./Carousel_Item_v2";
+import CarouselItem from "./Carousel_Item";
+import { nextIcon, lastIcon } from "./icons";
 
 //TODO: Default mobile responsiveness
 //TODO: Handle slot cards
@@ -17,17 +18,17 @@ export class WebMarketsCarousel extends LitElement {
   static styles = css`
     :host {
       display: block;
-      border: solid 1px gray;
-      padding: 16px;
-      max-width: 800px;
+      position: relative;
+      padding: 0 3.5rem;
+      margin: 2rem 0;
     }
     .carousel-supreme {
       position: relative;
       overflow: hidden;
-      height: 400px;
+      height: 100%;
     }
     .carousel-item-wrapper {
-      padding: var(--carousel-item-gap, 0.5rem);
+      padding: var(--carousel-item-gap, 1rem);
       box-sizing: border-box;
       display: none;
     }
@@ -43,7 +44,47 @@ export class WebMarketsCarousel extends LitElement {
     .carousel-item p {
       margin-bottom: 0;
     }
+    :host .prev-btn,
+    :host .next-btn {
+      background-color: transparent;
+      border-color: #333;
+      fill: #333;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 100%;
+      height: 3rem;
+      width: 3rem;
+      transition: 250ms all;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    :host .prev-btn:hover,
+    :host .next-btn:hover {
+      cursor: pointer;
+      background: #333;
+      fill: white;
+    }
+    :host .prev-btn {
+      padding-right: 0.15rem;
+      left: 0.5rem;
+    }
+    :host .next-btn {
+      padding-left: 0.15rem;
+      right: 0.5rem;
+    }
+
+    :host .prev-btn svg,
+    :host .next-btn svg {
+      fill: inherit;
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
   `;
+  private _style?: Element = undefined;
   // Properties for settings
   @property({ type: Number, reflect: true, attribute: "num-cards" })
   _numCards: number = 3;
@@ -60,6 +101,18 @@ export class WebMarketsCarousel extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: "no-loop" })
   _notLooping: boolean = false;
 
+  // Property for controls
+  @property({ type: Boolean, reflect: true, attribute: "no-controls" })
+  _noControls: boolean = false;
+
+  // Property for auto-play
+  @property({ type: Boolean, reflect: true, attribute: "auto-play" })
+  _autoPlay: boolean = false;
+
+  // Property for auto-play interval
+  @property({ type: Number, reflect: true, attribute: "auto-play-interval" })
+  _autoPlayInterval: number = 5000;
+
   // Current index determines which cards are active
   @state()
   private _currentIndex: number = 0;
@@ -75,26 +128,71 @@ export class WebMarketsCarousel extends LitElement {
    */
   private _init() {
     // push all children in slot to the array
-    while (this.children.length > 0) {
-      let item = this.children[0];
+    let carouselItems = document.querySelectorAll('*[slot="carousel-items"]');
+    let style = document.querySelector('*[slot="carousel-style"]');
+    let prevBtn = document.querySelector('*[slot="prev-btn"]');
+    let nextBtn = document.querySelector('*[slot="next-btn"]');
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        this.previousSlide();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        this.nextSlide();
+      });
+    }
+    if (style) {
+      this._style = style;
+    }
+    carouselItems.forEach((item) => {
       this._carouselChildren.push(new CarouselItem(undefined, undefined, item));
+    });
+    if (this._noControls) {
+      this.style.padding = "0";
+    }
+    if (this._autoPlay) {
+      setInterval(() => {
+        this.nextSlide();
+      }, this._autoPlayInterval);
     }
     this.renderActiveSlideSet();
   }
 
   render() {
     return html`
-      <slot name="carousel-items"></slot>
+      ${this._style}
+      <slot name="carousel-style"></slot>
+      <slot name="carousel-items" id="carousel-items"></slot>
       <div class="carousel-supreme">
         ${this._carouselChildren.map((item) => {
           return item;
         })}
       </div>
-      <div class="carousel-buttons">
-        <button @click=${this.previousSlide}>Previous</button>
-        <button @click=${this.nextSlide}>Next</button>
-      </div>
+      <slot name="prev-btn"
+        ><button style=${this._noControls ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>
+          ${lastIcon}
+        </button>
+      </slot>
+      <slot name="next-btn"
+        ><button style=${this._noControls ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>
+          ${nextIcon}
+        </button>
+      </slot>
     `;
+  }
+  firstUpdated() {
+    this._setHeight();
+  }
+
+  private _setHeight() {
+    let height = 0;
+    this._carouselChildren.forEach((item) => {
+      if (height < item.clientHeight) {
+        height = item.clientHeight;
+      }
+    });
+    this.style.height = `${height}px`;
   }
 
   public connectedCallback() {
@@ -126,13 +224,11 @@ export class WebMarketsCarousel extends LitElement {
     if (
       this._carouselChildren.length < this._numCards ||
       this._currentIndex < (this._numCards + 2) / 2 ||
-      this._carouselChildren.length - this._currentIndex <
-        (this._numCards + 2) / 2
+      this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2
     ) {
       rendering = true;
     }
     this._carouselChildren.push(...items);
-    console.log(this._carouselChildren);
     if (rendering) {
       this.renderActiveSlideSet();
     }
@@ -195,13 +291,8 @@ export class WebMarketsCarousel extends LitElement {
   private getActiveSlideSet(): CarouselItem[] {
     let slideSet: CarouselItem[] = [];
     if (this._notLooping) {
-      for (
-        let i = this._currentIndex - 1;
-        i < this._currentIndex + this._numCards + 1;
-        i++
-      ) {
+      for (let i = this._currentIndex - 1; i < this._currentIndex + this._numCards + 1; i++) {
         if (i >= 0 && i < this._carouselChildren.length) {
-          console.log(i);
           slideSet.push(this._carouselChildren[i]);
         }
       }
@@ -220,11 +311,9 @@ export class WebMarketsCarousel extends LitElement {
     return slideSet;
   }
   private renderActiveSlideSet() {
-    // debugger;
     let currentAtZero = false;
     let currentAtEnd = false;
     let set = this.getActiveSlideSet();
-    console.log(set);
     let width = 100 / this._numCards;
 
     const baseStyle = css`
@@ -234,8 +323,7 @@ export class WebMarketsCarousel extends LitElement {
       position: absolute;
       top: 0;
     `;
-    //TODO: Handle not looping
-    if (this._currentIndex !== 0) {
+    if (this._currentIndex !== 0 || !this._notLooping) {
       set[0].setStyle(
         baseStyle +
           `
@@ -246,10 +334,7 @@ export class WebMarketsCarousel extends LitElement {
     } else {
       currentAtZero = true;
     }
-    if (
-      this._currentIndex <
-      this._carouselChildren.length - this._numCards - 1
-    ) {
+    if (this._currentIndex < this._carouselChildren.length - this._numCards - 1 || !this._notLooping) {
       set[set.length - 1].setStyle(
         baseStyle +
           `
