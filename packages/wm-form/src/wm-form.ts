@@ -147,6 +147,7 @@ export class WebmarketsForm extends LitElement {
       >
         <input type="hidden" name="_redirect" value=${this.redirectURL} />
         <input type="hidden" name="_append" value="false" />
+        <input type="hidden" name="Form URL" value=${window.location.href} />
 
         <input
           type="checkbox"
