@@ -21,7 +21,7 @@ export class WebmarketsForm extends LitElement {
     .wm-form select {
       padding: 0.75rem;
       box-sizing: border-box;
-      border: 1px solid #dcdcdc;
+      border: 2px solid #dcdcdc;
       color: var(--wm-form-input-color, #000000);
       width: 100%;
       border-radius: 5px;
