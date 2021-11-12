@@ -7,8 +7,8 @@ export default defineConfig({
       entry: 'src/wm-expandable.ts',
       formats: ['es']
     },
-    rollupOptions: {
-      external: /^lit/
-    }
+    // rollupOptions: {
+    //   external: /^lit/
+    // }
   }
 })
