@@ -5,9 +5,47 @@
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit App</title>
+    <style>
+      wm-expandable {
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+      }
+      .title__container {
+        padding: 1rem 0;
+        /* font-size: 2rem; */
+      }
+      /* .body__container {
+        padding: 1rem 0;
+      } */
+    </style>
     <script type="module" src="/src/wm-expandable.ts"></script>
   </head>
   <body>
-    <wm-expandable></wm-expandable>
+    <wm-expandable>
+      <div class="title__container" slot="title">
+        Lorem ipsum dolor sit amet consectetur
+      </div>
+      <div class="body__container" slot="body">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat porro quibusdam placeat quasi laudantium quia non quam? Soluta sint corrupti vel illum repellendus pariatur maiores veritatis culpa, suscipit nesciunt quas?
+      </div>
+    </wm-expandable>
+    <wm-expandable>
+      <div slot="title">
+        Lorem ipsum dolor sit amet consectetur
+      </div>
+      <div class="body__container" slot="body">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat porro quibusdam placeat quasi laudantium quia non quam? Soluta sint corrupti vel illum repellendus pariatur maiores veritatis culpa, suscipit nesciunt quas?
+      </div>
+    </wm-expandable>
+    <wm-expandable>
+      <div slot="title">
+        Lorem ipsum dolor sit amet consectetur
+      </div>
+      <div class="body__container" slot="body">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat porro quibusdam placeat quasi laudantium quia non quam? Soluta sint corrupti vel illum repellendus pariatur maiores veritatis culpa, suscipit nesciunt quas?
+      </div>
+    </wm-expandable>
   </body>
 </html>
