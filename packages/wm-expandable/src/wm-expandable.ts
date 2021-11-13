@@ -38,7 +38,7 @@ export class MyElement extends LitElement {
       font-size: inherit;
     }
     :host([open]) .expanded-body__container {
-      display: flex;
+      display: block;
     }
   `;
 
