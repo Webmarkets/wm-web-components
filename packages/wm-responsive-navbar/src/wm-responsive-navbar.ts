@@ -54,7 +54,6 @@ export class WebmarketsResponsiveNavbar extends LitElement {
       height: 100%;
       display: flex;
       align-items: center;
-      background-color: var(--navbar-background-color, #ffffff);
     }
     .nav--align-right {
       justify-content: space-between;
