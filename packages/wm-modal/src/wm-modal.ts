@@ -93,12 +93,11 @@ export class WebmarketsModal extends LitElement {
     if (this.stopButtonClickEvent) {
       toggleModalBtn?.addEventListener("click", (e: Event) => {
         e.preventDefault();
-        this.open = !this.open;
+        this.toggleModal();
       });
     } else toggleModalBtn?.addEventListener("click", () => {
-      this.open = !this.open;
+      this.toggleModal();
     });
-    
   }
 
   private _autoPopupModal() {
@@ -179,9 +178,15 @@ export class WebmarketsModal extends LitElement {
   /**
    * Toggle the open property of the modal
    */
-  // public toggleModal () {
-  //   this.open = !this.open;
-  // }
+  public toggleModal () {
+    // if the modal is open close it
+    if (this.open) {
+      this.closeModal();
+    } else {
+      // if the modal is closed open it
+      this.openModal();
+    }
+  }
 
   // _dispatchClickedAway() {
   //   const options = {
