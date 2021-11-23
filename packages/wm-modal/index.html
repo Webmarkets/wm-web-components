@@ -14,9 +14,8 @@
   </head>
 
   <body>
-    <button id="btn">Open Modal</button>
-
-    <wm-modal auto-popup unset-dimensions>
+    <button id="modal-2-btn">Open Modal</button>
+    <wm-modal id="modal-2" auto-popup unset-dimensions>
       <div slot="modal-content">
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quae exercitationem, ea nam molestias
@@ -65,13 +64,13 @@
         </p>
       </div>
     </wm-modal>
-    <script>
+    <!-- <script>
       var btn = document.querySelector("#btn");
       var modal = document.querySelector("wm-modal");
       btn.addEventListener("click", (e) => {
         // e.stopPropagation()
         modal.openModal();
       });
-    </script>
+    </script> -->
   </body>
 </html>

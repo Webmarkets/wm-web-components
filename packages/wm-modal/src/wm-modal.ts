@@ -86,6 +86,13 @@ export class WebmarketsModal extends LitElement {
     super.disconnectedCallback();
   }
 
+  firstUpdated() {
+    let toggleModalBtn = document.getElementById(this.id + "-btn")
+    toggleModalBtn?.addEventListener("click", () => {
+      this.open = !this.open;
+    });
+  }
+
   private _autoPopupModal() {
     // if popuponce attribute is enabled go through this function
     if (this.popupOnce) {
