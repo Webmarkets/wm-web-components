@@ -59,18 +59,32 @@ export class WebmarketsModal extends LitElement {
 
   @property({ type: Boolean, reflect: true, attribute: "open" })
   open = false;
-  @property({ type: Boolean, reflect: true, attribute: "stop-button-click-event" })
-  stopButtonClickEvent = false
+
+  @property({ type: Boolean, reflect: true, attribute: "scroll-while-open" })
+  scrollWhileOpen = false;
+
+  @property({
+    type: Boolean,
+    reflect: true,
+    attribute: "stop-button-click-event",
+  })
+  stopButtonClickEvent = false;
+
   @property({ type: Boolean, reflect: true, attribute: "hide-close-icon" })
   hideCloseIcon = false;
+
   @property({ type: Boolean, reflect: true, attribute: "popup-once" })
   popupOnce = false;
+
   @property({ type: Boolean, reflect: true, attribute: "auto-popup" })
   autoPopup = false;
+
   @property({ type: Boolean, reflect: true, attribute: "popup-every-visit" })
   popupEveryVisit = false;
+
   @property({ type: Number, reflect: true, attribute: "popup-delay" })
   popupDelay = 5000;
+
   @property({ type: Boolean, reflect: true, attribute: "unset-dimensions" })
   unsetDimensions: boolean = false;
 
@@ -79,25 +93,40 @@ export class WebmarketsModal extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener("load", this.autoPopup ? () => this._autoPopupModal() : () => console.log("Not auto"));
-    window.addEventListener("keydown", (e: KeyboardEvent) => this._keyListener(e));
+    window.addEventListener(
+      "load",
+      this.autoPopup
+        ? () => this._autoPopupModal()
+        : () => console.log("Not auto")
+    );
+    window.addEventListener("keydown", (e: KeyboardEvent) =>
+      this._keyListener(e)
+    );
   }
   disconnectedCallback() {
-    window.removeEventListener("load", this.autoPopup ? () => this._autoPopupModal() : () => console.log("Not auto"));
-    window.removeEventListener("keydown", (e: KeyboardEvent) => this._keyListener(e));
+    window.removeEventListener(
+      "load",
+      this.autoPopup
+        ? () => this._autoPopupModal()
+        : () => console.log("Not auto")
+    );
+    window.removeEventListener("keydown", (e: KeyboardEvent) =>
+      this._keyListener(e)
+    );
     super.disconnectedCallback();
   }
 
   firstUpdated() {
-    let toggleModalBtn = document.getElementById(this.id + "-btn")
+    let toggleModalBtn = document.getElementById(this.id + "-btn");
     if (this.stopButtonClickEvent) {
       toggleModalBtn?.addEventListener("click", (e: Event) => {
         e.preventDefault();
         this.toggleModal();
       });
-    } else toggleModalBtn?.addEventListener("click", () => {
-      this.toggleModal();
-    });
+    } else
+      toggleModalBtn?.addEventListener("click", () => {
+        this.toggleModal();
+      });
   }
 
   private _autoPopupModal() {
@@ -164,7 +193,11 @@ export class WebmarketsModal extends LitElement {
    */
   public openModal() {
     this.open = true;
-    document.body.style.overflow = "hidden";
+    if (this.scrollWhileOpen) {
+      return;
+    } else {
+      document.body.style.overflow = "hidden";
+    }
   }
 
   /**
@@ -172,13 +205,17 @@ export class WebmarketsModal extends LitElement {
    */
   public closeModal() {
     this.open = false;
-    document.body.style.overflow = "";
+    if (this.scrollWhileOpen) {
+      return;
+    } else {
+      document.body.style.overflow = "";
+    }
   }
 
   /**
    * Toggle the open property of the modal
    */
-  public toggleModal () {
+  public toggleModal() {
     // if the modal is open close it
     if (this.open) {
       this.closeModal();
@@ -201,15 +238,16 @@ export class WebmarketsModal extends LitElement {
     if (e.key === "Escape") {
       // e.preventDefault();
       this.closeModal();
-      // document.body.toggleAttribute("no-scroll");
-      document.body.style.overflow = "";
     }
   }
 
   render() {
     return html`<div id="scrim__container" @click=${this._handleScrimClick}>
       <slot name="modal" id="modal__slot">
-        <div id="modal__container" style=${this.unsetDimensions ? "width: unset; height: unset;" : ""}>
+        <div
+          id="modal__container"
+          style=${this.unsetDimensions ? "width: unset; height: unset;" : ""}
+        >
           ${this.hideCloseIcon
             ? ""
             : html`<slot name="close-icon" @click=${this.closeModal}
