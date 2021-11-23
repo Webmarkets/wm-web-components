@@ -59,6 +59,8 @@ export class WebmarketsModal extends LitElement {
 
   @property({ type: Boolean, reflect: true, attribute: "open" })
   open = false;
+  @property({ type: Boolean, reflect: true, attribute: "stop-button-click-event" })
+  stopButtonClickEvent = false
   @property({ type: Boolean, reflect: true, attribute: "hide-close-icon" })
   hideCloseIcon = false;
   @property({ type: Boolean, reflect: true, attribute: "popup-once" })
@@ -88,9 +90,15 @@ export class WebmarketsModal extends LitElement {
 
   firstUpdated() {
     let toggleModalBtn = document.getElementById(this.id + "-btn")
-    toggleModalBtn?.addEventListener("click", () => {
+    if (this.stopButtonClickEvent) {
+      toggleModalBtn?.addEventListener("click", (e: Event) => {
+        e.preventDefault();
+        this.open = !this.open;
+      });
+    } else toggleModalBtn?.addEventListener("click", () => {
       this.open = !this.open;
     });
+    
   }
 
   private _autoPopupModal() {
