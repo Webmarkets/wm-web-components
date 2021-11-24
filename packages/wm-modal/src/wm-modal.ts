@@ -196,6 +196,7 @@ export class WebmarketsModal extends LitElement {
     if (this.scrollWhileOpen) {
       return;
     } else {
+      // document.body.toggleAttribute("no-scroll", true);
       document.body.style.overflow = "hidden";
     }
   }
@@ -208,6 +209,7 @@ export class WebmarketsModal extends LitElement {
     if (this.scrollWhileOpen) {
       return;
     } else {
+      // document.body.toggleAttribute("no-scroll", false);
       document.body.style.overflow = "";
     }
   }
