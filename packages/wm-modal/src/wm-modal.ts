@@ -33,10 +33,11 @@ export class WebmarketsModal extends LitElement {
       position: absolute;
       top: 1rem;
       right: 1rem;
+      cursor: pointer;
     }
     #modal__container {
-      width: 60%;
-      height: 50%;
+      width: var(--modal-width, 70%);
+      height: var(--modal-height, 60%);
       display: flex;
       z-index: 9999;
       position: absolute;
@@ -48,12 +49,6 @@ export class WebmarketsModal extends LitElement {
       transform: translate(-50%, -50%);
       background: #fff;
       overflow: auto;
-    }
-    @media only screen and (max-width: 905px) {
-      #modal__container {
-        width: 80%;
-        height: 60%;
-      }
     }
   `;
 
@@ -84,9 +79,6 @@ export class WebmarketsModal extends LitElement {
 
   @property({ type: Number, reflect: true, attribute: "popup-delay" })
   popupDelay = 5000;
-
-  @property({ type: Boolean, reflect: true, attribute: "unset-dimensions" })
-  unsetDimensions: boolean = false;
 
   @query("#modal__slot")
   modalSlot!: HTMLDivElement;
@@ -248,7 +240,6 @@ export class WebmarketsModal extends LitElement {
       <slot name="modal" id="modal__slot">
         <div
           id="modal__container"
-          style=${this.unsetDimensions ? "width: unset; height: unset;" : ""}
         >
           ${this.hideCloseIcon
             ? ""

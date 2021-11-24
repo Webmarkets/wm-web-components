@@ -9,13 +9,23 @@
       *:not(:defined) {
         display: none;
       }
+      wm-modal {
+        --modal-width: 20%;
+        --modal-height: 20%;
+      }
+      @media only screen and (max-width: 905px) {
+        wm-modal {
+          --modal-width: 100%;
+          --modal-height: 100%;
+        }
+      }
     </style>
     <script type="module" src="/src/wm-modal.ts"></script>
   </head>
 
   <body>
     <button id="modal-2-btn">Open Modal</button>
-    <wm-modal id="modal-2" unset-dimensions>
+    <wm-modal id="modal-2">
       <div slot="modal-content">
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quae exercitationem, ea nam molestias
