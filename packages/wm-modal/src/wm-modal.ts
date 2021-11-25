@@ -246,7 +246,7 @@ export class WebmarketsModal extends LitElement {
             : html`<slot name="close-icon" @click=${this.closeModal}
                 ><span id="close-icon__span">${closeIcon}</span></slot
               >`}
-          <slot name="modal-content"> </slot>
+          <slot name="modal-content"></slot>
         </div>
       </slot>
     </div>`;
