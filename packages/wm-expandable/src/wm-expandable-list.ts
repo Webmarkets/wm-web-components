@@ -26,7 +26,7 @@ export class MyElement extends LitElement {
         // @ts-ignore
         let openedIndex = e.target.getAttribute("index");
         if (this._index && this._index !== openedIndex) {
-            this.shadowRoot ? this.shadowRoot.children[this._index].toggleAttribute("open") : null;
+            this.shadowRoot ? this.shadowRoot.children[this._index].removeAttribute("open") : null;
         }
         this._index = openedIndex;
     }
