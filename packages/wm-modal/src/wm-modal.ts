@@ -44,11 +44,14 @@ export class WebmarketsModal extends LitElement {
       top: 50%;
       left: 50%;
       min-height: 100px;
-      padding: 1rem;
       border-radius: 0.5rem;
       transform: translate(-50%, -50%);
       background: #fff;
       overflow: auto;
+    }
+    .modal-content__container {
+      height: fit-content;
+      padding: 1rem;
     }
   `;
 
@@ -88,9 +91,9 @@ export class WebmarketsModal extends LitElement {
     window.addEventListener(
       "load",
       this.autoPopup
-        ? () => this._autoPopupModal()
-        : () => console.log("Not auto")
-    );
+        ? () => this._autoPopupModal() 
+        : () => ``
+        );
     window.addEventListener("keydown", (e: KeyboardEvent) =>
       this._keyListener(e)
     );
@@ -100,7 +103,7 @@ export class WebmarketsModal extends LitElement {
       "load",
       this.autoPopup
         ? () => this._autoPopupModal()
-        : () => console.log("Not auto")
+        : () => ``
     );
     window.removeEventListener("keydown", (e: KeyboardEvent) =>
       this._keyListener(e)
@@ -241,12 +244,14 @@ export class WebmarketsModal extends LitElement {
         <div
           id="modal__container"
         >
-          ${this.hideCloseIcon
-            ? ""
-            : html`<slot name="close-icon" @click=${this.closeModal}
-                ><span id="close-icon__span">${closeIcon}</span></slot
-              >`}
+        ${this.hideCloseIcon
+          ? ""
+          : html`<slot name="close-icon" @click=${this.closeModal}
+              ><span id="close-icon__span">${closeIcon}</span></slot
+            >`}
+        <div class="modal-content__container">
           <slot name="modal-content"></slot>
+          </div>
         </div>
       </slot>
     </div>`;
