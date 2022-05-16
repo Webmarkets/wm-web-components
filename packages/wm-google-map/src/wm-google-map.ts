@@ -164,11 +164,25 @@ export class WebmarketsGoogleMap extends LitElement {
     this.loader
       ?.load()
       .then(() => {
-        new google.maps.Marker({
+        const infoWindow = new google.maps.InfoWindow({
+          content: marker.infoWindowContent,
+        })
+        
+        const localMarker = new google.maps.Marker({
           position: { lat: marker.lat, lng: marker.lng },
           map: this.map,
           icon: marker.icon,
         });
+
+        if (marker.infoWindowContent) {
+          localMarker.addListener("click", () => {
+            infoWindow.open({
+              anchor: localMarker,
+              map: this.map,
+              shouldFocus: true,
+            });
+          })
+        }
       })
       .catch((error) => {
         console.log(error);
