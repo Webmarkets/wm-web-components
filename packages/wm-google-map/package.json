@@ -1,6 +1,6 @@
 {
   "name": "@webmarkets/wm-google-map",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "repository": {
     "type": "git",
     "url": "https://github.com/Webmarkets/wm-web-components/tree/main/packages/wm-google-map"
