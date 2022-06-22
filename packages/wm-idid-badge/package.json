@@ -1,6 +1,7 @@
 {
   "name": "@webmarkets/wm-idid-badge",
-  "version": "1.0.2",
+  "version": "1.1.0",
+  "type": "module",
   "main": "dist/wm-idid-badge.es.js",
   "exports": {
     ".": "./dist/wm-idid-badge.es.js"
