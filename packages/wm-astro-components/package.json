@@ -1,0 +1,19 @@
+{
+  "name": "wm-astro-components",
+  "version": "1.0.0",
+  "description": "A collection of Astro components for use in webmarkets projects.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Webmarkets/wm-web-components.git#main"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Webmarkets/wm-web-components/issues"
+  },
+  "homepage": "https://github.com/Webmarkets/wm-web-components/tree/main#readme",
+  "dependencies": {
+    "astro": "^1.0.0-rc.1"
+  }
+}

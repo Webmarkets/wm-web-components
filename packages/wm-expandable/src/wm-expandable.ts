@@ -57,6 +57,8 @@ export class MyElement extends LitElement {
       this.ariaLabel = 'collapsed'
     } else {
       this.ariaLabel = 'expanded'
+      let openEvent = new Event('opened');
+      this.dispatchEvent(openEvent);
     }
     this.isOpen = !this.isOpen;
   }
