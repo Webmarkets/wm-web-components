@@ -12,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/Webmarkets/wm-web-components/issues"
   },
-  "homepage": "https://github.com/Webmarkets/wm-web-components/tree/main#readme"
+  "homepage": "https://github.com/Webmarkets/wm-web-components/tree/main#readme",
+  "dependencies": {
+    "astro": "^1.0.0-rc.1"
+  }
 }
