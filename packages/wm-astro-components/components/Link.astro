@@ -1,0 +1,13 @@
+---
+export interface Props {
+    title: string;
+    href: string;
+    newTab?: boolean;
+}
+
+const { title, href, newTab = false } = Astro.props as Props;
+---
+
+<>
+    <a href={href} {newTab && `target="_blank" rel="noopener noreferrer" `}>{title}</a>
+</>

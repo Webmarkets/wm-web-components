@@ -14,6 +14,8 @@
   },
   "homepage": "https://github.com/Webmarkets/wm-web-components/tree/main#readme",
   "dependencies": {
-    "astro": "^1.0.0-rc.1"
+    "@types/common-tags": "^1.8.1",
+    "astro": "^1.0.0-rc.1",
+    "common-tags": "^1.8.2"
   }
 }
