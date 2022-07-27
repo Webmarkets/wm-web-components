@@ -1,0 +1,54 @@
+---
+import { Image, Date, Button, ImageProps } from "../generic/index.astro";
+
+export interface Props {
+    title: string;
+    link: string;
+    mainImage?: ImageProps;
+    summary?: string;
+    date?: Date;
+}
+
+const { title, link, mainImage, summary, date } = Astro.props as Props;
+---
+
+<article>
+    {mainImage &&
+    <Image src={mainImage.src} alt={mainImage.alt} />}
+    <h3>{title}</h3>
+    {summary && <p>{summary}</p>}
+    {date &&
+    <Date value={date} />}
+    <slot name="button">
+        <Button title="Read More" link={link} />
+    </slot>
+</article>
+
+<style>
+    article {
+        display: grid;
+        grid-template-columns: 25% 25% 50%;
+        grid-template-rows: 1fr auto auto;
+        align-items: center;
+
+        max-height: 600px;
+        width: 100%;
+    }
+
+    article :global(img) {
+        grid-column: 1/4;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    article h3 {
+        grid-column: 1/3;
+    }
+
+    article :global(a.btn) {
+        grid-column: 3/4;
+        grid-row: 2/-1;
+        justify-self: center;
+    }
+</style>

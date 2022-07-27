@@ -9,5 +9,5 @@ const { title, href, newTab = false } = Astro.props as Props;
 ---
 
 <>
-    <a href={href} {newTab && `target="_blank" rel="noopener noreferrer" `}>{title}</a>
+    <a href={href} target={newTab ? "_blank" : "" } rel={newTab ? "noreferrer noopener" : "" }>{title}</a>
 </>

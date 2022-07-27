@@ -1,5 +1,22 @@
 ---
 import BaseHead from "../../components/head/BaseHead.astro";
+import BlogList from "../../components/blog/BlogList.astro";
+import { Props as PostPreviewProps } from '../../components/blog/BlogPostPreview.astro';
+
+import Blogs from "../api/blogs.json"
+
+const getBlogPreview = post => {
+    let preview: PostPreviewProps = {
+        title: post.title,
+        summary: post.summary,
+        date: new Date(post.date),
+        link: "https://example.com",
+        mainImage: post.image
+    }
+    return preview;
+}
+
+const blogPreviewList = Blogs.map(post => getBlogPreview(post))
 ---
 
 <html>
@@ -19,6 +36,7 @@ import BaseHead from "../../components/head/BaseHead.astro";
 
 <body>
     <h1>Hello world!</h1>
+    <BlogList posts={blogPreviewList} title="My blog posts" />
 </body>
 
 </html>

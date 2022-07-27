@@ -1,0 +1,26 @@
+---
+import Image, { Props as ImageProps } from "../generic/Image.astro";
+import Date from "../generic/Date.astro";
+import type { AstroComponent } from "astro/dist/types/runtime/server";
+import { html } from "common-tags";
+
+export interface Props {
+    title: string;
+    subtitle?: string;
+    date?: Date;
+    mainImage?: ImageProps;
+    sections: AstroComponent[];
+}
+
+const { title, subtitle, date, mainImage, sections } = Astro.props as Props;
+---
+
+<article>
+    {mainImage &&
+    <Image src={mainImage.src} alt={mainImage.alt} />}
+    <h2>{title}</h2>
+    {subtitle && html`<h3>${subtitle}</h3>`}
+    {date &&
+    <Date value={date} />}
+    {sections}
+</article>

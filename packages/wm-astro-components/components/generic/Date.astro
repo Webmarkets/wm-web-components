@@ -22,3 +22,16 @@ const dateString = getDateString(value);
     <Icon name="ic:outline-date-range" />
     {dateString}
 </time>
+
+<style>
+    time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    time :global(svg) {
+        height: 24px;
+        margin-right: 1rem;
+    }
+</style>

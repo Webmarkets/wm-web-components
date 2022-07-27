@@ -1,6 +1,6 @@
 ---
 import { AstroComponent } from "astro/dist/types/runtime/server";
-import Link from "../Link.astro";
+import Link from "../generic/Link.astro";
 import { html } from "common-tags";
 
 export interface Props {
@@ -13,7 +13,8 @@ export interface Props {
 const { title, link, children, newTab = false } = Astro.props as Props;
 ---
 
-{link 
-    ? html`<div>${title} ${children && html`<div class="children">${children}</div>`}</div>`
-    : <Link title={title} href={link} newTab={newTab} />
+{link
+? html`<div>${title} ${children && html`<div class="children">${children}</div>`}</div>`
+:
+<Link title={title} href={link} newTab={newTab} />
 }
