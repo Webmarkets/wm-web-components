@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/common-tags": "^1.8.1",
     "astro": "^1.0.0-rc.1",
+    "astro-icon": "^0.7.3",
     "common-tags": "^1.8.2"
   }
 }

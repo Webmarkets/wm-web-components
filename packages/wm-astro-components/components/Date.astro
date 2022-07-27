@@ -1,0 +1,24 @@
+---
+import { Icon } from 'astro-icon';
+
+export interface Props {
+    value: Date;
+}
+
+const { value } = Astro.props as Props;
+
+const getDateString = (d: Date) => {
+    let day = d.getDate();
+    let month = d.getMonth() + 1;
+    let year = d.getFullYear();
+
+    return `${day}-${month}-${year}`;
+}
+
+const dateString = getDateString(value);
+---
+
+<time>
+    <Icon name="ic:outline-date-range" />
+    {dateString}
+</time>

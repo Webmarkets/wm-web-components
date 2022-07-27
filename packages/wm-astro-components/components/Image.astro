@@ -1,0 +1,13 @@
+---
+export interface Props {
+    src: string;
+    alt: string;
+    background?: boolean;
+}
+const { src, alt, background = false } = Astro.props as Props;
+---
+
+<!-- TODO: add background image option -->
+<>
+    <img src={src} alt={alt} />
+</>
