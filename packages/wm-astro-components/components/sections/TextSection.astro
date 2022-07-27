@@ -1,0 +1,14 @@
+---
+import { html } from "common-tags";
+
+export interface Props {
+    header?: string;
+}
+
+const { header } = Astro.props as Props;
+---
+
+<section class="section--text">
+    {header && html`<h2>${header}</h2>`}
+    <slot />
+</section>

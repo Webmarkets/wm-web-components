@@ -1,0 +1,19 @@
+---
+import { HTMLString } from "astro/dist/types/runtime/server";
+import { html } from "common-tags";
+import Image from "../Image.astro";
+import type { Props as ImageProps } from "../Image.astro";
+
+export interface Props {
+    text: HTMLString
+    image: ImageProps;
+    orientation?: 'rtl' | 'ltr'
+}
+
+const { text, image, orientation = 'ltr' } = Astro.props as Props;
+---
+
+<section {(orientation=='rtl' ) && `class="rtl" `}>
+    {html`${text}`}
+    <Image src={image.src} alt={image.alt} />
+</section>
