@@ -1,0 +1,14 @@
+---
+export interface Props {
+    title: string;
+    link: string;
+}
+
+const { title, link } = Astro.props as Props;
+---
+
+<>
+    <a href={link}>{title}</a>
+</>
+
+<!-- TODO: add different button styles? -->
