@@ -1,13 +1,18 @@
 ---
-import Head from "../components/head/Head.astro";
+import BaseHead from "../../components/head/BaseHead.astro";
 ---
 
 <html>
 
-<Head title="WM Demo Page" description="A page for demonstrating Astro components"
-    canonicalURL="https://www.example.com" image="https://picsum.photos/200/300" gtmContainerID="1234">
-    <meta name="test" />
-</Head>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconect" href="https://fonts.gstatic.com" crossorigin>
+    <BaseHead title="WM Demo Page" description="A page for demonstrating Astro components"
+        canonicalURL="https://www.example.com" image="https://picsum.photos/200/300" gtmContainerID="1234">
+        <link slot="before" rel="stylesheet" href="https://fonts.gstatic.com/" crossorigin>
+    </BaseHead>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
 
 <body>
     <h1>Hello world!</h1>

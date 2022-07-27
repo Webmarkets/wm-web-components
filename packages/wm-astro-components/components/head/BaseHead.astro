@@ -13,7 +13,7 @@ export interface Props {
 const { title, description, canonicalURL, image, gtmContainerID } = Astro.props as Props
 ---
 
-<head>
+<>
     <!-- Render Tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,5 +26,4 @@ const { title, description, canonicalURL, image, gtmContainerID } = Astro.props 
     <PreviewCards title={title} description={description} url={canonicalURL} image={image} />
     {gtmContainerID &&
     <TagManager containerID={gtmContainerID} />}
-    <slot />
-</head>
+</>
