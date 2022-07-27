@@ -12,3 +12,21 @@ const { title, link } = Astro.props as Props;
 </>
 
 <!-- TODO: add different button styles? -->
+
+<style>
+    a.btn {
+        background-color: var(--theme-primary);
+        border-radius: 4px;
+        padding: 1rem;
+
+        font-weight: bold;
+        color: var(--theme-bg);
+        text-decoration: none;
+
+        transition: all 250ms;
+    }
+
+    a.btn:hover {
+        background-color: var(--theme-secondary);
+    }
+</style>
