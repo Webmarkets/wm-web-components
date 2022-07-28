@@ -23,11 +23,40 @@ const { title, posts } = Astro.props as Props;
 <style>
     main {
         width: 100%;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: auto auto 1fr;
         display: grid;
         justify-items: center;
     }
 
+    main h1 {
+        grid-column: 1/-1;
+    }
+
     .post-list {
+        grid-column: 2/3;
+        grid-row: 2/4;
         max-width: 1200px;
+    }
+
+    :global(.blog__categories) {
+        grid-column: 3/4;
+    }
+
+    @media (max-width: 992px) {
+        main {
+            grid-template-columns: 100%;
+        }
+
+        :global(.blog__categories) {
+            grid-column: 1/2;
+            grid-row: 2/3;
+            margin: 1rem 0;
+        }
+
+        .post-list {
+            grid-column: 1/2;
+            grid-row: 3/4;
+        }
     }
 </style>

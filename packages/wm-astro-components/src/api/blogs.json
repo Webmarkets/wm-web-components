@@ -8,5 +8,25 @@
     },
     "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "date": "Jan-1-2022"
+  },
+  {
+    "title": "Lorem 1",
+    "link": "#",
+    "image": {
+      "src": "https://picsum.photos/1600/900",
+      "alt": "A placeholder image."
+    },
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "date": "Feb-14-2022"
+  },
+  {
+    "title": "Lorem 2",
+    "link": "#",
+    "image": {
+      "src": "https://picsum.photos/1600/900",
+      "alt": "A placeholder image."
+    },
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "date": "Dec-25-2022"
   }
 ]

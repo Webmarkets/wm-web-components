@@ -1,0 +1,42 @@
+---
+import {Link, LinkProps} from "../generic/index.astro";
+
+export interface Props {
+    categories:LinkProps[];
+    sticky?: boolean;
+}
+
+const {categories, sticky = false} = Astro.props as Props;
+---
+
+<aside class="blog__categories">
+    <span class="categories__header">Blog Categories</span>
+    {categories.map(({href, title}) => {
+        return (
+            <Link href={href} title={title} />
+        )
+    })}
+</aside>
+
+<style>
+    aside {
+        width: calc(100% - 10vw);
+
+        display: grid;
+        grid-template-columns: 100%;
+        place-items: center;
+
+        background-color: var(--theme-on-bg);
+        color: var(--theme-bg);
+    }
+
+    aside span,
+    aside :global(a) {
+        padding: 1rem;
+    }
+
+    aside :global(a) {
+        text-decoration: none;
+        color: var(--theme-bg);
+    }
+</style>
