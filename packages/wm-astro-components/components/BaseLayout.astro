@@ -1,0 +1,43 @@
+---
+export type CSSColors = {
+    primary: string;
+    secondary: string;
+    background: string;
+    backgroundAccent: string;
+    text: string;
+}
+
+export type CSSTypeSizing = {
+    sm: string;
+    base: string;
+    em: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xxl: string;
+}
+
+export type CSSFonts = {
+    main: string;
+    accent?: string;
+}
+
+export interface Props {
+    colors?: CSSColors;
+    sizing?: CSSTypeSizing;
+    fonts?: CSSFonts;
+}
+
+const {colors, sizing, fonts} = Astro.props as Props;
+---
+<html>
+    <slot name="head" />
+    <body>
+        <slot name="nav" />
+        <slot name="main" />
+        <slot name="footer" />
+    </body>
+</html>
+
+<!-- TODO: add global styles -->
+<style define:vars={{ ...colors, ...sizing, ...fonts }}></style>

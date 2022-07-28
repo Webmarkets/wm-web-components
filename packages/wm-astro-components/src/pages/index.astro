@@ -2,8 +2,9 @@
 import BaseHead from "../../components/head/BaseHead.astro";
 import BlogList from "../../components/blog/BlogList.astro";
 import { Props as PostPreviewProps } from '../../components/blog/BlogPostPreview.astro';
-
+import BlogCategories from "../../components/blog/BlogCategories.astro";
 import Blogs from "../api/blogs.json"
+import BaseLayout from "../../components/BaseLayout.astro";
 
 const getBlogPreview = post => {
     let preview: PostPreviewProps = {
@@ -17,33 +18,34 @@ const getBlogPreview = post => {
 const blogPreviewList = Blogs.map(post => getBlogPreview(post))
 ---
 
-<html>
+<BaseLayout colors={{primary: "#000", secondary: "#123", background: "lsdfkj", backgroundAccent: "dlsfjkds", text: "tlekjs"}} >
+    <head slot="head">
+        <!-- Preconnect -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Render base tags -->
+        <BaseHead title="WM Demo Page" description="A page for demonstrating Astro components"
+            canonicalURL="https://www.example.com" image="https://picsum.photos/200/300" gtmContainerID="1234">
+            <link slot="before" rel="stylesheet" href="https://fonts.gstatic.com/" crossorigin>
+        </BaseHead>
+        <!-- Site specific tags -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <BlogList slot="main" posts={blogPreviewList} title="My blog posts">
+        <BlogCategories slot="aside" categories={[{title: 'Category 1', href: '#'}, {title: 'Category 2', href: '#'}, {title: 'Category 3', href: '#'}]} />
+    </BlogList>
+</BaseLayout>
 
-<head>
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Render base tags -->
-    <BaseHead title="WM Demo Page" description="A page for demonstrating Astro components"
-        canonicalURL="https://www.example.com" image="https://picsum.photos/200/300" gtmContainerID="1234">
-        <link slot="before" rel="stylesheet" href="https://fonts.gstatic.com/" crossorigin>
-    </BaseHead>
-    <!-- Site specific tags -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</head>
-
-<body>
-    <BlogList posts={blogPreviewList} title="My blog posts" />
-</body>
-
-</html>
-
-<style is:global>
+<!-- <style is:global>
     :root {
         --theme-primary: rgb(28, 81, 102);
         --theme-secondary: rgb(31, 143, 177);
         --theme-bg: rgb(250, 250, 250);
         --theme-on-bg: rgb(30, 30, 30);
+    }
+
+    * {
+        box-sizing: border-box;
     }
 
     /* Type */
@@ -96,4 +98,4 @@ const blogPreviewList = Blogs.map(post => getBlogPreview(post))
     p {
         font-weight: 400;
     }
-</style>
+</style> -->
