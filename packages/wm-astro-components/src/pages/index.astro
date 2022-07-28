@@ -4,7 +4,8 @@ import BlogList from "../../components/blog/BlogList.astro";
 import { Props as PostPreviewProps } from '../../components/blog/BlogPostPreview.astro';
 import BlogCategories from "../../components/blog/BlogCategories.astro";
 import Blogs from "../api/blogs.json"
-import BaseLayout from "../../components/BaseLayout.astro";
+import BaseBody, {CSSColors} from "../../components/BaseBody.astro";
+import Footer from "../../components/footer/Footer.astro";
 
 const getBlogPreview = post => {
     let preview: PostPreviewProps = {
@@ -15,10 +16,19 @@ const getBlogPreview = post => {
     return preview;
 }
 
-const blogPreviewList = Blogs.map(post => getBlogPreview(post))
+const blogPreviewList = Blogs.map(post => getBlogPreview(post));
+
+const theme:CSSColors = {
+    primary: "rgb(28, 81, 102)",
+    secondary: "rgb(31, 143, 177)",
+    background: "#fff",
+    backgroundAccent: "#eee",
+    text: "#111"
+}
 ---
 
-<BaseLayout colors={{primary: "#000", secondary: "#123", background: "lsdfkj", backgroundAccent: "dlsfjkds", text: "tlekjs"}} >
+<!DOCTYPE html>
+<html>
     <head slot="head">
         <!-- Preconnect -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,10 +41,13 @@ const blogPreviewList = Blogs.map(post => getBlogPreview(post))
         <!-- Site specific tags -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
-    <BlogList slot="main" posts={blogPreviewList} title="My blog posts">
-        <BlogCategories slot="aside" categories={[{title: 'Category 1', href: '#'}, {title: 'Category 2', href: '#'}, {title: 'Category 3', href: '#'}]} />
-    </BlogList>
-</BaseLayout>
+    <BaseBody colors={theme} fonts={{main: 'Roboto'}} >
+        <BlogList slot="main" posts={blogPreviewList} title="My blog posts">
+            <BlogCategories slot="aside" categories={[{title: 'Category 1', href: '#'}, {title: 'Category 2', href: '#'}, {title: 'Category 3', href: '#'}]} />
+        </BlogList>
+        <Footer slot="footer" siteName="WM Demo" />
+    </BaseBody>
+</html>
 
 <!-- <style is:global>
     :root {

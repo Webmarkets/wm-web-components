@@ -30,14 +30,23 @@ export interface Props {
 
 const {colors, sizing, fonts} = Astro.props as Props;
 ---
-<html>
-    <slot name="head" />
-    <body>
-        <slot name="nav" />
-        <slot name="main" />
-        <slot name="footer" />
-    </body>
-</html>
+<body>
+    <slot name="nav" />
+    <slot name="main" />
+    <slot name="footer" />
+</body>
 
 <!-- TODO: add global styles -->
-<style define:vars={{ ...colors, ...sizing, ...fonts }}></style>
+<style define:vars={{ ...colors, ...sizing, ...fonts }}>
+    body {
+        --theme-primary: var(--primary);
+        --theme-secondary: var(--secondary);
+        --theme-bg: var(--background);
+        --theme-bg-accent: var(--backgroundAccent);
+        --theme-text: var(--text);
+    }
+
+    body {
+        font-family: var(--main);
+    }
+</style>

@@ -1,0 +1,46 @@
+---
+import { Link } from "../generic/index.astro";
+
+export interface Props {
+    siteName: string;
+}
+
+const getYear = () => {
+    return new Date().getFullYear();
+}
+
+const {siteName} = Astro.props as Props
+---
+
+<footer>
+    <slot name="notice">
+        <span class="footer__notice">
+            &copy; {getYear()} by {siteName}
+        </span>
+    </slot>
+    <slot name="socials" />
+    <slot name="promo">
+        <span class="footer__promo">
+            <Link title="Web Design" href="https://webmarketsonline.com/web-design" />,
+            <Link title="SEO" href="https://webmarketsonline.com/seo" /> by
+            <Link title="WebMarkets" href="https://webmarketsonline.com/" />
+        </span>
+    </slot>
+</footer>
+
+<style>
+    footer {
+        display: grid;
+        grid-template-columns: calc(100% / 3);
+        background-color: var(--theme-primary);
+    }
+
+    .footer__notice {
+        grid-column: 1/2;
+    }
+
+    .footer__promo {
+        grid-column: 3/4;
+        text-align: right;
+    }
+</style>
