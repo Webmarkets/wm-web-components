@@ -10,9 +10,10 @@ export interface Props {
     subtitle?: string;
     image: ImageProps;
     height?: "string";
+    bgBrightness?: number;
 }
 
-const {title, subtitle, image, height = "600px"} = Astro.props as Props;
+const {title, subtitle, image, height = "600px", bgBrightness = 1} = Astro.props as Props;
 ---
 
 <section class="hero">
@@ -21,7 +22,7 @@ const {title, subtitle, image, height = "600px"} = Astro.props as Props;
     <img class="hero__bg" src={image.src} alt={image.alt} />
 </section>
 
-<style define:vars={{height}}>
+<style define:vars={{height, bgBrightness}}>
     .hero {
         width: 100%;
         height: min(50vh, var(--height));
@@ -32,6 +33,10 @@ const {title, subtitle, image, height = "600px"} = Astro.props as Props;
         justify-content: center;
         flex-direction: column;
         text-align: center;
+    }
+
+    .hero h1 {
+        color: var(--theme-secondary);
     }
     
     .hero__subtitle {
@@ -49,5 +54,7 @@ const {title, subtitle, image, height = "600px"} = Astro.props as Props;
         height: 100%;
         position: absolute;
         object-fit: cover;
+
+        filter: brightness(var(--bgBrightness));
     }
 </style>
