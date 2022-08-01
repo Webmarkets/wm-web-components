@@ -12,5 +12,5 @@ const { title, link, newTab = false, children  } = Astro.props as Props;
 ---
 
 <div class="nav__item">
-    {link ? html`<a href=${link} ${newTab && 'target="_blank" rel="noopener noreferrer"'}>${title}</a>` : html`<span>${title}</span>`}
+    {link ? <a href={link} target={newTab ? "_blank" : "_self"} rel={newTab ? "noopener noreferrer" : ""} >{title}</a> : <span>{title}</span>}
 </div>

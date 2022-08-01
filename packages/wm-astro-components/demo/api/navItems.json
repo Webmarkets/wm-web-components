@@ -1,7 +1,8 @@
 [
     {
         "title": "Page 1",
-        "link": "/page1"
+        "link": "/page1",
+        "newTab": true
     },
     {
         "title": "Category 1",
