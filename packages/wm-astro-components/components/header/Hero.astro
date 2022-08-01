@@ -1,8 +1,4 @@
 ---
-/**
- * Hero Image Component
- */
-
 import { ImageProps } from "../generic/index.astro";
 
 export interface Props {
@@ -19,6 +15,7 @@ const {title, subtitle, image, height = "600px", bgBrightness = 1} = Astro.props
 <section class="hero">
     <h1>{title}
     {subtitle && <span class="hero__subtitle">{subtitle}</span>}</h1>
+    <div class="hero__filter"></div>
     <img class="hero__bg" src={image.src} alt={image.alt} />
 </section>
 
@@ -44,8 +41,16 @@ const {title, subtitle, image, height = "600px", bgBrightness = 1} = Astro.props
         display: block;
     }
 
-    .hero *:not(.hero__bg) {
+    .hero *:not(.hero__bg, .hero__filter) {
         position: relative;
+        z-index: 2;
+    }
+
+    .hero__filter {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backdrop-filter: brightness(var(--bgBrightness));
         z-index: 1;
     }
 
@@ -55,6 +60,6 @@ const {title, subtitle, image, height = "600px", bgBrightness = 1} = Astro.props
         position: absolute;
         object-fit: cover;
 
-        filter: brightness(var(--bgBrightness));
+        z-index: 0;
     }
 </style>
