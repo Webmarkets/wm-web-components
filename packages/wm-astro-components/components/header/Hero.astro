@@ -15,6 +15,7 @@ const {title, subtitle, image, height = "600px", bgBrightness = 1} = Astro.props
 <section class="hero">
     <h1>{title}
     {subtitle && <span class="hero__subtitle">{subtitle}</span>}</h1>
+    <slot />
     <div class="hero__filter"></div>
     <img class="hero__bg" src={image.src} alt={image.alt} />
 </section>

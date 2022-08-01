@@ -7,9 +7,9 @@ import Blogs from "../api/blogs.json"
 import BaseBody, {CSSColors} from "../../components/BaseBody.astro";
 import Footer from "../../components/footer/Footer.astro";
 import { Image } from "../../components/generic/index.astro";
-import Menu from "../../components/header/Menu.astro";
 import navItemData from "../api/navItems.json";
 import Hero from "../../components/header/Hero.astro";
+import Header from "../../components/header/Header.astro";
 
 const getBlogPreview = post => {
     let preview: PostPreviewProps = {
@@ -46,11 +46,8 @@ const theme:CSSColors = {
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
     <BaseBody colors={theme} fonts={{main: 'Roboto'}} >
-        <nav slot="nav">
-            <Image src="/demo/images/WMLogo.png" alt="A placeholder logo" />
-            <Menu items={navItemData} />
-        </nav>
         <main slot="main">
+            <Header reverse logo={{desktop: "/demo/images/WMLogo.png", alt:"A placeholder logo"}} items={navItemData} />
             <Hero title="Page Hero" subtitle="Hello world" image={{src: "/demo/images/hero.jpg", alt: "A beach landscape photo"}} bgBrightness={0.4} />
             <BlogList posts={blogPreviewList} title="My blog posts">
                 <BlogCategories slot="aside" categories={[{title: 'Category 1', href: '#'}, {title: 'Category 2', href: '#'}, {title: 'Category 3', href: '#'}]} />

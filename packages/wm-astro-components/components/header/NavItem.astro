@@ -1,0 +1,25 @@
+---
+import { html } from "common-tags";
+
+export interface Props {
+    title: string;
+    link?: string;
+    newTab?: boolean;
+    children?: Props[];
+}
+
+const { title, link, newTab = false, children  } = Astro.props as Props;
+---
+
+{link ? <a href={link} target={newTab ? "_blank" : "_self"} rel={newTab ? "noopener noreferrer" : ""} class="nav__item" >{title}</a> 
+: <span class="nav__item">{title}</span>}
+
+
+<style>
+    .nav__item {
+        font-size: var(--font-size-lg);
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--theme-primary);
+    }
+</style>

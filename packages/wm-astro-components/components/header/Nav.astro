@@ -1,0 +1,25 @@
+---
+import NavItem, {Props as NavItemProps} from "./NavItem.astro";
+export interface Props {
+    items: NavItemProps[];
+}
+
+const {items} = Astro.props as Props;
+---
+
+<nav class="nav__menu">
+    {items.map(item => {
+        return (<NavItem {...item} />)
+    })}
+</nav>
+
+<style>
+    .nav__menu {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+</style>

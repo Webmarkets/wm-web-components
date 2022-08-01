@@ -1,0 +1,40 @@
+---
+import Nav from "./Nav.astro";
+import {Props as NavItemProps} from "./NavItem.astro";
+
+export interface Props {
+    logo: {
+        desktop: string;
+        mobile?: string;
+        alt: string;
+    };
+    reverse?: boolean;
+    items: NavItemProps[];
+}
+const {logo, items, reverse=false} = Astro.props as Props;
+---
+
+<header class={reverse && "reverse"}>
+    <img src={logo.desktop} alt={logo.alt} class="header__logo--desktop" />
+    {logo.mobile && <img src={logo.desktop} alt={logo.alt} class="header__logo--mobile" />}
+    <Nav items={items} />
+</header>
+
+<style>
+    header {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        place-items: center;
+    }
+
+    header.reverse {
+        grid-template-columns: 3fr 1fr;
+        grid-auto-flow: dense;
+    }
+
+    header.reverse .header__logo--desktop,
+    header.reverse .header__logo--mobile {
+        grid-column: 2/3;
+    }
+</style>
