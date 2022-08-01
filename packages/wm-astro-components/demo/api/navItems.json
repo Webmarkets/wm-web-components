@@ -1,0 +1,24 @@
+[
+    {
+        "title": "Page 1",
+        "link": "/page1"
+    },
+    {
+        "title": "Category 1",
+        "link": "/cat1",
+        "children": [
+            {
+                "title": "Child Page 1",
+                "link": "/child1"
+            },
+            {
+                "title": "Child Page 2",
+                "link": "/child2"
+            }
+        ]
+    },
+    {
+        "title": "Page 3",
+        "link": "/page3"
+    }
+]

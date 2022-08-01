@@ -1,0 +1,16 @@
+---
+import { html } from "common-tags";
+
+export interface Props {
+    title: string;
+    link?: string;
+    newTab?: boolean;
+    children?: Props[];
+}
+
+const { title, link, newTab = false, children  } = Astro.props as Props;
+---
+
+<div class="nav__item">
+    {link ? html`<a href=${link} ${newTab && 'target="_blank" rel="noopener noreferrer"'}>${title}</a>` : html`<span>${title}</span>`}
+</div>

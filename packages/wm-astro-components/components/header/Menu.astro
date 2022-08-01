@@ -1,0 +1,14 @@
+---
+import MenuItem, {Props as MenuItemProps} from "./MenuItem.astro";
+export interface Props {
+    items: MenuItemProps[];
+}
+
+const {items} = Astro.props as Props;
+---
+
+<menu>
+    {items.map(item => {
+        return (<MenuItem {...item} />)
+    })}
+</menu>
