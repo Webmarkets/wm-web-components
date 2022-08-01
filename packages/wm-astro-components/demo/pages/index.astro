@@ -6,6 +6,9 @@ import BlogCategories from "../../components/blog/BlogCategories.astro";
 import Blogs from "../api/blogs.json"
 import BaseBody, {CSSColors} from "../../components/BaseBody.astro";
 import Footer from "../../components/footer/Footer.astro";
+import { Image } from "../../components/generic/index.astro";
+import Menu from "../../components/header/Menu.astro";
+import navItemData from "../api/navItems.json";
 
 const getBlogPreview = post => {
     let preview: PostPreviewProps = {
@@ -42,6 +45,10 @@ const theme:CSSColors = {
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
     <BaseBody colors={theme} fonts={{main: 'Roboto'}} >
+        <nav slot="nav">
+            <Image src="/demo/images/WMLogo.png" alt="A placeholder logo" />
+            <Menu items={navItemData} />
+        </nav>
         <BlogList slot="main" posts={blogPreviewList} title="My blog posts">
             <BlogCategories slot="aside" categories={[{title: 'Category 1', href: '#'}, {title: 'Category 2', href: '#'}, {title: 'Category 3', href: '#'}]} />
         </BlogList>
