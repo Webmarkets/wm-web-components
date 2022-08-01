@@ -16,8 +16,8 @@ const {title, subtitle, image, height = "600px"} = Astro.props as Props;
 ---
 
 <section class="hero">
-    <h1>{title}</h1>
-    {subtitle && <h2>{subtitle}</h2>}
+    <h1>{title}
+    {subtitle && <span class="hero__subtitle">{subtitle}</span>}</h1>
     <img class="hero__bg" src={image.src} alt={image.alt} />
 </section>
 
@@ -31,6 +31,12 @@ const {title, subtitle, image, height = "600px"} = Astro.props as Props;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero__subtitle {
+        font-size: var(--font-size-xl);
+        display: block;
     }
 
     .hero *:not(.hero__bg) {
