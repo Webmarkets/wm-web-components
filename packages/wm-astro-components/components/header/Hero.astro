@@ -1,0 +1,47 @@
+---
+/**
+ * Hero Image Component
+ */
+
+import { ImageProps } from "../generic/index.astro";
+
+export interface Props {
+    title: string;
+    subtitle?: string;
+    image: ImageProps;
+    height?: "string";
+}
+
+const {title, subtitle, image, height = "600px"} = Astro.props as Props;
+---
+
+<section class="hero">
+    <h1>{title}</h1>
+    {subtitle && <h2>{subtitle}</h2>}
+    <img class="hero__bg" src={image.src} alt={image.alt} />
+</section>
+
+<style define:vars={{height}}>
+    .hero {
+        width: 100%;
+        height: min(50vh, var(--height));
+        
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .hero *:not(.hero__bg) {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero__bg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: cover;
+    }
+</style>
