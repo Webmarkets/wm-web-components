@@ -1,0 +1,119 @@
+---
+import { toHTML, uriLooksSafe } from '@portabletext/to-html';
+import type { PortableTextBlock } from '@portabletext/types';
+import imageURLBuilder from '@sanity/image-url';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { html } from 'common-tags';
+
+const getSanityImageUrl = (asset: SanityImageSource) => {
+  let client = {
+    'projectId': process.env.PUBLIC_SANITY_PROJECT_ID,
+    'dataset': process.env.PUBLIC_SANITY_DATASET,
+    'apiVersion': process.env.PUBLIC_SANITY_API_VERSION,
+    'token': process.env.PUBLIC_SANITY_READ_TOKEN,
+    'useCdn': true
+  };
+  let builder = imageURLBuilder(client);
+  return builder.image(asset);
+}
+
+const customComponents = {
+  types: {
+    mainImage: ({ value }) => {
+      return html`
+        <picture>
+          <source
+            srcset="${getSanityImageUrl(value.asset).format('webp').url()}"
+            type="image/webp"
+          />
+          <img
+            class="responsive__img"
+            src="${getSanityImageUrl(value.asset).url()}"
+            alt="${value.alt}"
+          />
+        </picture>
+      `;
+    },
+    cta: ({ value }) => {
+      // ⚠️ `value.href` IS NOT "SAFE" BY DEFAULT ⚠️
+      // ⚠️ Make sure you sanitize/validate the href! ⚠️
+      const href = value.link || '';
+      let fill = value.isFilled ? "btn-filled" : "btn-outlined";
+      let theme;
+      switch (value.theme) {
+        case 'primary':
+          theme = "btn-filled";
+          break;
+        case 'secondary':
+          theme = "btn--secondary";
+          break;
+        case 'tertiary':
+          theme = "btn--tertiary";
+          break;
+        default:
+          theme = "btn-filled";
+      }
+      let tab = value.newTab ? `target="_blank" rel="noopener noreferrer"` : "";
+
+      if (uriLooksSafe(href)) {
+        if (value.centerAlign) {
+          return html`
+            <div class="cta__container--center">
+              <a class="btn ${fill} ${theme}" href="${href}" ${tab}>${value.title}</a>
+            </div>
+          `;
+        }
+        return html`
+          <p><a class="btn ${fill} ${theme}" href="${href}" ${tab}>${value.title}</a></p>
+        `;
+      }
+    },
+  },
+  marks: {
+    link: ({ children, value }) => {
+      // ⚠️ `value.href` IS NOT "SAFE" BY DEFAULT ⚠️
+      // ⚠️ Make sure you sanitize/validate the href! ⚠️
+      const href = value.href || '';
+
+      if (uriLooksSafe(href)) {
+        if (value.newTab) {
+          return html`
+            <a href="${href}" target="_blank" rel="noopener noreferrer">${children}</a>
+          `;
+        } else {
+          return html`
+            <a href="${href}">${children}</a>
+          `;
+        }
+      }
+      // If the URI appears unsafe, render the children (eg, text) without the link
+      return children;
+    },
+    center: ({ children }) => {
+      return html`
+        <div class="text-align-center">${children}</div>
+      `;
+    },
+    tinyText: ({ children }) => {
+      return html`
+        <p class="tiny-text">${(children)}</p>
+      `;
+    },
+    anchor: ({ value, children }) => {
+      return html`
+        <span style="visibility: hidden;" id="${value.id}"></span>
+        ${children}
+      `;
+    },
+  }
+}
+
+const { portableText } = Astro.props as { portableText: PortableTextBlock[] }
+---
+
+<>
+  {
+    //@ts-ignore
+    toHTML(portableText, {components: customComponents})
+  }
+</>
