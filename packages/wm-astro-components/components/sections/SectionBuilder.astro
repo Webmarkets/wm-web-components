@@ -1,3 +1,30 @@
 ---
-import type { AstroComponent } from "astro/dist/types/runtime/server";
+import type { Text } from './TextSection.astro';
+import type { TextImage } from './TextImageSection.astro';
+import TextSection from './TextSection.astro';
+import TextImageSection from './TextImageSection.astro';
+
+export interface SanitySection {
+    _key: string;
+    _type: string;
+}
+
+export interface Props {
+    sections: Array<Text|TextImage>;
+}
+
+const {sections} = Astro.props as Props
 ---
+
+<>
+    {sections.map(section => {
+        switch(section._type) {
+            case 'textSection':
+                return <TextSection {...section} />;
+            case 'textImageSection':
+                return <TextImageSection {...section} />;
+            default:
+                return null;
+        }
+    })}
+</>

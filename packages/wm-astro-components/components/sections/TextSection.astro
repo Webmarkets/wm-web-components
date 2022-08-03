@@ -1,14 +1,15 @@
 ---
-import { html } from "common-tags";
+import type {SanitySection} from './SectionBuilder.astro';
+import type {PortableTextBlock} from '@portabletext/types';
+import PortableText from '../portableText/PortableText.astro';
 
-export interface Props {
-    header?: string;
+export interface Text extends SanitySection {
+    bodyText: PortableTextBlock[];
 }
 
-const { header } = Astro.props as Props;
+const { bodyText } = Astro.props as Text;
 ---
 
-<section class="section--text">
-    {header && html`<h2>${header}</h2>`}
-    <slot />
+<section class="text-section">
+    <PortableText portableText={bodyText} />
 </section>

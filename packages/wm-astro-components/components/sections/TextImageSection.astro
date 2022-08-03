@@ -1,19 +1,38 @@
 ---
 import { HTMLString } from "astro/dist/types/runtime/server";
-import { html } from "common-tags";
-import Image from "../Image.astro";
-import type { Props as ImageProps } from "../Image.astro";
+import PortableText from "../portableText/PortableText.astro";
+import type { Props as ImageProps } from "../generic/Image.astro";
+import type { SanitySection } from "./SectionBuilder.astro";
 
-export interface Props {
-    text: HTMLString
+export interface TextImage extends SanitySection {
+    text: HTMLString;
     image: ImageProps;
     orientation?: 'rtl' | 'ltr'
 }
 
-const { text, image, orientation = 'ltr' } = Astro.props as Props;
+const { text, image, orientation = 'ltr' } = Astro.props as TextImage;
+const classes = `text-image-section text-image-sections--${orientation}`
 ---
 
-<section {(orientation=='rtl' ) && `class="rtl" `}>
-    {html`${text}`}
-    <Image src={image.src} alt={image.alt} />
+<section class={classes}>
+    <div class="text-image-section__text">
+        <PortableText portableText={text} />
+    </div>
+    <img alt={image.alt} src={image.src} />
 </section>
+
+<style>
+    .text-image-section {
+        position: relative;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    
+    .text-image-section--rtl .text-image-section__text {
+        grid-column: 2/3;
+    }
+
+    .text-image-section--ltr img {
+        grid-column: 1/2;
+    }
+</style>
