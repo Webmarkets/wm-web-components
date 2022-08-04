@@ -1,9 +1,12 @@
 {
-  "name": "wm-astro-components",
-  "version": "1.0.0",
+  "name": "@webmarkets/wm-astro-components",
+  "version": "1.0.1",
   "description": "A collection of Astro components for use in webmarkets projects.",
-  "main": "index.js",
-  "scripts": {},
+  "keywords": ["astro", "component"],
+  "main": "components/index.js",
+  "scripts": {
+    "start": "astro dev"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Webmarkets/wm-web-components.git#main"
@@ -15,12 +18,14 @@
   "homepage": "https://github.com/Webmarkets/wm-web-components/tree/main#readme",
   "dependencies": {
     "@portabletext/to-html": "^1.0.3",
-    "@portabletext/types": "^1.0.3",
     "@sanity/image-url": "^1.0.1",
-    "@types/common-tags": "^1.8.1",
-    "@types/node": "^18.6.3",
-    "astro": "^1.0.0-rc.6",
     "astro-icon": "^0.7.3",
     "common-tags": "^1.8.2"
+  },
+  "devDependencies": {
+    "@portabletext/types": "^1.0.3",
+    "astro": "^1.0.0-rc.6",
+    "@types/common-tags": "^1.8.1",
+    "@types/node": "^18.6.3"
   }
 }
