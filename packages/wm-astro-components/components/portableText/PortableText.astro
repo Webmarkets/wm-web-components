@@ -1,20 +1,20 @@
 ---
 import { toHTML, uriLooksSafe } from '@portabletext/to-html';
 import type { PortableTextBlock } from '@portabletext/types';
-import imageURLBuilder from '@sanity/image-url';
+import imageUrlBuilder from '@sanity/image-url';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { html } from 'common-tags';
 
 const getSanityImageUrl = (asset: SanityImageSource) => {
-  let client = {
-    'projectId': process.env.PUBLIC_SANITY_PROJECT_ID,
-    'dataset': process.env.PUBLIC_SANITY_DATASET,
-    'apiVersion': process.env.PUBLIC_SANITY_API_VERSION,
-    'token': process.env.PUBLIC_SANITY_READ_TOKEN,
-    'useCdn': true
-  };
-  let builder = imageURLBuilder(client);
-  return builder.image(asset);
+    let client = {
+        'projectId': process.env.PUBLIC_SANITY_PROJECT_ID,
+        'dataset': process.env.PUBLIC_SANITY_DATASET,
+        'apiVersion': process.env.PUBLIC_SANITY_API_VERSION,
+        'token': process.env.PUBLIC_SANITY_READ_TOKEN,
+        'useCdn': true
+    };
+    let builder = imageUrlBuilder(client);
+    return builder.image(asset);
 }
 
 const customComponents = {

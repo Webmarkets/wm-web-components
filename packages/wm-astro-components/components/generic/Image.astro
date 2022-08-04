@@ -1,13 +1,39 @@
 ---
+import imageUrlBuilder from "@sanity/image-url";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+const getSanityImageUrl = (asset: SanityImageSource) => {
+    let client = {
+        'projectId': process.env.PUBLIC_SANITY_PROJECT_ID,
+        'dataset': process.env.PUBLIC_SANITY_DATASET,
+        'apiVersion': process.env.PUBLIC_SANITY_API_VERSION,
+        'token': process.env.PUBLIC_SANITY_READ_TOKEN,
+        'useCdn': true
+    };
+    let builder = imageUrlBuilder(client);
+    return builder.image(asset).url();
+}
+
 export interface Props {
-    src: string;
+    src: string | SanityImageSource;
     alt: string;
     background?: boolean;
+    link?: {
+        href: string;
+        newTab?: boolean;
+    };
+    type?: 'normal' | 'sanity';
 }
-const { src, alt, background = false } = Astro.props as Props;
+let { src, alt, link, background = false, type = 'normal' } = Astro.props as Props;
+
+if (type == 'sanity') {
+    src = getSanityImageUrl(src);
+}
 ---
 
 <!-- TODO: add background image option -->
 <>
-    <img src={src} alt={alt} />
+    {link ? <a href={link.href} target={link.newTab ? "_blank" : "_self" } rel={link.newTab && "noopener noreferrer" }>
+        <img src={src as string} alt={alt} />
+    </a> : <img src={src as string} alt={alt} />}
 </>
