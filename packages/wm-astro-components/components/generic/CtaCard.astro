@@ -1,0 +1,64 @@
+---
+export interface CtaCardProps {
+    title: string;
+    link: string;
+    image: {
+        src: string;
+        alt: string;
+    };
+    newTab?: boolean;
+    rounded?: boolean;
+}
+
+const {title, link, image, newTab = false, rounded = false} = Astro.props as CtaCardProps;
+---
+
+<a class:list={["cta-card", { "cta-card--rounded": rounded }]} href={link} target={newTab ? "_blank" : "_self"} rel={newTab ? "noopener noreferrer" : ""}>
+    <img {...image} />
+    <div class="cta-card__lower">
+        <strong>{title}</strong>
+    </div>
+</a>
+
+<style>
+    .cta-card {
+        width: min(80vh, 400px);
+        height: min(70vh, 500px);
+
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr auto;
+        position: relative;
+        margin: 1rem;
+
+        box-shadow: 0 0 24px rgba(0, 0, 0, 1);
+
+        text-decoration: none;
+    }
+
+    .cta-card--rounded {
+        border-radius: 32px;
+        overflow:hidden;
+    }
+
+    .cta-card img {
+        grid-row: 1/2;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .cta-card__lower {
+        grid-row: 2/3;
+        background-color: var(--theme-bg-accent);
+        padding: 2rem 1rem;
+    }
+
+    .cta-card__lower strong {
+        font-size: var(--font-size-lg);
+        font-weight: bold;
+        color: var(--theme-text);
+        /* text-transform: uppercase; */
+    }
+</style>

@@ -1,15 +1,13 @@
 ---
 import BaseHead from "../../components/head/BaseHead.astro";
-import BlogList from "../../components/blog/BlogList.astro";
 import { Props as PostPreviewProps } from '../../components/blog/BlogPostPreview.astro';
-import BlogCategories from "../../components/blog/BlogCategories.astro";
 import Blogs from "../api/blogs.json"
 import BaseBody, {CSSColors} from "../../components/BaseBody.astro";
 import Footer from "../../components/footer/Footer.astro";
-import { Image } from "../../components/generic/index.astro";
 import navItemData from "../api/navItems.json";
 import Hero from "../../components/header/Hero.astro";
 import Header from "../../components/header/Header.astro";
+import CtaCard from "../../components/generic/CtaCard.astro";
 
 const getBlogPreview = post => {
     let preview: PostPreviewProps = {
@@ -43,15 +41,15 @@ const theme:CSSColors = {
             <link slot="before" rel="stylesheet" href="https://fonts.gstatic.com/" crossorigin>
         </BaseHead>
         <!-- Site specific tags -->
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> 
     </head>
     <BaseBody colors={theme} fonts={{main: 'Roboto'}} >
         <main slot="main">
             <Header logo={{desktop: "/demo/images/WMLogo.png", alt:"A placeholder logo"}} items={navItemData} />
             <Hero title="Page Hero" subtitle="Hello world" image={{src: "/demo/images/hero.jpg", alt: "A beach landscape photo"}} bgBrightness={0.4} />
-            <BlogList posts={blogPreviewList} title="My blog posts">
-                <BlogCategories slot="aside" categories={[{title: 'Category 1', href: '#'}, {title: 'Category 2', href: '#'}, {title: 'Category 3', href: '#'}]} />
-            </BlogList>
+            <div>
+                <CtaCard title="Click here!" link="/here" image={{src:'/demo/images/cta-placeholder-1.jpg', alt: 'A placeholder image'}} rounded newTab />
+            </div>
         </main>
         <Footer slot="footer" siteName="WM Demo" />
     </BaseBody>
