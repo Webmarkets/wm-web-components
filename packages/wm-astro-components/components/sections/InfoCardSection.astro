@@ -1,0 +1,21 @@
+---
+import InfoCard, { InfoCardProps } from '../generic/InfoCard.astro';
+
+export interface CtaCardSectionProps {
+    cards: InfoCardProps[];
+}
+
+const { cards } = Astro.props as CtaCardSectionProps;
+---
+
+<section class="info-card-section">
+    {cards.map(card => {
+        return <InfoCard {...card} />;
+    })}
+</section>
+
+<style>
+    .info-card-section {
+        display: flex;
+    }
+</style>

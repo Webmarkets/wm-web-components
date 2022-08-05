@@ -8,6 +8,7 @@ import navItemData from "../api/navItems.json";
 import Hero from "../../components/header/Hero.astro";
 import Header from "../../components/header/Header.astro";
 import CtaCard from "../../components/generic/CtaCard.astro";
+import InfoCard from "../../components/generic/InfoCard.astro";
 
 const getBlogPreview = post => {
     let preview: PostPreviewProps = {
@@ -48,7 +49,14 @@ const theme:CSSColors = {
             <Header logo={{desktop: "/demo/images/WMLogo.png", alt:"A placeholder logo"}} items={navItemData} />
             <Hero title="Page Hero" subtitle="Hello world" image={{src: "/demo/images/hero.jpg", alt: "A beach landscape photo"}} bgBrightness={0.4} />
             <div>
-                <CtaCard title="Click here!" link="/here" image={{src:'/demo/images/cta-placeholder-1.jpg', alt: 'A placeholder image'}} rounded newTab />
+                <CtaCard title="Click here!" link="/here" rounded newTab>
+                    <img slot="image" src="/demo/images/cta-placeholder-1.jpg" />
+                </CtaCard>
+                <InfoCard title="My Item">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nemo eveniet quo ratione unde repellendus soluta placeat magni recusandae quae.</p>
+                    <a href="#">Link</a>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam facilis quasi ex quaerat libero quod voluptatem voluptates sequi aliquid delectus.</p>
+                </InfoCard>
             </div>
         </main>
         <Footer slot="footer" siteName="WM Demo" />

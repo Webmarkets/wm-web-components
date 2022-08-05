@@ -3,6 +3,8 @@ import type { Text } from './TextSection.astro';
 import type { TextImage } from './TextImageSection.astro';
 import TextSection from './TextSection.astro';
 import TextImageSection from './TextImageSection.astro';
+import CtaCardSection from './CtaCardSection.astro';
+import InfoCardSection from './InfoCardSection.astro';
 
 export interface SanitySection {
     _key: string;
@@ -23,6 +25,10 @@ const {sections} = Astro.props as Props
                 return <TextSection {...section} />;
             case 'textImageSection':
                 return <TextImageSection {...section} />;
+            case 'ctaCardSection':
+                return <CtaCardSection {...section} />;    
+            case 'infoCardSection':
+                return <InfoCardSection {...section} />;
             default:
                 return null;
         }

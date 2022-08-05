@@ -18,6 +18,7 @@ import { Component } from '@webmarkets/wm-astro-components';
 | BaseBody | | |
 | Button | | |
 | CtaCard | | |
+| InfoCard | | |
 | Date | | |
 | Image | | |
 | Link | | |
@@ -26,6 +27,8 @@ import { Component } from '@webmarkets/wm-astro-components';
 | SectionBuilder | | |
 | TextImageSection | | |
 | TextSection | | |
+| CtaCardSection | | |
+| InfoCardSection | | |
 | PortableText | | |
 | BlogCategories | | |
 | BlogList | | |

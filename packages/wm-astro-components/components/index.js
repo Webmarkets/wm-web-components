@@ -6,6 +6,7 @@ import BaseHead from './BaseHead.astro';
 // Generic
 import Button from './generic/Button.astro';
 import CtaCard from './generic/CtaCard.astro';
+import InfoCard from './generic/InfoCard.astro';
 import Date from './generic/Data.astro';
 import Image from './generic/Image.astro';
 import Link from './generic/Link.astro';
@@ -18,6 +19,8 @@ import Hero from './header/Hero.astro';
 import SectionBuilder from './sections/SectionBuilder.astro';
 import TextImageSection from './sections/TextImageSection.astro';
 import TextSection from './sections/TextSection.astro';
+import CtaCardSection from './sections/CtaCardSection.astro';
+import InfoCardSection from './sections/InfoCardSection.astro';
 
 // Portable Text
 import PortableText from './portableText/PortableText.astro';
@@ -33,6 +36,7 @@ export {
     BaseHead,
     Button,
     CtaCard,
+    InfoCard,
     Date,
     Image,
     Link,
@@ -41,6 +45,8 @@ export {
     SectionBuilder,
     TextImageSection,
     TextSection,
+    CtaCardSection,
+    InfoCardSection,
     PortableText,
     BlogCategories,
     BlogList,

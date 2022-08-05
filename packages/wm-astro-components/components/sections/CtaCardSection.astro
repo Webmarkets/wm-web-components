@@ -1,0 +1,21 @@
+---
+import CtaCard, { CtaCardProps } from '../generic/CtaCard.astro';
+
+export interface CtaCardSectionProps {
+    cards: CtaCardProps[];
+}
+
+const { cards } = Astro.props as CtaCardSectionProps;
+---
+
+<section class="cta-card-section">
+    {cards.map(card => {
+        return <CtaCard {...card} />;
+    })}
+</section>
+
+<style>
+    .cta-card-section {
+        display: flex;
+    }
+</style>
