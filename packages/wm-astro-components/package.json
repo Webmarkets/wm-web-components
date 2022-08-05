@@ -1,8 +1,11 @@
 {
   "name": "@webmarkets/wm-astro-components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A collection of Astro components for use in webmarkets projects.",
-  "keywords": ["astro", "component"],
+  "keywords": [
+    "astro",
+    "component"
+  ],
   "main": "components/index.js",
   "scripts": {
     "start": "astro dev"
