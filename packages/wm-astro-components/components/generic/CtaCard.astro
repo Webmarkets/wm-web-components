@@ -2,25 +2,25 @@
 export interface CtaCardProps {
     title: string;
     link: string;
-    image: {
-        src: string;
-        alt: string;
-    };
     newTab?: boolean;
     rounded?: boolean;
 }
 
-const {title, link, image, newTab = false, rounded = false} = Astro.props as CtaCardProps;
+const {title, link, newTab = false, rounded = false} = Astro.props as CtaCardProps;
 ---
 
 <a class:list={["cta-card", { "cta-card--rounded": rounded }]} href={link} target={newTab ? "_blank" : "_self"} rel={newTab ? "noopener noreferrer" : ""}>
-    <img {...image} />
+    <slot name="image" />
     <div class="cta-card__lower">
         <strong>{title}</strong>
     </div>
 </a>
 
-<style>
+<!-- 
+    Opt out of component-scope styles because Astro does not consider 
+    slotted children to be within component scope 
+-->
+<style is:global>
     .cta-card {
         width: min(80vh, 400px);
         height: min(70vh, 500px);
@@ -31,7 +31,7 @@ const {title, link, image, newTab = false, rounded = false} = Astro.props as Cta
         position: relative;
         margin: 1rem;
 
-        box-shadow: 0 0 24px rgba(0, 0, 0, 1);
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
 
         text-decoration: none;
     }
@@ -59,6 +59,5 @@ const {title, link, image, newTab = false, rounded = false} = Astro.props as Cta
         font-size: var(--font-size-lg);
         font-weight: bold;
         color: var(--theme-text);
-        /* text-transform: uppercase; */
     }
 </style>

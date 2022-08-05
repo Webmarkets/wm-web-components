@@ -1,0 +1,54 @@
+---
+export interface InfoCardProps {
+    title: string;
+    rounded?: boolean;
+}
+
+const {title, rounded = false} = Astro.props as InfoCardProps;
+---
+
+<div class:list={["info-card", { "info-card--rounded": rounded }]}>
+    <strong>{title}</strong>
+    <div class="info-card__body">
+        <slot />
+    </div>
+</div>
+
+<!-- 
+    Opt out of component-scope styles because Astro does not consider 
+    slotted children to be within component scope 
+-->
+<style is:global>
+    .info-card {
+        width: min(80vh, 400px);
+        height: min(70vh, 500px);
+
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 20% 80%;
+
+        padding: 1rem;
+        margin: 1rem;
+
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+
+        text-decoration: none;
+    }
+
+    .info-card--rounded {
+        border-radius: 32px;
+        overflow:hidden;
+    }
+    
+    .info-card strong {
+        text-align: center;
+        place-self: center;
+        font-size: var(--font-size-lg);
+    }
+
+    .info-card__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+</style>
