@@ -1,7 +1,8 @@
 {
   "name": "@webmarkets/wm-modal",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "dist/wm-modal.es.js",
+  "type": "module",
   "exports": {
     ".": "./dist/wm-modal.es.js"
   },
