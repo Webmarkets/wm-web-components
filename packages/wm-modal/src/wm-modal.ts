@@ -34,6 +34,7 @@ export class WebmarketsModal extends LitElement {
       top: 1rem;
       right: 1rem;
       cursor: pointer;
+      z-index: 1;
     }
     #modal__container {
       width: var(--modal-width, 70%);
