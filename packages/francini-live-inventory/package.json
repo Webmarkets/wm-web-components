@@ -1,0 +1,26 @@
+{
+  "name": "francini-live-inventory",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/live-inventory.es.js",
+  "exports": {
+    ".": "./dist/live-inventory.es.js"
+  },
+  "types": "types/live-inventory.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "lit": "^2.2.8"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7"
+  }
+}
