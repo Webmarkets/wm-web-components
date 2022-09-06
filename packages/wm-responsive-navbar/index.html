@@ -7,20 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite + Lit App</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+    wm-responsive-navbar {
+      z-index: 10;
+      --navbar-height: 80px;
+      --navbar-background-color: var(--theme-white-translucent);
     }
 
-    /* wm-responsive-navbar {
-      --navbar-background-color: #000000;
-      --menu-background-color: #000000;
-      color: #ffffff;
-    } */
-
-    #logo__container a {
-      display: flex;
+    .wm-responsive-navbar--translucent {
+      width: 100%;
+      position: fixed;
     }
 
     .nav-links__list {
@@ -28,48 +23,248 @@
       padding: 0;
       display: flex;
       list-style: none;
+      position: relative;
     }
 
+    .nav-link--dropdown {
+      position: relative;
+    }
+
+    .dropdown__container {
+      display: none;
+      min-width: 200px;
+      max-width: 300px;
+      flex-direction: column;
+      position: absolute;
+      background-color: var(--theme-white-translucent);
+      z-index: 10;
+    }
+
+    .dropdown__container .nav-links__list {
+      flex-direction: column;
+    }
 
     .nav-links__list li a {
-      padding: 1.5rem 1rem;
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin: 0;
+      border-radius: inherit;
+    }
+
+    .nav-links__list li:hover {
+      background-color: var(--theme-secondary);
+      color: var(--color-white);
+    }
+
+    /* .dropdown__container--level-1 {
+    top: 70px;
+  } */
+
+    .dropdown__container--level-2 {
+      top: 0;
+      left: 100%;
+    }
+
+    .nav-link--dropdown.nav-item>a {
+      padding-right: 1.5rem;
+    }
+
+    .nav-link--dropdown:hover .dropdown__container--level-1,
+    .nav-link--dropdown--level-2:hover .dropdown__container--level-2 {
+      display: flex;
+    }
+
+    .nav-link--dropdown>span.mobile-nav__toggle {
+      position: absolute;
+      top: 50%;
+      right: 0.25rem;
+      transform: translate(25%, -50%) rotate(0deg);
+      fill: var(--theme-primary);
+      transition: 250ms all;
+    }
+
+    .nav-link--dropdown:hover>span.mobile-nav__toggle {
+      transform: translate(25%, -50%) rotate(0deg);
+      transition: 250ms all;
+    }
+
+    .child-item.nav-link--dropdown>span.mobile-nav__toggle {
+      transform: translate(25%, -50%) rotate(270deg);
+    }
+
+    .child-item.nav-link--dropdown:hover>span.mobile-nav__toggle {
+      transform: translate(25%, -50%) rotate(270deg);
+      fill: white;
+    }
+
+    .nav-links__list li a {
+      padding: 1rem;
+      display: flex;
+      color: var(--theme-secondary);
+      font-family: var(--font-family-sans);
+      font-weight: 600;
+      font-size: 1.5rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links__list .child-item>a {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      transition: 250ms all;
+    }
+
+    .nav-links__list .child-item:hover>a {
+      background-color: var(--theme-secondary);
+      color: var(--color-white);
+      transition: 250ms all;
+    }
+
+    a.cta__link {
+      margin-right: 0.5rem;
+      text-decoration: none;
+      padding: 0.25rem;
+      background-color: var(--theme-primary);
+      color: var(--color-white);
+      font-size: 1.25rem;
+      font-weight: 600;
       display: flex;
       text-align: center;
-      text-transform: uppercase;
-      color: inherit;
-      text-decoration: none;
-      font-weight: 700;
     }
 
-    .nav-links__list li a:hover {
-      background-color: #333333;
-      color: white;
+    .action-items__container {
+      display: flex;
     }
 
-    @media only screen and (max-width: 475px) {
-      .nav-links__list {
-        padding: 3rem 0 0 2rem;
-        align-items: flex-start;
-        flex-direction: column;
-      }
+    .social-icons__container {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .nav-links__list li {
-        margin-bottom: 2rem;
-        font-size: 1.5rem;
-      }
+    .action-items__container {
+      display: flex;
+    }
+
+    .action-items__container .social-icons__container {
+      display: none;
+    }
+
+    wm-responsive-navbar[collapsed] .nav-links__list {
+      padding: 1rem 0 0 2rem;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    wm-responsive-navbar[collapsed] li {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .dropdown__container .nav-children {
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-item {
+      list-style: none !important;
+    }
+
+    wm-responsive-navbar[collapsed] div.dropdown__container {
+      display: none !important;
+    }
+
+    wm-responsive-navbar[collapsed] .nav-link--dropdown[expanded] div.dropdown__container {
+      display: flex !important;
     }
   </style>
   <script type="module" src="/src/wm-responsive-navbar.ts"></script>
 </head>
 
 <body>
-  <wm-responsive-navbar  breakpoint="991">
+  <wm-responsive-navbar breakpoint="991">
     <div slot="nav-links">
       <ul class="nav-links__list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/contact">Contact Us</a></li>
+        <li class="nav-item"><a href="/">Home</a></li>
+        <li class="nav-item nav-link--dropdown nav-link--dropdown--level-1">
+          <a href="null">About</a>
+          <span class="mobile-nav__toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+              <path d="M24 24H0V0h24v24z" fill="none" opacity=".87"></path>
+              <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"></path>
+            </svg></span>
+          <div class="dropdown__container dropdown__container--level-1">
+            <ul class="About-nav-children nav-children">
+              <li class="child-item nav-item"><a href="/about-us">About Us</a></li>
+              <li class="child-item nav-item"><a href="/residential-move-faq">Residential Move FAQ</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item nav-link--dropdown nav-link--dropdown--level-1">
+          <a href="null">Services</a><span class="mobile-nav__toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+              <path d="M24 24H0V0h24v24z" fill="none" opacity=".87"></path>
+              <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"></path>
+            </svg></span>
+          <div class="dropdown__container dropdown__container--level-1">
+            <ul class="Services-nav-children nav-children">
+              <li class="child-item nav-item"><a href="/services">Services</a></li>
+              <li class="child-item nav-item nav-link--dropdown nav-link--dropdown--level-2">
+                <a href="/residential-moving">Residential Moving</a><span class="mobile-nav__toggle">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87"></path>
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"></path>
+                  </svg></span>
+                <div class="dropdown__container dropdown__container--level-2">
+                  <ul class="Residential Moving-nav-children nav-children">
+                    <li class="child-item nav-item"><a href="/home-moves">Home Moves</a></li>
+                    <li class="child-item nav-item"><a href="/apartment-moves">Apartment Moves</a></li>
+                    <li class="child-item nav-item"><a href="/retirement-home-moves">Retirement Home Moves</a></li>
+                    <li class="child-item nav-item"><a href="/storage-facility-moves">Storage Facility Moves</a></li>
+                    <li class="child-item nav-item"><a href="/loading-unloading-rental-trucks">Rental Trucks</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="child-item nav-item nav-link--dropdown nav-link--dropdown--level-2">
+                <a href="/business-moving">Business Moving</a><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                  <path d="M24 24H0V0h24v24z" fill="none" opacity=".87"></path>
+                  <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"></path>
+                </svg>
+                <div class="dropdown__container dropdown__container--level-2">
+                  <ul class="Business Moving-nav-children nav-children">
+                    <li class="child-item nav-item"><a href="/office-moves">Office Moves</a></li>
+                    <li class="child-item nav-item">
+                      <a href="/school-classroom-moves">School / Classroom Moves</a>
+                    </li>
+                    <li class="child-item nav-item"><a href="/home-staging-moves">Home Staging Moves</a></li>
+                    <li class="child-item nav-item">
+                      <a href="/corporate-housing-moves">Corporate Housing Moves</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="child-item nav-item"><a href="/packing-services">Packing Services</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item"><a href="/jobs">Jobs</a></li>
+        <li class="nav-item nav-link--dropdown nav-link--dropdown--level-1">
+          <a href="/contact-us">Contact Us</a><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+            <path d="M24 24H0V0h24v24z" fill="none" opacity=".87"></path>
+            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"></path>
+          </svg>
+          <div class="dropdown__container dropdown__container--level-1">
+            <ul class="Contact Us-nav-children nav-children">
+              <li class="child-item nav-item"><a href="/contact-us">Contact Us</a></li>
+              <li class="child-item nav-item"><a href="/reviews">Reviews</a></li>
+              <li class="child-item nav-item">
+                <a href="https://g.page/CrossTownMovers/review?gm">Leave A Review</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item"><a href="/blog">Blog</a></li>
       </ul>
     </div>
   </wm-responsive-navbar>

@@ -1,5 +1,5 @@
 import { LitElement, css, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, query, state } from 'lit/decorators.js';
 import inventory, { City, Stone } from './data';
 
 @customElement('live-inventory')
@@ -14,6 +14,20 @@ export class LiveInventory extends LitElement {
   }
   selectStone(stone: Stone) {
     window.open(`http://inventory.francinimarble.com${this.selectedCity && this.selectedCity.name !== 'all' ? `/location/${this.selectedCity.url}` : ''}${stone.name !== 'all' ? `/subcategory/${stone.url ? stone.url : stone.name}` : ''}`, '_blank');
+  }
+  parseUrl() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const activeLocation = urlParams.get('location');
+    const idx = inventory.cities.findIndex((city) => city.name == activeLocation);
+    if (activeLocation && idx > -1) {
+      this.selectCity(inventory.cities[idx]);
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.parseUrl();
   }
 
   render() {

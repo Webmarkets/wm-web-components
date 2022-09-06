@@ -30,6 +30,7 @@ export class WebmarketsResponsiveNavbar extends LitElement {
       left: 0;
       overflow-y: auto;
       z-index: 9999;
+      flex-flow: column;
     }
     :host([collapsed]) .nav-links__container--open {
       display: block;
@@ -86,6 +87,8 @@ export class WebmarketsResponsiveNavbar extends LitElement {
   @property({ type: Number, reflect: true, attribute: "breakpoint" })
   breakpoint = 475;
 
+  private isMobileSetUp: boolean = false;
+
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener("resize", () => this._handleResize());
@@ -99,9 +102,33 @@ export class WebmarketsResponsiveNavbar extends LitElement {
   private _handleResize() {
     if (document.documentElement.clientWidth < this.breakpoint) {
       this.collapsed = true;
+      this.mobileSetup();
     } else {
       this.collapsed = false;
     }
+  }
+
+  private mobileSetup() {
+    if (this.isMobileSetUp) return;
+    this.isMobileSetUp = true;
+    document.querySelectorAll("li.nav-link--dropdown").forEach((item) => {
+      let toggler = item.querySelector(".mobile-nav__toggle");
+      if (toggler) {
+        toggler.addEventListener("click", () => {
+          if (this.collapsed) {
+            item.toggleAttribute("expanded");
+          }
+        });
+      }
+      let link = item.querySelector("a");
+      if (link) {
+        link.addEventListener("click", () => {
+          if (this.collapsed) {
+            item.toggleAttribute("expanded");
+          }
+        });
+      }
+    });
   }
 
   firstUpdated() {
@@ -112,6 +139,7 @@ export class WebmarketsResponsiveNavbar extends LitElement {
     // if the window is less than the breakpoint, collapse the navbar
     if (document.documentElement.clientWidth < this.breakpoint) {
       this.collapsed = true;
+      this.mobileSetup();
     }
   }
 
@@ -127,11 +155,7 @@ export class WebmarketsResponsiveNavbar extends LitElement {
           <div class="logo__container">
             <slot name="logo"> </slot>
           </div>
-          <div
-            class="nav-links__container ${this.menuOpen
-              ? "  nav-links__container--open"
-              : ""}"
-          >
+          <div class="nav-links__container ${this.menuOpen ? "  nav-links__container--open" : ""}">
             <slot name="nav-links"></slot>
           </div>
         </nav>
