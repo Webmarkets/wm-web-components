@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Lit App</title>
-    <script type="module" src="/src/wm-carousel.ts"></script>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <wm-carousel id="carousel" num-cards="2" transition-time="750">
-      <style slot="carousel-style">
-        .extra-cool-card {
-          padding: 1rem;
-          background-color: #efefef;
-          border-radius: 1rem;
-        }
-      </style>
-      <div class="extra-cool-card" slot="carousel-items">
-        <h1>Extra Cool Card</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-      <div class="extra-cool-card" slot="carousel-items">
-        <h1>Extra Cool Card</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-      <div class="extra-cool-card" slot="carousel-items">
-        <h1>Extra Cool Card</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-      <div class="extra-cool-card" slot="carousel-items">
-        <h1>Extra Cool Card</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-      <div class="extra-cool-card" slot="carousel-items">
-        <h1>Extra Cool Card</h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod consequatur ullam perferendis impedit
-          assumenda, quibusdam commodi placeat maxime voluptates quia asperiores optio est quo nobis at voluptatum illo
-          ratione nam. Facilis beatae animi, praesentium nostrum cumque sint at commodi ipsam ab quis totam esse
-          cupiditate minus reprehenderit et, quidem consectetur sunt quas sapiente error necessitatibus blanditiis
-          numquam omnis! Dolor, cupiditate. Culpa repudiandae animi ratione, mollitia dolorem dicta ducimus! Facilis
-          necessitatibus recusandae sed voluptatibus, ipsa sunt id vitae quaerat dignissimos in quisquam officia
-          explicabo expedita deserunt quas deleniti blanditiis dolorem ratione.
-        </p>
-      </div>
-    </wm-carousel>
-    <script type="module" src="app.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + Lit App</title>
+  <script type="module" src="/src/wm-carousel.ts"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <wm-carousel id="carousel" num-cards="2" transition-time="500">
+    <style slot="carousel-style">
+      .extra-cool-card {
+        padding: 1rem;
+        background-color: #efefef;
+        border-radius: 1rem;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+    <div class="extra-cool-card" slot="carousel-items">
+      <h1>Extra Cool Card</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
+        euismod nisi, vitae porttitor nisl nunc euismod nisi.
+      </p>
+    </div>
+    <div class="extra-cool-card" slot="carousel-items">
+      <h1>Extra Cool Card</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
+        euismod nisi, vitae porttitor nisl nunc euismod nisi.
+      </p>
+    </div>
+    <div class="extra-cool-card" slot="carousel-items">
+      <h1>Extra Cool Card</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
+        euismod nisi, vitae porttitor nisl nunc euismod nisi.
+      </p>
+    </div>
+    <div class="extra-cool-card" slot="carousel-items">
+      <h1>Extra Cool Card</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
+        euismod nisi, vitae porttitor nisl nunc euismod nisi.
+      </p>
+    </div>
+    <div class="extra-cool-card" slot="carousel-items">
+      <h1>Extra Cool Card</h1>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod consequatur ullam perferendis impedit
+        assumenda, quibusdam commodi placeat maxime voluptates quia asperiores optio est quo nobis at voluptatum illo
+        ratione nam. Facilis beatae animi, praesentium nostrum cumque sint at commodi ipsam ab quis totam esse
+        cupiditate minus reprehenderit et, quidem consectetur sunt quas sapiente error necessitatibus blanditiis
+        numquam omnis! Dolor, cupiditate. Culpa repudiandae animi ratione, mollitia dolorem dicta ducimus! Facilis
+        necessitatibus recusandae sed voluptatibus, ipsa sunt id vitae quaerat dignissimos in quisquam officia
+        explicabo expedita deserunt quas deleniti blanditiis dolorem ratione.
+      </p>
+    </div>
+    <img src="src/assets/placeholder.jpg" slot="carousel-items" alt="">
+  </wm-carousel>
+  <!-- <script type="module" src="app.ts"></script> -->
+</body>
+
 </html>
