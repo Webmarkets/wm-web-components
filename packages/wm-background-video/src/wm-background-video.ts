@@ -1,5 +1,5 @@
-import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { LitElement, html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 /**
  * An element for setting a background video on a container
@@ -9,7 +9,7 @@ import { customElement, property } from "lit/decorators.js";
  *
  */
 
-@customElement("wm-background-video")
+@customElement('wm-background-video')
 export class WebmarketsBackgroundVideo extends LitElement {
   static styles = css`
     #background-video__container {
@@ -26,34 +26,43 @@ export class WebmarketsBackgroundVideo extends LitElement {
       transform: translate(-50%, -50%);
     }
     @media only screen and (max-width: 1600px) {
-      #background__video  {
+      #background__video {
         min-height: 100%;
         min-width: 100%;
       }
     }
   `;
 
-  @property({ type: String, reflect: true }) mp4Src = "";
-  @property({ type: String, reflect: true }) webmSrc = "";
-  @property({ type: String, reflect: true }) imgSrc = "";
+  @property({ type: String, reflect: true }) mp4Src = '';
+  @property({ type: String, reflect: true }) webmSrc = '';
+  @property({ type: String, reflect: true }) imgSrc = '';
+
+  @property({ type: Number, reflect: true }) minRes = 0;
+
+  connectedCallback() {
+    super.connectedCallback();
+  }
 
   render() {
-    return html`<div id="background-video__container">
-      <video id="background__video" autoplay playsinline muted autoplay loop>
-        <source src=${this.webmSrc} type="video/webm;" />
-        <source src=${this.mp4Src} type="video/mp4;" />
-        <img
-          src=${this.imgSrc}
-          title="Your browser does not support the <video> tag"
-        />
-      </video>
-      <slot></slot>
-    </div>`;
+    return html`
+      <div id="background-video__container">
+        ${window.innerWidth >= this.minRes
+          ? html`
+              <video id="background__video" autoplay playsinline muted autoplay loop>
+                <source src=${this.webmSrc} type="video/webm;" />
+                <source src=${this.mp4Src} type="video/mp4;" />
+                <img src=${this.imgSrc} title="Your browser does not support the <video> tag" />
+              </video>
+            `
+          : ''}
+        <slot></slot>
+      </div>
+    `;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "wm-background-video": WebmarketsBackgroundVideo;
+    'wm-background-video': WebmarketsBackgroundVideo;
   }
 }
