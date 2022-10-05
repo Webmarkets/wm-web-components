@@ -36,12 +36,7 @@ export class WebmarketsBackgroundVideo extends LitElement {
   @property({ type: String, reflect: true }) mp4Src = '';
   @property({ type: String, reflect: true }) webmSrc = '';
   @property({ type: String, reflect: true }) imgSrc = '';
-
   @property({ type: Number, reflect: true }) minRes = 0;
-
-  connectedCallback() {
-    super.connectedCallback();
-  }
 
   render() {
     return html`
