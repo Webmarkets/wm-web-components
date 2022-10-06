@@ -1,0 +1,26 @@
+{
+  "name": "wm-lazy-video",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/wm-lazy-video.es.js",
+  "exports": {
+    ".": "./dist/wm-lazy-video.es.js"
+  },
+  "types": "types/wm-lazy-video.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "lit": "^2.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0"
+  }
+}
