@@ -1,6 +1,5 @@
 {
-  "name": "wm-lazy-video",
-  "private": true,
+  "name": "@webmarkets/wm-lazy-video",
   "version": "1.0.0",
   "type": "module",
   "main": "dist/wm-lazy-video.es.js",
@@ -22,5 +21,8 @@
   "devDependencies": {
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

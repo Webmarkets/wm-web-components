@@ -1,5 +1,5 @@
 import { html, css, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 type MediaType = 'local' | 'hosted';
 
@@ -44,7 +44,7 @@ export class WebMarketsLazyVideo extends LitElement {
 
   private _init() {
     const videoElem = this.shadowRoot?.getElementById(this.videoId.toString());
-    const onIntersection = (entries: any, observer: any) => {
+    const onIntersection = (entries: any) => {
       entries.forEach((entry: any) => {
         if (entry.target === videoElem && !this.videoSource && entry.intersectionRatio > 0) {
           switch (this.mediaType) {
