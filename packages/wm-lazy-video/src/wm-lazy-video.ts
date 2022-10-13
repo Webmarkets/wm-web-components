@@ -85,10 +85,8 @@ export class WebMarketsLazyVideo extends LitElement {
 
   private onVideoLoad() {
     if (this.videoSource) {
-      console.log('loaded!');
       const videoElem = this.shadowRoot?.getElementById(this.videoId.toString());
       videoElem?.toggleAttribute('loaded', true);
-
     }
   }
 
