@@ -1,5 +1,5 @@
 import { html, css, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 
 type MediaType = 'local' | 'hosted';
 
@@ -9,17 +9,28 @@ export class WebMarketsLazyVideo extends LitElement {
     :root {
       max-width: 100%;
     }
-    .video {
+    .video, .thumbnail{
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: 1;
+    }
+    .thumbnail {
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .video[loaded] {
+      z-index: 2;
     }
     .video__wrapper {
       position: relative;
       width: 100%;
       padding-bottom: 56.25%;
+      overflow: hidden;
     }
   `;
 
@@ -36,7 +47,11 @@ export class WebMarketsLazyVideo extends LitElement {
   private videoSource: string = '';
 
   @state()
+  private thumbSource: string = '';
+
+  @state()
   private videoId: number = Math.ceil(Math.random() * 1000000);
+
 
   protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
     this._init();
@@ -49,6 +64,7 @@ export class WebMarketsLazyVideo extends LitElement {
         if (entry.target === videoElem && !this.videoSource && entry.intersectionRatio > 0) {
           switch (this.mediaType) {
             case 'hosted':
+              this.thumbSource = `https://i.ytimg.com/vi_webp/${this.youtubeEmbedId}/sddefault.webp`;
               this.videoSource = `https://www.youtube.com/embed/${this.youtubeEmbedId}`;
               break;
             case 'local':
@@ -67,15 +83,27 @@ export class WebMarketsLazyVideo extends LitElement {
     }
   }
 
+  private onVideoLoad() {
+    if (this.videoSource) {
+      console.log('loaded!');
+      const videoElem = this.shadowRoot?.getElementById(this.videoId.toString());
+      videoElem?.toggleAttribute('loaded', true);
+
+    }
+  }
+
+
+
   render() {
     return html`
       <div class="video__wrapper">
         ${this.mediaType === 'local' || !this.mediaType
-          ? html`
-              <video id=${this.videoId} class="video" src=${this.videoSource} autoplay loop muted playsinline></video>
+        ? html`
+              <video id=${this.videoId} class="video" src=${this.videoSource} autoplay loop muted playsinline width="100%" height="100%"></video>
             `
-          : html`
-              <iframe id=${this.videoId} class="video" src=${this.videoSource} width="100%" height="100%" title="Eustachian Tube Dysfunction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        : html`
+              <iframe @load=${this.onVideoLoad} id=${this.videoId} class="video" src=${this.videoSource} width="100%" height="100%" title="Eustachian Tube Dysfunction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+              <img width="100%" height="100%" class="thumbnail" src=${this.thumbSource} alt="">
             `}
       </div>
     `;

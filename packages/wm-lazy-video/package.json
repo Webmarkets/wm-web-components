@@ -1,10 +1,9 @@
 {
   "name": "@webmarkets/wm-lazy-video",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "dist/wm-lazy-video.es.js",
+  "version": "1.0.4",
+  "main": "dist/wm-lazy-video.mjs",
   "exports": {
-    ".": "./dist/wm-lazy-video.es.js"
+    ".": "./dist/wm-lazy-video.mjs"
   },
   "types": "types/wm-lazy-video.d.ts",
   "files": [
