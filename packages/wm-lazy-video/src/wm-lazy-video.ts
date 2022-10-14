@@ -9,7 +9,8 @@ export class WebMarketsLazyVideo extends LitElement {
     :root {
       max-width: 100%;
     }
-    .video, .thumbnail{
+    .video,
+    .thumbnail {
       position: absolute;
       top: 0;
       left: 0;
@@ -36,6 +37,8 @@ export class WebMarketsLazyVideo extends LitElement {
 
   @property({ type: String, attribute: 'src' })
   public src: string = '';
+  @property({ type: String, attribute: 'thumb' })
+  public thumb: string = '';
 
   @property({ type: String, attribute: 'media-type' })
   private mediaType: MediaType | undefined;
@@ -51,7 +54,6 @@ export class WebMarketsLazyVideo extends LitElement {
 
   @state()
   private videoId: number = Math.ceil(Math.random() * 1000000);
-
 
   protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
     this._init();
@@ -69,6 +71,7 @@ export class WebMarketsLazyVideo extends LitElement {
               break;
             case 'local':
               this.videoSource = this.src;
+              this.thumbSource = this.thumb;
               break;
           }
         }
@@ -90,19 +93,17 @@ export class WebMarketsLazyVideo extends LitElement {
     }
   }
 
-
-
   render() {
     return html`
       <div class="video__wrapper">
         ${this.mediaType === 'local' || !this.mediaType
-        ? html`
+          ? html`
               <video id=${this.videoId} class="video" src=${this.videoSource} autoplay loop muted playsinline width="100%" height="100%"></video>
             `
-        : html`
+          : html`
               <iframe @load=${this.onVideoLoad} id=${this.videoId} class="video" src=${this.videoSource} width="100%" height="100%" title="Eustachian Tube Dysfunction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-              <img width="100%" height="100%" class="thumbnail" src=${this.thumbSource} alt="">
             `}
+        <img width="100%" height="100%" class="thumbnail" src=${this.thumbSource} alt="" />
       </div>
     `;
   }
