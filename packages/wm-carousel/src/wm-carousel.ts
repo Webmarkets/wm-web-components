@@ -198,7 +198,7 @@ export class WebMarketsCarousel extends LitElement {
       item.addEventListener('touchstart', (e) => {
         this.swipeStartX = e.touches[0].clientX;
       });
-      item.addEventListener('touchend', (e) => {
+      item.addEventListener('touchend', () => {
         this.handleSwipeEnd(this.swipeStartX, this.lastSwipeX);
       });
     });
@@ -340,7 +340,6 @@ export class WebMarketsCarousel extends LitElement {
   }
   private renderActiveSlideSet(offset?: number) {
     let currentAtZero = false;
-    let currentAtEnd = false;
     let set = this.getActiveSlideSet();
     let width = 100 / this._numCards;
     const wrapperWidth = this.shadowRoot?.getElementById('inner-wrap')?.clientWidth;
@@ -351,7 +350,7 @@ export class WebMarketsCarousel extends LitElement {
       percentOffset = (offset / this._numCards / desiredWidth) * 100;
     }
 
-    const baseStyle = css`
+    const baseStyle = `
       display: inline-block;
       width: ${width}%;
       position: absolute;
@@ -364,7 +363,7 @@ export class WebMarketsCarousel extends LitElement {
         `transition: 0ms all;
           transform: translateX(-100%);
         opacity: 0;
-        z-index: 1`
+        z-index: 1;`
       );
     });
     if (this._currentIndex !== 0 || !this._notLooping) {
@@ -373,7 +372,7 @@ export class WebMarketsCarousel extends LitElement {
           `
           transform: translateX(${percentOffset - 100}%);
           opacity: ${percentOffset !== 0 ? 1 : 0};
-          z-index: 1`
+          z-index: 1;`
       );
     } else {
       currentAtZero = true;
@@ -386,8 +385,6 @@ export class WebMarketsCarousel extends LitElement {
           z-index: 1;
           transform: translateX(${this._numCards * 100 + percentOffset}%);`
       );
-    } else {
-      currentAtEnd = true;
     }
     if (currentAtZero) {
       for (let i = 0; i < set.length - 1; i++) {
