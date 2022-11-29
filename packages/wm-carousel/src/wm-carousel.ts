@@ -345,6 +345,7 @@ export class WebMarketsCarousel extends LitElement {
     let width = 100 / this._numCards;
     const wrapperWidth = this.shadowRoot?.getElementById('inner-wrap')?.clientWidth;
     let percentOffset = 0;
+    //TODO: Make this logarithmic
     if (offset && wrapperWidth) {
       const desiredWidth = wrapperWidth / this._numCards;
       percentOffset = (offset / this._numCards / desiredWidth) * 100;
