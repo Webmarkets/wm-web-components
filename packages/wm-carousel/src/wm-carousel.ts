@@ -33,6 +33,7 @@ export class WebMarketsCarousel extends LitElement {
       padding: var(--carousel-item-gap, 1rem);
       box-sizing: border-box;
       display: none;
+      min-height: 100%;
     }
     .carousel-item {
       color: var(--wm-carousel-item-color, black);
@@ -346,7 +347,7 @@ export class WebMarketsCarousel extends LitElement {
     let percentOffset = 0;
     if (offset && wrapperWidth) {
       const desiredWidth = wrapperWidth / this._numCards;
-      percentOffset = (offset / desiredWidth) * 100;
+      percentOffset = (offset / this._numCards / desiredWidth) * 100;
     }
 
     const baseStyle = css`
@@ -357,6 +358,14 @@ export class WebMarketsCarousel extends LitElement {
       transition-duration: ${percentOffset !== 0 ? 0 : this._transitionTime}ms;
       transition-property: visibility, opacity, transform;
     `;
+    this._carouselChildren.forEach((slide) => {
+      slide.setStyle(
+        `transition: 0ms all;
+          transform: translateX(-100%);
+        opacity: 0;
+        z-index: 1`
+      );
+    });
     if (this._currentIndex !== 0 || !this._notLooping) {
       set[0].setStyle(
         baseStyle +
@@ -373,7 +382,7 @@ export class WebMarketsCarousel extends LitElement {
         baseStyle +
           `
           opacity: ${percentOffset !== 0 ? 1 : 0};
-          z-index: 1
+          z-index: 1;
           transform: translateX(${this._numCards * 100 + percentOffset}%);`
       );
     } else {
