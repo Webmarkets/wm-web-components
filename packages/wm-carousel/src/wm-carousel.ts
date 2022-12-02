@@ -5,6 +5,10 @@ import { nextIcon, lastIcon } from './icons';
 
 //TODO: Default mobile responsiveness
 
+interface CarouselBreakpoint {
+  [breakpoint: number]: number;
+}
+
 /**
  * A carousel with adaptable contents
  *
@@ -94,9 +98,13 @@ export class WebMarketsCarousel extends LitElement {
     }
   `;
   private _style?: Element = undefined;
-  // Properties for settings
-  @property({ type: Number, reflect: true, attribute: 'num-cards' })
+  // Number of cards to display in the carousel by default
+  @property({ type: Number, attribute: 'num-cards' })
   _numCards: number = 3;
+
+  // An Array of breakpoints needed for mobile responsiveness (i.e. [768, 1440])
+  @property({ type: Object, attribute: 'card-breakpoints' })
+  _cardBreakpoints: CarouselBreakpoint | undefined;
 
   // I kinda don't want to use this
   @property({ type: String, reflect: true, attribute: 'cards-data' })
@@ -173,6 +181,7 @@ export class WebMarketsCarousel extends LitElement {
   }
 
   render() {
+    console.log(this._cardBreakpoints);
     return html`
       ${this._style}
       <slot name="carousel-style"></slot>
