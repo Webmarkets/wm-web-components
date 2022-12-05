@@ -99,11 +99,18 @@ export class WebMarketsCarousel extends LitElement {
   `;
   private _style?: Element = undefined;
   // Number of cards to display in the carousel by default
-  @property({ type: Number, attribute: 'num-cards' })
+  @property({ type: Number, attribute: 'num-cards', state: true, reflect: true })
   _numCards: number = 3;
 
   // An Array of breakpoints needed for mobile responsiveness (i.e. [768, 1440])
-  @property({ type: Object, attribute: 'card-breakpoints' })
+  @property({
+    type: Object, state: false, attribute: 'card-breakpoints', converter(value) {
+      if (value) {
+        const jsonValue = value.replaceAll("'", '"');
+        return JSON.parse(jsonValue);
+      }
+    }
+  })
   _cardBreakpoints: CarouselBreakpoint | undefined;
 
   // I kinda don't want to use this
@@ -144,10 +151,31 @@ export class WebMarketsCarousel extends LitElement {
   // Tracks if the carousel is currently spinning
   private _isSpinning: boolean = false;
 
+  public setNumCards(num: number) {
+    this._numCards = num;
+  }
+
+  setBreakpoint() {
+    if (this._cardBreakpoints) {
+      const breakpoints = (Object.keys(this._cardBreakpoints)).map(key => {
+        return Number.parseInt(key);
+      });
+      let eligibleBreakpoints = breakpoints.filter(breakpoint => breakpoint >= window.innerWidth);
+      if (eligibleBreakpoints.length > 0) {
+        const currentBreakpoint = eligibleBreakpoints.sort((a, b) => a - b)[0];
+        this._numCards = this._cardBreakpoints[currentBreakpoint];
+      }
+    }
+  }
+
   /**
    * Runs on component initialization
    */
   private _init() {
+    // Setting up Mobile Responsiveness
+    if (this._cardBreakpoints) {
+      this.setBreakpoint();
+    }
     // push all children in slot to the array
     let carouselItems = document.querySelectorAll('*[slot="carousel-items"]');
     let style = document.querySelector('*[slot="carousel-style"]');
@@ -181,15 +209,14 @@ export class WebMarketsCarousel extends LitElement {
   }
 
   render() {
-    console.log(this._cardBreakpoints);
     return html`
       ${this._style}
       <slot name="carousel-style"></slot>
       <slot name="carousel-items"></slot>
       <div class="carousel-supreme" id="inner-wrap">
         ${this._carouselChildren.map((item) => {
-          return item;
-        })}
+      return item;
+    })}
         <div class="carousel-back"></div>
       </div>
       <slot name="prev-btn"><button style=${this._noControls ? 'display: none;' : ''} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</button></slot>
@@ -378,7 +405,7 @@ export class WebMarketsCarousel extends LitElement {
     if (this._currentIndex !== 0 || !this._notLooping) {
       set[0].setStyle(
         baseStyle +
-          `
+        `
           transform: translateX(${percentOffset - 100}%);
           opacity: ${percentOffset !== 0 ? 1 : 0};
           z-index: 1;`
@@ -389,7 +416,7 @@ export class WebMarketsCarousel extends LitElement {
     if (this._currentIndex < this._carouselChildren.length - this._numCards - 1 || !this._notLooping) {
       set[set.length - 1].setStyle(
         baseStyle +
-          `
+        `
           opacity: ${percentOffset !== 0 ? 1 : 0};
           z-index: 1;
           transform: translateX(${this._numCards * 100 + percentOffset}%);`
@@ -399,7 +426,7 @@ export class WebMarketsCarousel extends LitElement {
       for (let i = 0; i < set.length - 1; i++) {
         set[i].setStyle(
           baseStyle +
-            `
+          `
           opacity: 1;
           z-index: 1;
           transform: translateX(${i * 100 + percentOffset}%);`
@@ -409,7 +436,7 @@ export class WebMarketsCarousel extends LitElement {
       for (let i = 1; i < set.length - 1; i++) {
         set[i].setStyle(
           baseStyle +
-            `
+          `
               opacity: 1;
               z-index: 1;
               transform: translateX(${(i - 1) * 100 + percentOffset}%);`
