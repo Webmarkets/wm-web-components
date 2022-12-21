@@ -30,7 +30,6 @@ export class WebMarketsCarousel extends LitElement {
       position: relative;
       overflow: hidden;
       height: 100%;
-      background-color: white;
       z-index: 0;
     }
     .carousel-item-wrapper {
@@ -43,7 +42,6 @@ export class WebMarketsCarousel extends LitElement {
       color: var(--wm-carousel-item-color, black);
       padding: var(--wm-carousel-item-padding, 1rem);
       border-radius: 1rem;
-      background-color: var(--wm-carousel-item-background-color, #aaaaaa);
     }
     .carousel-item h3 {
       margin-top: 0;
@@ -54,13 +52,14 @@ export class WebMarketsCarousel extends LitElement {
     .carousel-back {
       width: 100%;
       height: 100%;
-      background-color: white;
       z-index: 0;
       position: relative;
+      background-color: var(--background-color, transparent);
     }
     :host .prev-btn,
     :host .next-btn {
       background-color: transparent;
+      border: 2px solid #333;
       border-color: #333;
       fill: #333;
       position: absolute;
@@ -387,7 +386,8 @@ export class WebMarketsCarousel extends LitElement {
     }
 
     const baseStyle = `
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       width: ${width}%;
       position: absolute;
       top: 0;
