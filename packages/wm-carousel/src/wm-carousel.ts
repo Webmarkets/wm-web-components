@@ -435,11 +435,9 @@ export class WebMarketsCarousel extends LitElement {
     } else {
       for (let i = 1; i < set.length - 1; i++) {
         set[i].setStyle(
-          baseStyle +
-          `
-              opacity: 1;
-              z-index: 1;
-              transform: translateX(${(i - 1) * 100 + percentOffset}%);`
+          baseStyle + `opacity: 1;
+            z-index: 1;
+            transform: translateX(${(i - 1) * 100 + percentOffset}%);`
         );
       }
     }

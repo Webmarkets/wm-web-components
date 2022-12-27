@@ -1,5 +1,5 @@
 import { html, css, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 type MediaType = 'local' | 'hosted';
 
@@ -97,10 +97,10 @@ export class WebMarketsLazyVideo extends LitElement {
     return html`
       <div class="video__wrapper">
         ${this.mediaType === 'local' || !this.mediaType
-          ? html`
+        ? html`
               <video id=${this.videoId} class="video" src=${this.videoSource} autoplay loop muted playsinline width="100%" height="100%"></video>
             `
-          : html`
+        : html`
               <iframe @load=${this.onVideoLoad} id=${this.videoId} class="video" src=${this.videoSource} width="100%" height="100%" title="Eustachian Tube Dysfunction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
             `}
         <img width="100%" height="100%" class="thumbnail" src=${this.thumbSource} alt="" />

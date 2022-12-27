@@ -5,10 +5,10 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/wm-lazy-video.ts',
-      formats: ['es'],
+      formats: ['es', 'cjs'],
     },
-    rollupOptions: {
-      external: /^lit/,
-    },
+    // rollupOptions: {
+    //   external: /^lit/,
+    // },
   },
 });
