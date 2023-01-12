@@ -114,6 +114,8 @@ export class WebMarketsCarousel extends LitElement {
   })
   _cardBreakpoints: CarouselBreakpoint | undefined;
 
+  //TODO: Add a property for autoplay breakpoints
+
   // I kinda don't want to use this
   @property({ type: String, reflect: true, attribute: 'cards-data' })
   _cardsData: string = '';
@@ -134,6 +136,7 @@ export class WebMarketsCarousel extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'auto-play' })
   _autoPlay: boolean = false;
 
+  //TODO: Override auto-play variable if value is specified
   // Property for auto-play interval
   @property({ type: Number, reflect: true, attribute: 'auto-play-interval' })
   _autoPlayInterval: number = 5000;

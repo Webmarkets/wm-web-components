@@ -9,10 +9,10 @@
 }
 
 body {
-  background-color: #552399;
+  background-color: #fafafafa;
 }
 
 wm-carousel {
-  --btn-color: #39b44a;
-  --background-color: blue;
+  --btn-color: #333;
+  --background-color: transparent;
 }
