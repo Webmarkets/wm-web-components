@@ -11,3 +11,8 @@
 body {
   background-color: #552399;
 }
+
+wm-carousel {
+  --btn-color: #39b44a;
+  --background-color: blue;
+}

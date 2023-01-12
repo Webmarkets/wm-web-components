@@ -37,6 +37,8 @@ export class WebMarketsCarousel extends LitElement {
       box-sizing: border-box;
       display: none;
       min-height: 100%;
+      align-items: center;
+      justify-content: center;
     }
     .carousel-item {
       color: var(--wm-carousel-item-color, black);
@@ -59,9 +61,9 @@ export class WebMarketsCarousel extends LitElement {
     :host .prev-btn,
     :host .next-btn {
       background-color: transparent;
-      border: 2px solid #333;
-      border-color: #333;
-      fill: #333;
+      border: 2px solid var(--btn-color, #333);
+      border-color: var(--btn-color, #333);
+      fill: var(--btn-color, #333);
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -77,7 +79,7 @@ export class WebMarketsCarousel extends LitElement {
     :host .prev-btn:hover,
     :host .next-btn:hover {
       cursor: pointer;
-      background: #333;
+      background: var(--btn-color, #333);
       fill: white;
     }
     :host .prev-btn {
@@ -387,7 +389,6 @@ export class WebMarketsCarousel extends LitElement {
 
     const baseStyle = `
       display: inline-flex;
-      align-items: center;
       width: ${width}%;
       position: absolute;
       top: 0;
