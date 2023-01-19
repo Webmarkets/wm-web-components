@@ -53,6 +53,7 @@ export class WebmarketsModal extends LitElement {
     .modal-content__container {
       height: fit-content;
       padding: 1rem;
+      width: 100%;
     }
   `;
 
@@ -92,9 +93,9 @@ export class WebmarketsModal extends LitElement {
     window.addEventListener(
       "load",
       this.autoPopup
-        ? () => this._autoPopupModal() 
+        ? () => this._autoPopupModal()
         : () => ``
-        );
+    );
     window.addEventListener("keydown", (e: KeyboardEvent) =>
       this._keyListener(e)
     );
@@ -246,8 +247,8 @@ export class WebmarketsModal extends LitElement {
           id="modal__container"
         >
         ${this.hideCloseIcon
-          ? ""
-          : html`<slot name="close-icon" @click=${this.closeModal}
+        ? ""
+        : html`<slot name="close-icon" @click=${this.closeModal}
               ><span id="close-icon__span">${closeIcon}</span></slot
             >`}
         <div class="modal-content__container">
