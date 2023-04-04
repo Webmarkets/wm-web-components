@@ -16,6 +16,8 @@ export class WebmarketsBackgroundVideo extends LitElement {
       overflow: hidden;
       z-index: 1;
       position: relative;
+      width: 100%;
+      height: 100%;
     }
     #background__video {
       z-index: 0;
@@ -24,12 +26,9 @@ export class WebmarketsBackgroundVideo extends LitElement {
       top: 50%;
       min-width: 100%;
       transform: translate(-50%, -50%);
-    }
-    @media only screen and (max-width: 1600px) {
-      #background__video {
-        min-height: 100%;
-        min-width: 100%;
-      }
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
   `;
 
