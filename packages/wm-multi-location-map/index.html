@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + Lit + TS</title>
+  <link rel="stylesheet" href="./src/index.css" />
+  <script type="module" src="/src/multi-location-map.ts"></script>
+</head>
+
+<body>
+  <multi-location-map id="multi-map"></multi-location-map>
+  <script type="module">
+    const multiMap = document.getElementById("multi-map");
+    multiMap.importLocations([
+      {
+        lat: 43.6035958,
+        lng: -116.5901677,
+        name: 'Karcher Nampa',
+        getDirectionsLink: 'https://g.page/idaho-storage-connection-karcher?share'
+      },
+      {
+        lat: 43.6887325,
+        lng: -116.3161658,
+        name: 'Eagle Office',
+        getDirectionsLink: 'https://g.page/idaho-storage-connection-eagle?share'
+      },
+      {
+        lat: 43.6132939,
+        lng: -116.6100964,
+        name: 'USave Nampa',
+        getDirectionsLink: 'https://g.page/idaho-storage-connection-usave?share'
+      },
+      {
+        lat: 43.6624285,
+        lng: -116.3220567,
+        name: 'Joplin II Boise',
+        getDirectionsLink: 'https://www.google.com/maps/place/Idaho+Storage+Connection+Joplin+II-+Boise+Storage+Units/@43.6624285,-116.3220567,15z/data=!4m5!3m4!1s0x0:0x5d81ed4a0d442912!8m2!3d43.6624285!4d-116.3220567'
+      },
+      {
+        lat: 43.6044504,
+        lng: -116.2581044,
+        name: 'Franklin Boise',
+        getDirectionsLink: 'https://g.page/idaho-storage-connection-joplin?share'
+      },
+      {
+        lat: 43.66167651391043,
+        lng: -116.31651008660776,
+        name: 'Joplin Boise',
+        getDirectionsLink: 'https://g.page/idaho-storage-connection-joplin?share'
+      }
+    ]);
+  </script>
+  <style>
+    multi-location-map {
+      height: 350px;
+      width: 100%;
+    }
+  </style>
+</body>
+
+</html>

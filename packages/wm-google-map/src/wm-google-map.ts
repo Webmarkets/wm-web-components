@@ -1,19 +1,12 @@
-import { html, css, LitElement } from "lit";
-import {
-  customElement,
-  property,
-  query,
-  state,
-  queryAssignedNodes,
-} from "lit/decorators.js";
-import { Loader } from "@googlemaps/js-api-loader";
-import WmGoogleMapMarker from "./WmGoogleMapMarker"
+import { html, css, LitElement } from 'lit';
+import { customElement, property, query, state, queryAssignedNodes } from 'lit/decorators.js';
+import { Loader } from '@googlemaps/js-api-loader';
+import WmGoogleMapMarker from './WmGoogleMapMarker';
 
-export { default as WmGoogleMapMarker }  from "./WmGoogleMapMarker";
+export { default as WmGoogleMapMarker } from './WmGoogleMapMarker';
 
-
-@customElement("wm-google-map")
-export class WebmarketsGoogleMap extends LitElement {
+@customElement('wm-google-map')
+export default class WebmarketsGoogleMap extends LitElement {
   static styles = css`
     #map {
       height: 100%;
@@ -21,52 +14,52 @@ export class WebmarketsGoogleMap extends LitElement {
     }
   `;
 
-  @property({ type: String, reflect: true, attribute: "api-key" })
-  apiKey = "";
+  @property({ type: String, reflect: true, attribute: 'api-key' })
+  apiKey = '';
 
-  @property({ type: Number, reflect: true, attribute: "lat" })
+  @property({ type: Number, reflect: true, attribute: 'lat' })
   lat = 0;
 
-  @property({ type: Number, reflect: true, attribute: "lng" })
+  @property({ type: Number, reflect: true, attribute: 'lng' })
   lng = 0;
 
-  @property({ type: Number, reflect: true, attribute: "zoom" })
+  @property({ type: Number, reflect: true, attribute: 'zoom' })
   zoom = 14;
 
-  @property({ type: Object, reflect: false, attribute: "styles" })
+  @property({ type: Object, reflect: false, attribute: 'styles' })
   styles: object = [
     {
-      featureType: "administrative",
-      elementType: "geometry",
-      stylers: [{ visibility: "off" }],
+      featureType: 'administrative',
+      elementType: 'geometry',
+      stylers: [{ visibility: 'off' }],
     },
     {
-      featureType: "administrative.land_parcel",
-      elementType: "labels",
-      stylers: [{ visibility: "off" }],
+      featureType: 'administrative.land_parcel',
+      elementType: 'labels',
+      stylers: [{ visibility: 'off' }],
     },
-    { featureType: "poi", stylers: [{ visibility: "off" }] },
+    { featureType: 'poi', stylers: [{ visibility: 'off' }] },
     {
-      featureType: "road",
-      elementType: "labels.icon",
-      stylers: [{ visibility: "on" }],
+      featureType: 'road',
+      elementType: 'labels.icon',
+      stylers: [{ visibility: 'on' }],
     },
     {
-      featureType: "road.local",
-      elementType: "labels",
-      stylers: [{ visibility: "on" }],
+      featureType: 'road.local',
+      elementType: 'labels',
+      stylers: [{ visibility: 'on' }],
     },
-    { featureType: "transit", stylers: [{ visibility: "off" }] },
+    { featureType: 'transit', stylers: [{ visibility: 'off' }] },
   ];
 
-  @property({ type: Boolean, reflect: true, attribute: "show-marker" })
+  @property({ type: Boolean, reflect: true, attribute: 'show-marker' })
   showMarker = false;
 
-  @property({ type: Boolean, reflect: true, attribute: "auto-open-marker" })
+  @property({ type: Boolean, reflect: true, attribute: 'auto-open-marker' })
   autoOpenMarker = false;
 
   @property({ type: String })
-  infoWindowContent = "";
+  infoWindowContent = '';
 
   @state()
   loader?: Loader;
@@ -83,7 +76,7 @@ export class WebmarketsGoogleMap extends LitElement {
   @state()
   infoWindow?: google.maps.InfoWindow;
 
-  @query("#map")
+  @query('#map')
   mapContainer!: HTMLElement;
 
   @queryAssignedNodes()
@@ -92,24 +85,18 @@ export class WebmarketsGoogleMap extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this._initMap();
-    window.addEventListener(
-      "load",
-      this.autoOpenMarker ? () => this._autoOpenInfoWindow() : () => {}
-    );
+    window.addEventListener('load', this.autoOpenMarker ? () => this._autoOpenInfoWindow() : () => {});
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener(
-      "load",
-      this.autoOpenMarker ? () => this._autoOpenInfoWindow() : () => {}
-    );
+    window.removeEventListener('load', this.autoOpenMarker ? () => this._autoOpenInfoWindow() : () => {});
   }
 
   private _initMap() {
     this.loader = new Loader({
       apiKey: this.apiKey,
-      version: "weekly",
+      version: 'weekly',
     });
 
     this.loader
@@ -128,7 +115,7 @@ export class WebmarketsGoogleMap extends LitElement {
             map: this.map,
           });
 
-          this.marker?.addListener("click", () => {
+          this.marker?.addListener('click', () => {
             this.infoWindow?.open({
               anchor: this.marker,
               map: this.map,
@@ -166,8 +153,8 @@ export class WebmarketsGoogleMap extends LitElement {
       .then(() => {
         const infoWindow = new google.maps.InfoWindow({
           content: marker.infoWindowContent,
-        })
-        
+        });
+
         const localMarker = new google.maps.Marker({
           position: { lat: marker.lat, lng: marker.lng },
           map: this.map,
@@ -175,13 +162,13 @@ export class WebmarketsGoogleMap extends LitElement {
         });
 
         if (marker.infoWindowContent) {
-          localMarker.addListener("click", () => {
+          localMarker.addListener('click', () => {
             infoWindow.open({
               anchor: localMarker,
               map: this.map,
               shouldFocus: true,
             });
-          })
+          });
         }
       })
       .catch((error) => {
@@ -203,8 +190,8 @@ export class WebmarketsGoogleMap extends LitElement {
         this.wmGoogleMapMarkers.forEach((marker) => {
           const infoWindow = new google.maps.InfoWindow({
             content: marker.infoWindowContent,
-          })
-          
+          });
+
           const localMarker = new google.maps.Marker({
             position: { lat: marker.lat, lng: marker.lng },
             map: this.map,
@@ -212,13 +199,13 @@ export class WebmarketsGoogleMap extends LitElement {
           });
 
           if (marker.infoWindowContent) {
-            localMarker.addListener("click", () => {
+            localMarker.addListener('click', () => {
               infoWindow.open({
                 anchor: localMarker,
                 map: this.map,
                 shouldFocus: true,
               });
-            })
+            });
           }
         });
       })
@@ -235,9 +222,9 @@ export class WebmarketsGoogleMap extends LitElement {
     // ... do something with childNodes ...
     this.infoWindowContent = Array.prototype.map
       .call(childNodes, (node) => {
-        return node.innerHTML ? node.innerHTML : "";
+        return node.innerHTML ? node.innerHTML : '';
       })
-      .join("");
+      .join('');
   }
 
   _autoOpenInfoWindow() {

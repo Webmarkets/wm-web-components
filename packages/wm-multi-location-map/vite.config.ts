@@ -1,18 +1,21 @@
 import { defineConfig } from 'vite';
-// import resolve from '@rollup/plugin-node-resolve';
-// import replace from '@rollup/plugin-replace';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/wm-google-map.ts',
+      entry: 'src/multi-location-map.ts',
       formats: ['es'],
     },
-    // rollupOptions: {
-    //   external: /^lit/
-    // }
+    rollupOptions: {
+      // external: /^lit/,
+      // treeshake: false,
+    },
   },
+  server: {
+    port: 3000,
+  },
+  base: './',
   // plugins: [
   //   replace({ "Reflect.decorate": "undefined", preventAssignment: true }),
   //   resolve(),
