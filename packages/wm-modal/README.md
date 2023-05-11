@@ -8,7 +8,7 @@
 **Requires `auto-popup` Attribute**
 
 - `popup-every-visit` - Makes the modal popup every single user visit
-- `popupe-once` - Makes the modal popup only once permanently unless the user cleares their local storage cache
+- `popup-once` - Makes the modal popup only once permanently unless the user cleares their local storage cache
 - `popup-delay` - This is a numeric value in miliseconds. If not specified the value is 5000
 
 ## Required CSS
