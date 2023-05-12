@@ -3,6 +3,8 @@
 ```html
 <wm-background-video
   mp4Src="https://webmarketsonline.com/portals/0/videos/header_small.mp4"
+  webmSrc="https://webmarketsonline.com/portals/0/videos/header_small.webm"
+  imgSrc="https://webmarketsonline.com/portals/0/videos/header_small-thumb.jpg"
 >
   <div>
     <h1>Lorem Ipsum</h1>
