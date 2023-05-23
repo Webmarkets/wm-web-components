@@ -1,15 +1,18 @@
 import { html, css, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import '@webmarkets/wm-google-map';
 import WebmarketsGoogleMap, { WmGoogleMapMarker } from '@webmarkets/wm-google-map';
-import '@webmarkets/wm-google-map';
 
 @customElement('multi-location-map')
 export class MultiLocationMap extends LitElement {
   static styles = css`
+    :host {
+      --map-height: 450px;
+      --map-width: 100%;
+    }
     .gmap__section {
       display: flex;
-      height: 350px;
+      height: var(--map-height);
+      width: var(--map-width);
     }
     wm-google-map {
       opacity: 0;
@@ -23,6 +26,9 @@ export class MultiLocationMap extends LitElement {
   @property({ type: Array, attribute: true, state: true })
   locations: any[] | undefined;
 
+  @property({ type: String, attribute: 'api-key' })
+  apiKey: string | undefined;
+
   @query('#source-map')
   map: WebmarketsGoogleMap | undefined;
 
@@ -32,220 +38,220 @@ export class MultiLocationMap extends LitElement {
   @state()
   averageLng = 0;
 
-  mapStyles = [
-    {
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#212121',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#212121',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#757575',
-        },
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.country',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.land_parcel',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.locality',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#bdbdbd',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#181818',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#1b1b1b',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#2c2c2c',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#8a8a8a',
-        },
-      ],
-    },
-    {
-      featureType: 'road.arterial',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#373737',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#3c3c3c',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway.controlled_access',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#4e4e4e',
-        },
-      ],
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      featureType: 'transit',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      featureType: 'transit',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#000000',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#3d3d3d',
-        },
-      ],
-    },
-  ];
+  // mapStyles = [
+  //   {
+  //     elementType: 'geometry',
+  //     stylers: [
+  //       {
+  //         color: '#212121',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     elementType: 'labels.icon',
+  //     stylers: [
+  //       {
+  //         visibility: 'off',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#757575',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     elementType: 'labels.text.stroke',
+  //     stylers: [
+  //       {
+  //         color: '#212121',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'administrative',
+  //     elementType: 'geometry',
+  //     stylers: [
+  //       {
+  //         color: '#757575',
+  //       },
+  //       {
+  //         visibility: 'off',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'administrative.country',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#9e9e9e',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'administrative.land_parcel',
+  //     stylers: [
+  //       {
+  //         visibility: 'off',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'administrative.locality',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#bdbdbd',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'poi',
+  //     stylers: [
+  //       {
+  //         visibility: 'off',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'poi',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#757575',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'poi.park',
+  //     elementType: 'geometry',
+  //     stylers: [
+  //       {
+  //         color: '#181818',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'poi.park',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#616161',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'poi.park',
+  //     elementType: 'labels.text.stroke',
+  //     stylers: [
+  //       {
+  //         color: '#1b1b1b',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'road',
+  //     elementType: 'geometry.fill',
+  //     stylers: [
+  //       {
+  //         color: '#2c2c2c',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'road',
+  //     elementType: 'labels.icon',
+  //     stylers: [
+  //       {
+  //         visibility: 'off',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'road',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#8a8a8a',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'road.arterial',
+  //     elementType: 'geometry',
+  //     stylers: [
+  //       {
+  //         color: '#373737',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'road.highway',
+  //     elementType: 'geometry',
+  //     stylers: [
+  //       {
+  //         color: '#3c3c3c',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'road.highway.controlled_access',
+  //     elementType: 'geometry',
+  //     stylers: [
+  //       {
+  //         color: '#4e4e4e',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'road.local',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#616161',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'transit',
+  //     stylers: [
+  //       {
+  //         visibility: 'off',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'transit',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#757575',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'water',
+  //     elementType: 'geometry',
+  //     stylers: [
+  //       {
+  //         color: '#000000',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     featureType: 'water',
+  //     elementType: 'labels.text.fill',
+  //     stylers: [
+  //       {
+  //         color: '#3d3d3d',
+  //       },
+  //     ],
+  //   },
+  // ];
 
   public importLocations(locations: any[]) {
     this.locations = locations;
@@ -266,6 +272,7 @@ export class MultiLocationMap extends LitElement {
         const marker = new WmGoogleMapMarker(location.lat, location.lng, undefined, infoWindowContent);
         this.map?.addMarker(marker);
       });
+      this.map?.requestUpdate('lat');
     }
     super.update(changedProperties);
   }
@@ -273,7 +280,7 @@ export class MultiLocationMap extends LitElement {
   render() {
     return html`
       <section class="gmap__section">
-        <wm-google-map id="source-map" api-key="AIzaSyBCjhHZUI2nyZ-shzhqPwN1apeL_DYfzxM" lat=${this.averageLat} lng=${this.averageLng} zoom="11" .styles=${this.mapStyles}></wm-google-map>
+        <wm-google-map id="source-map" api-key=${this.apiKey ? this.apiKey : ''} lat=${this.averageLat} lng=${this.averageLng} zoom="11"></wm-google-map>
       </section>
     `;
   }

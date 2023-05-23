@@ -11,47 +11,44 @@
 </head>
 
 <body>
-  <multi-location-map id="multi-map"></multi-location-map>
+  <multi-location-map id="multi-map" api-key="AIzaSyBCjhHZUI2nyZ-shzhqPwN1apeL_DYfzxM"></multi-location-map>
   <script type="module">
-    const multiMap = document.getElementById("multi-map");
-    multiMap.importLocations([
-      {
-        lat: 43.6035958,
-        lng: -116.5901677,
-        name: 'Karcher Nampa',
-        getDirectionsLink: 'https://g.page/idaho-storage-connection-karcher?share'
-      },
-      {
-        lat: 43.6887325,
-        lng: -116.3161658,
-        name: 'Eagle Office',
-        getDirectionsLink: 'https://g.page/idaho-storage-connection-eagle?share'
-      },
-      {
-        lat: 43.6132939,
-        lng: -116.6100964,
-        name: 'USave Nampa',
-        getDirectionsLink: 'https://g.page/idaho-storage-connection-usave?share'
-      },
-      {
-        lat: 43.6624285,
-        lng: -116.3220567,
-        name: 'Joplin II Boise',
-        getDirectionsLink: 'https://www.google.com/maps/place/Idaho+Storage+Connection+Joplin+II-+Boise+Storage+Units/@43.6624285,-116.3220567,15z/data=!4m5!3m4!1s0x0:0x5d81ed4a0d442912!8m2!3d43.6624285!4d-116.3220567'
-      },
-      {
-        lat: 43.6044504,
-        lng: -116.2581044,
-        name: 'Franklin Boise',
-        getDirectionsLink: 'https://g.page/idaho-storage-connection-joplin?share'
-      },
-      {
-        lat: 43.66167651391043,
-        lng: -116.31651008660776,
-        name: 'Joplin Boise',
-        getDirectionsLink: 'https://g.page/idaho-storage-connection-joplin?share'
+    const pollId = "45d31887-6d09-47a9-8bcd-f5a9245734dc";
+    async function getPollCandidates () {
+      const query = `*[_type == "poll" && _id == "${pollId}"]{
+        candidates[] {
+          business ->
+        }
+      }`;
+      try {
+        const res = await fetch(
+          `https://q8ktg4r3.api.sanity.io/v2021-03-25/data/query/production?query=${encodeURIComponent(
+            query
+          )}`
+        );
+        const body = await res.json();
+        if (body.result && body.result.length === 1) {
+          return body.result[0].candidates;
+        }
+      } catch (error) {
+        console.error(error);
       }
-    ]);
+    }
+    const candidates = await getPollCandidates();
+    const locations = candidates.map(candidate => {
+      return {
+        name: candidate.business.businessName,
+        lat: candidate.business.coordinates.lat,
+        lng: candidate.business.coordinates.lng,
+        getDirectionsLink: candidate.business.mapLink
+      };
+    });
+    const maps = document.querySelectorAll('multi-location-map');
+    if (maps) {
+      maps.forEach(map => {
+        map.importLocations(locations);
+      });
+    } 
   </script>
   <style>
     multi-location-map {

@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, state, queryAssignedNodes } from 'lit/decorators.js';
 import { Loader } from '@googlemaps/js-api-loader';
 import WmGoogleMapMarker from './WmGoogleMapMarker';
@@ -17,11 +17,11 @@ export default class WebmarketsGoogleMap extends LitElement {
   @property({ type: String, reflect: true, attribute: 'api-key' })
   apiKey = '';
 
-  @property({ type: Number, reflect: true, attribute: 'lat' })
-  lat = 0;
+  @property({ type: Number, attribute: 'lat' })
+  private lat: number = 0;
 
-  @property({ type: Number, reflect: true, attribute: 'lng' })
-  lng = 0;
+  @property({ type: Number, attribute: 'lng' })
+  private lng: number = 0;
 
   @property({ type: Number, reflect: true, attribute: 'zoom' })
   zoom = 14;
@@ -92,7 +92,12 @@ export default class WebmarketsGoogleMap extends LitElement {
     super.disconnectedCallback();
     window.removeEventListener('load', this.autoOpenMarker ? () => this._autoOpenInfoWindow() : () => {});
   }
-
+  protected update(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+    if (changedProperties.has('lat') || changedProperties.has('lng')) {
+      this.map?.setCenter({ lat: this.lat, lng: this.lng });
+    }
+    super.update(changedProperties);
+  }
   private _initMap() {
     this.loader = new Loader({
       apiKey: this.apiKey,
@@ -129,7 +134,7 @@ export default class WebmarketsGoogleMap extends LitElement {
         });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
@@ -172,7 +177,7 @@ export default class WebmarketsGoogleMap extends LitElement {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
@@ -210,7 +215,7 @@ export default class WebmarketsGoogleMap extends LitElement {
         });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
