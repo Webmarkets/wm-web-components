@@ -12,8 +12,11 @@
     // "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "outDir": "./types",
+    // "noEmit": true,
+    // Setting up TS support in node
+    "outDir": "types",
+    "declaration": true,
+    "emitDeclarationOnly": true,
 
     /* Linting */
     "strict": true,

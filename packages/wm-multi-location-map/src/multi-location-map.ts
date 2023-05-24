@@ -1,6 +1,7 @@
 import { html, css, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import WebmarketsGoogleMap, { WmGoogleMapMarker } from '@webmarkets/wm-google-map';
+import MapLocation from './types/MapLocation';
 
 @customElement('multi-location-map')
 export class MultiLocationMap extends LitElement {
@@ -24,10 +25,12 @@ export class MultiLocationMap extends LitElement {
   `;
 
   @property({ type: Array, attribute: true, state: true })
-  locations: any[] | undefined;
+  locations: MapLocation[] = [];
 
   @property({ type: String, attribute: 'api-key' })
   apiKey: string | undefined;
+  @property({ type: String, attribute: 'zoom' })
+  zoom: string = '11';
 
   @query('#source-map')
   map: WebmarketsGoogleMap | undefined;
@@ -259,19 +262,20 @@ export class MultiLocationMap extends LitElement {
   }
   protected update(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
     if (changedProperties.has('locations') && this.locations) {
-      this.locations.forEach((location: any) => {
+      this.locations.forEach((location) => {
+        // Calculating center of map
         this.averageLat += location.lat;
         this.averageLng += location.lng;
-      });
-      this.averageLat = this.averageLat / this.locations.length;
-      this.averageLng = this.averageLng / this.locations.length;
-      this.locations.forEach((location: any) => {
+        // Generating the pins' information windows
+        const infoTitle = `${location.nameLink != null ? `<a href="${location.nameLink.url}" ${location.nameLink.newTab ? `target="_blank" rel="noopener noreferrer"` : ""}>${location.name}</a>` : location.name}`;
         const infoWindowContent = `
-        <p style="color:black;">${location.name}</p>
+        <p style="color:black;">${infoTitle}</p>
         <p><a href="${location.getDirectionsLink}" target="_blank" rel="noopener noreferrer">Get Directions</a></p>`;
         const marker = new WmGoogleMapMarker(location.lat, location.lng, undefined, infoWindowContent);
         this.map?.addMarker(marker);
       });
+      this.averageLat = this.averageLat / this.locations.length;
+      this.averageLng = this.averageLng / this.locations.length;
       this.map?.requestUpdate('lat');
     }
     super.update(changedProperties);
@@ -280,7 +284,7 @@ export class MultiLocationMap extends LitElement {
   render() {
     return html`
       <section class="gmap__section">
-        <wm-google-map id="source-map" api-key=${this.apiKey ? this.apiKey : ''} lat=${this.averageLat} lng=${this.averageLng} zoom="11"></wm-google-map>
+        <wm-google-map id="source-map" api-key=${this.apiKey ? this.apiKey : ''} lat=${this.averageLat} lng=${this.averageLng} zoom=${this.zoom}></wm-google-map>
       </section>
     `;
   }
