@@ -1,6 +1,6 @@
 {
   "name": "@webmarkets/wm-multi-location-map",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,10 +10,10 @@
   "main": "./dist/wm-multi-location-map.js",
   "exports": {
     ".": {
+      "types": "./types/multi-location-map.d.ts",
       "import": "./dist/wm-multi-location-map.js"
     }
   },
-  "types": "./types/multi-location-map.d.ts",
   "files": [
     "dist",
     "types"
