@@ -13,42 +13,21 @@
 <body>
   <multi-location-map id="multi-map" api-key="AIzaSyBCjhHZUI2nyZ-shzhqPwN1apeL_DYfzxM"></multi-location-map>
   <script type="module">
-    const pollId = "45d31887-6d09-47a9-8bcd-f5a9245734dc";
-    async function getPollCandidates () {
-      const query = `*[_type == "poll" && _id == "${pollId}"]{
-        candidates[] {
-          business ->
-        }
-      }`;
-      try {
-        const res = await fetch(
-          `https://q8ktg4r3.api.sanity.io/v2021-03-25/data/query/production?query=${encodeURIComponent(
-            query
-          )}`
-        );
-        const body = await res.json();
-        if (body.result && body.result.length === 1) {
-          return body.result[0].candidates;
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    const candidates = await getPollCandidates();
-    const locations = candidates.map(candidate => {
-      return {
-        name: candidate.business.businessName,
-        lat: candidate.business.coordinates.lat,
-        lng: candidate.business.coordinates.lng,
-        getDirectionsLink: candidate.business.mapLink
-      };
-    });
-    const maps = document.querySelectorAll('multi-location-map');
-    if (maps) {
-      maps.forEach(map => {
-        map.importLocations(locations);
-      });
-    } 
+    // const locations = [
+    //   {
+    //     name: "Bradley's Donuts",
+    //     lat: 43.712428,
+    //     lng: -116.6345512,
+    //     getDirectionsLink: "https://goo.gl/maps/d55wfZXP7Q3ZfCPM9?coh=178573&entry=tt",
+    //     nameLink: {url: "https://en.wikipedia.org/wiki/Doughnut", newTab: true},
+    //   },
+    // ];
+    // const maps = document.querySelectorAll('multi-location-map');
+    // if (maps) {
+    //   maps.forEach(map => {
+    //     map.importLocations(locations);
+    //   });
+    // } 
   </script>
   <style>
     multi-location-map {

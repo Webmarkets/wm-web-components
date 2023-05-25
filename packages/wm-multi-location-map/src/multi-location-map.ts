@@ -261,8 +261,15 @@ export class MultiLocationMap extends LitElement {
     this.locations = locations;
     this.requestUpdate();
   }
+  private deferMapUpdates(changedProperty: string) {
+    if (!this.map) {
+      setTimeout(() => this.deferMapUpdates(changedProperty), 10);
+    } else {
+      this.requestUpdate(changedProperty);
+    }
+  }
   protected update(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-    if (changedProperties.has('locations') && this.locations) {
+    if (changedProperties.has('locations') && this.locations && this.map) {
       let averageLat = 0;
       let averageLng = 0;
       this.locations.forEach((location) => {
@@ -280,10 +287,11 @@ export class MultiLocationMap extends LitElement {
       this.averageLat = averageLat / this.locations.length;
       this.averageLng = averageLng / this.locations.length;
       this.map?.requestUpdate('lat');
+    } else {
+      this.deferMapUpdates('locations');
     }
     super.update(changedProperties);
   }
-
   render() {
     return html`
       <section class="gmap__section">
