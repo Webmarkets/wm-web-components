@@ -8,5 +8,9 @@ let map: WebmarketsGoogleMap = document.querySelector('wm-google-map') as Webmar
 
 // map.addMarker(new WmGoogleMapMarker(43.655613, -116.3536647, markericon));
 // map.addMarker(new WmGoogleMapMarker(43.755613, -116.35366));
+const icon = {
+  url: 'https://totallyboise.com/portals/0/pages/restaurant_tour/assets/pin.svg',
+  scaledSize: { x: 30.375, y: 40 },
+};
 
-map.addMarkers([new WmGoogleMapMarker(43.655613, -116.3536647, undefined, `<h1>Hello</h1>`), new WmGoogleMapMarker(43.755613, -116.35366, undefined, `<h1>Hello 2</h1>`)]);
+map.addMarkers([new WmGoogleMapMarker(43.655613, -116.3536647, icon, `<h1>Hello</h1>`), new WmGoogleMapMarker(43.755613, -116.35366, icon, `<h1>Hello 2</h1>`)]);

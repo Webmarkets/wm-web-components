@@ -160,10 +160,20 @@ export default class WebmarketsGoogleMap extends LitElement {
           content: marker.infoWindowContent,
         });
 
+        let icon: any = marker.icon;
+        if (marker.icon && typeof marker.icon !== 'string') {
+          icon = {
+            url: marker.icon.url,
+            size: marker.icon.size ? new google.maps.Size(marker.icon.size?.x, marker.icon.size?.y) : undefined,
+            scaledSize: marker.icon.scaledSize ? new google.maps.Size(marker.icon.scaledSize?.x, marker.icon.scaledSize?.y) : undefined,
+            origin: marker.icon.origin ? new google.maps.Point(marker.icon.origin.x, marker.icon.origin.y) : undefined,
+            anchor: marker.icon.anchor ? new google.maps.Point(marker.icon.anchor.x, marker.icon.anchor.y) : undefined,
+          };
+        }
         const localMarker = new google.maps.Marker({
           position: { lat: marker.lat, lng: marker.lng },
           map: this.map,
-          icon: marker.icon,
+          icon,
         });
 
         if (marker.infoWindowContent) {
@@ -197,10 +207,25 @@ export default class WebmarketsGoogleMap extends LitElement {
             content: marker.infoWindowContent,
           });
 
+          // const localMarker = new google.maps.Marker({
+          //   position: { lat: marker.lat, lng: marker.lng },
+          //   map: this.map,
+          //   icon: marker.icon,
+          // });
+          let icon: any = marker.icon;
+          if (marker.icon && typeof marker.icon !== 'string') {
+            icon = {
+              url: marker.icon.url,
+              size: marker.icon.size ? new google.maps.Size(marker.icon.size?.x, marker.icon.size?.y) : undefined,
+              scaledSize: marker.icon.scaledSize ? new google.maps.Size(marker.icon.scaledSize?.x, marker.icon.scaledSize?.y) : undefined,
+              origin: marker.icon.origin ? new google.maps.Point(marker.icon.origin.x, marker.icon.origin.y) : undefined,
+              anchor: marker.icon.anchor ? new google.maps.Point(marker.icon.anchor.x, marker.icon.anchor.y) : undefined,
+            };
+          }
           const localMarker = new google.maps.Marker({
             position: { lat: marker.lat, lng: marker.lng },
             map: this.map,
-            icon: marker.icon,
+            icon,
           });
 
           if (marker.infoWindowContent) {

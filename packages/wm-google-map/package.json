@@ -1,6 +1,6 @@
 {
   "name": "@webmarkets/wm-google-map",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "type": "module",
   "repository": {
     "type": "git",
@@ -9,6 +9,7 @@
   "main": "./dist/wm-google-map.es.js",
   "exports": {
     ".": {
+      "types": "./types/wm-google-map.d.ts",
       "import": "./dist/wm-google-map.es.js"
     }
   },

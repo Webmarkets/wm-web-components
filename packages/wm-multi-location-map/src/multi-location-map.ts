@@ -27,20 +27,23 @@ export class MultiLocationMap extends LitElement {
 
   @property({ type: Array, attribute: true, state: true })
   locations: MapLocation[] = [];
-
   @property({ type: String, attribute: 'api-key' })
   apiKey: string | undefined;
   @property({ type: String, attribute: 'zoom' })
   zoom: string = '11';
+  @property({ type: Number, attribute: 'lat' })
+  private lat: number | undefined;
+  @property({ type: Number, attribute: 'lng' })
+  private lng: number | undefined;
 
   @query('#source-map')
   map: WebmarketsGoogleMap | undefined;
 
   @state()
-  private averageLat: number | undefined;
+  private averageLat: number = 0;
 
   @state()
-  private averageLng: number | undefined;
+  private averageLng: number = 0;
 
   // mapStyles = [
   //   {
@@ -281,7 +284,7 @@ export class MultiLocationMap extends LitElement {
         const infoWindowContent = `
         <p style="color:black;">${infoTitle}</p>
         <p><a href="${location.getDirectionsLink}" target="_blank" rel="noopener noreferrer">Get Directions</a></p>`;
-        const marker = new WmGoogleMapMarker(location.lat, location.lng, undefined, infoWindowContent);
+        const marker = new WmGoogleMapMarker(location.lat, location.lng, location.icon, infoWindowContent);
         this.map?.addMarker(marker);
       });
       this.averageLat = averageLat / this.locations.length;
@@ -295,7 +298,7 @@ export class MultiLocationMap extends LitElement {
   render() {
     return html`
       <section class="gmap__section">
-        <wm-google-map id="source-map" api-key=${this.apiKey ? this.apiKey : ''} lat=${this.averageLat ? this.averageLat : 0} lng=${this.averageLng ? this.averageLng : 0} zoom=${this.zoom}></wm-google-map>
+        <wm-google-map id="source-map" api-key=${this.apiKey ? this.apiKey : ''} lat=${this.lat ? this.lat : this.averageLat} lng=${this.lng ? this.lng : this.averageLng} zoom=${this.zoom}></wm-google-map>
       </section>
     `;
   }
