@@ -192,7 +192,6 @@ export class WebmarketsModal extends LitElement {
    */
   public openModal() {
     this.scrollPosition = window.scrollY;
-
     this.open = true;
     if (this.scrollWhileOpen) {
       return;
@@ -212,7 +211,7 @@ export class WebmarketsModal extends LitElement {
     } else {
       // document.body.toggleAttribute("no-scroll", false);
       document.body.style.overflow = "";
-      document.body.scrollTo(0, this.scrollPosition);
+      window.scrollTo(0, this.scrollPosition);
     }
   }
 
