@@ -88,6 +88,8 @@ export class WebmarketsModal extends LitElement {
   @query("#modal__slot")
   modalSlot!: HTMLDivElement;
 
+  private scrollPosition: number = 0;
+
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener(
@@ -189,6 +191,8 @@ export class WebmarketsModal extends LitElement {
    * Open the modal
    */
   public openModal() {
+    this.scrollPosition = window.scrollY;
+
     this.open = true;
     if (this.scrollWhileOpen) {
       return;
@@ -208,6 +212,7 @@ export class WebmarketsModal extends LitElement {
     } else {
       // document.body.toggleAttribute("no-scroll", false);
       document.body.style.overflow = "";
+      document.body.scrollTo(0, this.scrollPosition);
     }
   }
 
