@@ -13,7 +13,7 @@ export class MyElement extends LitElement {
     .expanded-title__container {
       display: flex;
       align-items: center;
-      /* justify-content: space-between; */
+      justify-content: space-between;
       cursor: pointer;
     }
     .expanded-title__container button {

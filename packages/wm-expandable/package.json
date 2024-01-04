@@ -1,10 +1,10 @@
 {
   "name": "@webmarkets/wm-expandable",
-  "version": "1.1.0",
+  "version": "1.2.2",
   "type": "module",
-  "main": "dist/wm-expandable.es.js",
+  "main": "dist/wm-expandable.js",
   "exports": {
-    ".": "./dist/wm-expandable.es.js"
+    ".": "./dist/wm-expandable.js"
   },
   "types": "types/wm-expandable.d.ts",
   "files": [
