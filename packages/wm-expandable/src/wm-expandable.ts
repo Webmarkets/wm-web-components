@@ -1,16 +1,15 @@
-import { html, css, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import { expandMoreIcon } from "./icons";
+import { html, css, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { expandMoreIcon } from './icons';
 /**
  * An example element.
  *
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement("wm-expandable")
+@customElement('wm-expandable')
 export class MyElement extends LitElement {
   static styles = css`
-
     .expanded-title__container {
       display: flex;
       align-items: center;
@@ -27,36 +26,48 @@ export class MyElement extends LitElement {
     }
     .expand-more__icon {
       display: flex;
-      transition: transform .3s ease-out;
+      transition: transform 0.3s ease-out;
     }
     :host([open]) .expand-more__icon {
       transform: rotate(180deg);
     }
     .expanded-body__container {
-      padding-top: 1rem;
-      display: none;
+      padding-top: 0;
+      box-sizing: border-box;
       font-size: inherit;
+      transition: 150ms all;
     }
     :host([open]) .expanded-body__container {
+      padding-top: 1rem;
       display: block;
+      transition: 150ms all;
     }
   `;
 
   /**
    * The name to say "Hello" to.
    */
-  @property({ type: Boolean, reflect: true, attribute: "open" })
+  @property({ type: Boolean, reflect: true, attribute: 'open' })
   isOpen: boolean = false;
+  @property({ type: String, reflect: true, attribute: 'id' })
+  id: string = 'expandable-' + Math.floor(Math.random() * 1000000).toString();
+
+  contentStyle: string = 'overflow: hidden; transition: 150ms all; height: ';
 
   firstUpdated() {
-    this.ariaLabel = 'collapsed'
+    this.ariaLabel = 'collapsed';
+    const content = document.querySelector(`#${this.id}>.body__container`);
+    content?.setAttribute('style', `${this.contentStyle}0px;`);
   }
 
   public toggleOpen() {
-    if(this.isOpen) {
-      this.ariaLabel = 'collapsed'
+    const content = document.querySelector(`#${this.id}>.body__container`);
+    if (this.isOpen) {
+      this.ariaLabel = 'collapsed';
+      content?.setAttribute('style', `${this.contentStyle}0px;`);
     } else {
-      this.ariaLabel = 'expanded'
+      this.ariaLabel = 'expanded';
+      content?.setAttribute('style', `${this.contentStyle}${content.scrollHeight}px;`);
     }
     this.isOpen = !this.isOpen;
   }
@@ -71,7 +82,7 @@ export class MyElement extends LitElement {
           <span class="expand-more__icon">${expandMoreIcon}</span>
         </slot>
       </div>
-      <div class="expanded-body__container">
+      <div class="expanded-body__container" id="content">
         <slot name="body">
           <p>I'm open!</p>
         </slot>
@@ -82,6 +93,6 @@ export class MyElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "wm-expandable": MyElement;
+    'wm-expandable': MyElement;
   }
 }
