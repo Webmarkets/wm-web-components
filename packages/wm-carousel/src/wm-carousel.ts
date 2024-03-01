@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import CarouselItem from './Carousel_Item';
-import { nextIcon, lastIcon } from './icons';
+import CarouselItem from './Carousel_Item.ts';
+import { nextIcon, lastIcon } from './icons.ts';
 
 //TODO: Default mobile responsiveness
 
@@ -105,12 +105,15 @@ export class WebMarketsCarousel extends LitElement {
 
   // An Array of breakpoints needed for mobile responsiveness (i.e. [768, 1440])
   @property({
-    type: Object, state: false, attribute: 'card-breakpoints', converter(value) {
+    type: Object,
+    state: false,
+    attribute: 'card-breakpoints',
+    converter(value) {
       if (value) {
         const jsonValue = value.replaceAll("'", '"');
         return JSON.parse(jsonValue);
       }
-    }
+    },
   })
   _cardBreakpoints: CarouselBreakpoint | undefined;
 
@@ -161,10 +164,10 @@ export class WebMarketsCarousel extends LitElement {
 
   setBreakpoint() {
     if (this._cardBreakpoints) {
-      const breakpoints = (Object.keys(this._cardBreakpoints)).map(key => {
+      const breakpoints = Object.keys(this._cardBreakpoints).map((key) => {
         return Number.parseInt(key);
       });
-      let eligibleBreakpoints = breakpoints.filter(breakpoint => breakpoint >= window.innerWidth);
+      let eligibleBreakpoints = breakpoints.filter((breakpoint) => breakpoint >= window.innerWidth);
       if (eligibleBreakpoints.length > 0) {
         const currentBreakpoint = eligibleBreakpoints.sort((a, b) => a - b)[0];
         this._numCards = this._cardBreakpoints[currentBreakpoint];
@@ -219,8 +222,8 @@ export class WebMarketsCarousel extends LitElement {
       <slot name="carousel-items"></slot>
       <div class="carousel-supreme" id="inner-wrap">
         ${this._carouselChildren.map((item) => {
-      return item;
-    })}
+          return item;
+        })}
         <div class="carousel-back"></div>
       </div>
       <slot name="prev-btn"><button style=${this._noControls ? 'display: none;' : ''} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</button></slot>
@@ -231,11 +234,11 @@ export class WebMarketsCarousel extends LitElement {
     const observer = new ResizeObserver(() => this._setHeight(this._carouselChildren));
     this._carouselChildren.forEach((item) => {
       observer.observe(item);
-      item.addEventListener('touchmove', (e) => {
+      item.addEventListener('touchmove', (e: any) => {
         this.lastSwipeX = e.touches[0].clientX;
         this.renderActiveSlideSet(e.touches[0].clientX - this.swipeStartX);
       });
-      item.addEventListener('touchstart', (e) => {
+      item.addEventListener('touchstart', (e: any) => {
         this.swipeStartX = e.touches[0].clientX;
       });
       item.addEventListener('touchend', () => {
@@ -409,7 +412,7 @@ export class WebMarketsCarousel extends LitElement {
     if (this._currentIndex !== 0 || !this._notLooping) {
       set[0].setStyle(
         baseStyle +
-        `
+          `
           transform: translateX(${percentOffset - 100}%);
           opacity: ${percentOffset !== 0 ? 1 : 0};
           z-index: 1;`
@@ -420,7 +423,7 @@ export class WebMarketsCarousel extends LitElement {
     if (this._currentIndex < this._carouselChildren.length - this._numCards - 1 || !this._notLooping) {
       set[set.length - 1].setStyle(
         baseStyle +
-        `
+          `
           opacity: ${percentOffset !== 0 ? 1 : 0};
           z-index: 1;
           transform: translateX(${this._numCards * 100 + percentOffset}%);`
@@ -430,7 +433,7 @@ export class WebMarketsCarousel extends LitElement {
       for (let i = 0; i < set.length - 1; i++) {
         set[i].setStyle(
           baseStyle +
-          `
+            `
           opacity: 1;
           z-index: 1;
           transform: translateX(${i * 100 + percentOffset}%);`
@@ -439,7 +442,8 @@ export class WebMarketsCarousel extends LitElement {
     } else {
       for (let i = 1; i < set.length - 1; i++) {
         set[i].setStyle(
-          baseStyle + `opacity: 1;
+          baseStyle +
+            `opacity: 1;
             z-index: 1;
             transform: translateX(${(i - 1) * 100 + percentOffset}%);`
         );

@@ -24,11 +24,13 @@ export class MyElement extends LitElement {
       border: none;
       cursor: pointer;
     }
-    .expand-more__icon {
+    .expand-more__icon,
+    [slot='icon'] {
       display: flex;
       transition: transform 0.3s ease-out;
     }
-    :host([open]) .expand-more__icon {
+    :host([open]) .expand-more__icon,
+    :host([open]) [slot='icon'] {
       transform: rotate(180deg);
     }
     .expanded-body__container {

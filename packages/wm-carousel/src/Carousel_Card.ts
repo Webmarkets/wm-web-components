@@ -1,5 +1,5 @@
 import { html } from 'lit-html';
-import CarouselItem from './Carousel_Item';
+import CarouselItem from './Carousel_Item.ts';
 
 export default class CarouselCard extends CarouselItem {
   private _cardTitle: string = '';
