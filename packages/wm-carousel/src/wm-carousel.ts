@@ -1,7 +1,7 @@
-import { html, css, LitElement } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import CarouselItem from './Carousel_Item.ts';
-import { nextIcon, lastIcon } from './icons.ts';
+import { html, css, LitElement } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
+import CarouselItem from "./Carousel_Item.ts";
+import { nextIcon, lastIcon } from "./icons.ts";
 
 //TODO: Default mobile responsiveness
 
@@ -16,7 +16,7 @@ interface CarouselBreakpoint {
  * @csspart button - The button
  * @author Bradley Graham
  */
-@customElement('wm-carousel')
+@customElement("wm-carousel")
 export class WebMarketsCarousel extends LitElement {
   static styles = css`
     :host {
@@ -24,7 +24,7 @@ export class WebMarketsCarousel extends LitElement {
       box-sizing: border-box;
       display: block;
       position: relative;
-      padding: 0 3.5rem;
+      padding: 0 calc(3.5 * var(--carousel-btn-size, 16px));
     }
     .carousel-supreme {
       position: relative;
@@ -60,16 +60,17 @@ export class WebMarketsCarousel extends LitElement {
     }
     :host .prev-btn,
     :host .next-btn {
+      font-size: var(--carousel-btn-size, 16px);
       background-color: transparent;
-      border: 2px solid var(--btn-color, #333);
+      border: 0.125em solid var(--btn-color, #333);
       border-color: var(--btn-color, #333);
       fill: var(--btn-color, #333);
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       border-radius: 100%;
-      height: 3rem;
-      width: 3rem;
+      height: 3em;
+      width: 3em;
       transition: 250ms all;
       padding: 0;
       display: flex;
@@ -83,31 +84,31 @@ export class WebMarketsCarousel extends LitElement {
       fill: white;
     }
     :host .prev-btn {
-      padding-right: 0.15rem;
-      left: 0.5rem;
+      padding-right: 0.15em;
+      left: 0.5em;
     }
     :host .next-btn {
-      padding-left: 0.15rem;
-      right: 0.5rem;
+      padding-left: 0.15em;
+      right: 0.5em;
     }
 
     :host .prev-btn svg,
     :host .next-btn svg {
       fill: inherit;
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 2.5em;
+      width: 2.5em;
     }
   `;
   private _style?: Element = undefined;
   // Number of cards to display in the carousel by default
-  @property({ type: Number, attribute: 'num-cards', state: true, reflect: true })
+  @property({ type: Number, attribute: "num-cards", reflect: true })
   _numCards: number = 3;
 
   // An Array of breakpoints needed for mobile responsiveness (i.e. [768, 1440])
   @property({
     type: Object,
     state: false,
-    attribute: 'card-breakpoints',
+    attribute: "card-breakpoints",
     converter(value) {
       if (value) {
         const jsonValue = value.replaceAll("'", '"');
@@ -120,28 +121,28 @@ export class WebMarketsCarousel extends LitElement {
   //TODO: Add a property for autoplay breakpoints
 
   // I kinda don't want to use this
-  @property({ type: String, reflect: true, attribute: 'cards-data' })
-  _cardsData: string = '';
+  @property({ type: String, reflect: true, attribute: "cards-data" })
+  _cardsData: string = "";
 
   // Property for transition time in ms
-  @property({ type: Number, reflect: true, attribute: 'transition-time' })
+  @property({ type: Number, reflect: true, attribute: "transition-time" })
   _transitionTime: number = 1000;
 
   // Property for looping
-  @property({ type: Boolean, reflect: true, attribute: 'no-loop' })
+  @property({ type: Boolean, reflect: true, attribute: "no-loop" })
   _notLooping: boolean = false;
 
   // Property for controls
-  @property({ type: Boolean, reflect: true, attribute: 'no-controls' })
+  @property({ type: Boolean, reflect: true, attribute: "no-controls" })
   _noControls: boolean = false;
 
   // Property for auto-play
-  @property({ type: Boolean, reflect: true, attribute: 'auto-play' })
+  @property({ type: Boolean, reflect: true, attribute: "auto-play" })
   _autoPlay: boolean = false;
 
   //TODO: Override auto-play variable if value is specified
   // Property for auto-play interval
-  @property({ type: Number, reflect: true, attribute: 'auto-play-interval' })
+  @property({ type: Number, reflect: true, attribute: "auto-play-interval" })
   _autoPlayInterval: number = 5000;
 
   // Current index determines which cards are active
@@ -189,23 +190,25 @@ export class WebMarketsCarousel extends LitElement {
     let prevBtn = document.querySelector('*[slot="prev-btn"]');
     let nextBtn = document.querySelector('*[slot="next-btn"]');
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
+      prevBtn.addEventListener("click", () => {
         this.previousSlide();
       });
     }
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
+      nextBtn.addEventListener("click", () => {
         this.nextSlide();
       });
     }
     if (style) {
       this._style = style;
     }
-    carouselItems.forEach((item) => {
-      this._carouselChildren.push(new CarouselItem(undefined, undefined, item));
-    });
+    if (carouselItems && carouselItems.length > 0) {
+      carouselItems.forEach((item) => {
+        this._carouselChildren.push(new CarouselItem(undefined, undefined, item));
+      });
+    }
     if (this._noControls) {
-      this.style.padding = '0';
+      this.style.padding = "0";
     }
     if (this._autoPlay) {
       setInterval(() => {
@@ -226,22 +229,22 @@ export class WebMarketsCarousel extends LitElement {
         })}
         <div class="carousel-back"></div>
       </div>
-      <slot name="prev-btn"><button style=${this._noControls ? 'display: none;' : ''} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</button></slot>
-      <slot name="next-btn"><button style=${this._noControls ? 'display: none;' : ''} class="next-btn" @click=${this.nextSlide}>${nextIcon}</button></slot>
+      <slot name="prev-btn"><button style=${this._noControls ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</button></slot>
+      <slot name="next-btn"><button style=${this._noControls ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</button></slot>
     `;
   }
   firstUpdated() {
     const observer = new ResizeObserver(() => this._setHeight(this._carouselChildren));
     this._carouselChildren.forEach((item) => {
       observer.observe(item);
-      item.addEventListener('touchmove', (e: any) => {
+      item.addEventListener("touchmove", (e: any) => {
         this.lastSwipeX = e.touches[0].clientX;
         this.renderActiveSlideSet(e.touches[0].clientX - this.swipeStartX);
       });
-      item.addEventListener('touchstart', (e: any) => {
+      item.addEventListener("touchstart", (e: any) => {
         this.swipeStartX = e.touches[0].clientX;
       });
-      item.addEventListener('touchend', () => {
+      item.addEventListener("touchend", () => {
         this.handleSwipeEnd(this.swipeStartX, this.lastSwipeX);
       });
     });
@@ -368,7 +371,7 @@ export class WebMarketsCarousel extends LitElement {
     return slideSet;
   }
   private handleSwipeEnd(swipeStart: number, swipeEnd: number) {
-    const wrapperWidth = this.shadowRoot?.getElementById('inner-wrap')?.clientWidth;
+    const wrapperWidth = this.shadowRoot?.getElementById("inner-wrap")?.clientWidth;
     const offset = swipeEnd - swipeStart;
     if (wrapperWidth) {
       const desiredWidth = wrapperWidth / this._numCards;
@@ -385,7 +388,7 @@ export class WebMarketsCarousel extends LitElement {
     let currentAtZero = false;
     let set = this.getActiveSlideSet();
     let width = 100 / this._numCards;
-    const wrapperWidth = this.shadowRoot?.getElementById('inner-wrap')?.clientWidth;
+    const wrapperWidth = this.shadowRoot?.getElementById("inner-wrap")?.clientWidth;
     let percentOffset = 0;
     //TODO: Make this logarithmic
     if (offset && wrapperWidth) {
@@ -455,6 +458,6 @@ export class WebMarketsCarousel extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'wm-carousel': WebMarketsCarousel;
+    "wm-carousel": WebMarketsCarousel;
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@webmarkets/wm-carousel",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "dist/wm-carousel.js",
   "type": "module",
   "exports": {
