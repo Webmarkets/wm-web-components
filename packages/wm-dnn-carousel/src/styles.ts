@@ -14,7 +14,8 @@ const styles = `
     height: 100%;
     z-index: 0;
   }
-  .carousel-item-wrapper, *[card] {
+  .carousel-item-wrapper,
+  *[card] {
     padding: var(--carousel-item-gap, 1rem);
     box-sizing: border-box;
     display: none;
@@ -103,6 +104,11 @@ const styles = `
     background-color: var(--theme-secondary, #333);
     cursor: not-allowed;
     transition: 150ms all;
+  }
+  @media screen and (max-width: 768px) {
+    wm-dnn-carousel {
+      padding: 0;
+    }
   }
 `;
 export default styles;

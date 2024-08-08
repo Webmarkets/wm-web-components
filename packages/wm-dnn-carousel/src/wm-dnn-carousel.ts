@@ -19,7 +19,6 @@ interface CarouselBreakpoint {
  */
 @customElement("wm-dnn-carousel")
 export class WebMarketsDNNCarousel extends LitElement {
-  private _style?: Element = undefined;
   // Number of cards to display in the carousel by default
   @property({ type: Number, attribute: "num-cards", reflect: true })
   _numCards: number = 3;
@@ -74,6 +73,9 @@ export class WebMarketsDNNCarousel extends LitElement {
   // These are all the carousel cards
   @state()
   private _carouselChildren: Element[] = [];
+
+  @state()
+  private renderingButtons: boolean = true;
 
   private swipeStartX: number = 0;
   private lastSwipeX: number = 0;
@@ -139,7 +141,6 @@ export class WebMarketsDNNCarousel extends LitElement {
 
   render() {
     return html`
-      ${this._style}
       <slot name="carousel-style"></slot>
       <slot name="carousel-items"></slot>
       <div class="carousel-supreme" id="inner-wrap">
@@ -148,8 +149,10 @@ export class WebMarketsDNNCarousel extends LitElement {
         })}
         <div class="carousel-back"></div>
       </div>
-      <slot name="prev-btn"><div style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</div></slot>
-      <slot name="next-btn"><div style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</div></slot>
+      ${this.renderingButtons
+        ? html` <slot name="prev-btn"><div style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</div></slot>
+            <slot name="next-btn"><div style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</div></slot>`
+        : ""}
       ${this._controlsStyle === "bubbles"
         ? html` <div class="bubbles">
             ${
@@ -171,12 +174,13 @@ export class WebMarketsDNNCarousel extends LitElement {
     `;
   }
   firstUpdated() {
-    const observer = new ResizeObserver((e) => this._setHeight(e));
+    const observer = new ResizeObserver((e) => this._responsiveListener(e));
     observer.observe(this);
     this._carouselChildren.forEach((child) => {
       // observer.observe(item);
       child.addEventListener("touchmove", (e: any) => {
         this.lastSwipeX = e.touches[0].clientX;
+        this._styleSlides(this._carouselChildren, false, this.lastSwipeX - this.swipeStartX);
       });
       child.addEventListener("touchstart", (e: any) => {
         this.swipeStartX = e.touches[0].clientX;
@@ -194,7 +198,6 @@ export class WebMarketsDNNCarousel extends LitElement {
 
   private _setHeight(e: ResizeObserverEntry[]) {
     const carousel = e[0].target as WebMarketsDNNCarousel;
-    carousel.setBreakpoint();
     let height = 0;
     carousel._carouselChildren.forEach((child) => {
       if (height < child.children[0].scrollHeight) {
@@ -202,6 +205,16 @@ export class WebMarketsDNNCarousel extends LitElement {
       }
     });
     carousel.setAttribute("style", "height: " + height + "px");
+  }
+
+  private _responsiveListener(e: ResizeObserverEntry[]) {
+    this._setHeight(e);
+    this.setBreakpoint();
+    if (window.innerWidth < 768) {
+      this.renderingButtons = false;
+    } else {
+      this.renderingButtons = true;
+    }
   }
 
   /**
@@ -294,7 +307,8 @@ export class WebMarketsDNNCarousel extends LitElement {
     this._styleSlides(this._carouselChildren, false);
   }
 
-  private _styleSlides(slideSet: Element[], instant: boolean) {
+  private _styleSlides(slideSet: Element[], instant: boolean, swipeOffset?: number) {
+    console.log(swipeOffset);
     slideSet.forEach((slide, index) => {
       const width = 100 / this._numCards;
       const baseStyle = `
@@ -303,14 +317,20 @@ export class WebMarketsDNNCarousel extends LitElement {
         position: absolute;
         top: 0;
         left: 0;
-        transition-duration: ${instant ? 0 : this._transitionTime}ms;
-        transition-property: transform;
       `;
+      const percentageOffset = 100 * (index - this._currentIndex);
       slide.setAttribute(
         "style",
         `
+      ${
+        swipeOffset
+          ? ""
+          : `
+          transition-duration: ${instant ? 0 : this._transitionTime}ms;
+          transition-property: transform, left;`
+      }
           ${baseStyle}
-          transform: translateX(${100 * (index - this._currentIndex)}%);
+          transform: translateX(${swipeOffset ? `calc(${percentageOffset}% + ${swipeOffset}px)` : `${percentageOffset}%`});
           visibility: visible;
           z-index: 1;`
       );
@@ -327,6 +347,8 @@ export class WebMarketsDNNCarousel extends LitElement {
         this._handleSpin(-1);
       } else if (offset * -1 > desiredWidth / 2) {
         this._handleSpin(1);
+      } else {
+        this._styleSlides(this._carouselChildren, false);
       }
     }
   }
