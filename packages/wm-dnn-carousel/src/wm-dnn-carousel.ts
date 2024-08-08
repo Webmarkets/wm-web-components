@@ -308,7 +308,6 @@ export class WebMarketsDNNCarousel extends LitElement {
   }
 
   private _styleSlides(slideSet: Element[], instant: boolean, swipeOffset?: number) {
-    console.log(swipeOffset);
     slideSet.forEach((slide, index) => {
       const width = 100 / this._numCards;
       const baseStyle = `
