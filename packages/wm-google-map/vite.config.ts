@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 // import resolve from '@rollup/plugin-node-resolve';
 // import replace from '@rollup/plugin-replace';
 
@@ -6,12 +6,15 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/wm-google-map.ts',
-      formats: ['es'],
+      entry: "src/wm-google-map.ts",
+      formats: ["es"],
     },
     // rollupOptions: {
     //   external: /^lit/
     // }
+  },
+  server: {
+    port: 3000,
   },
   // plugins: [
   //   replace({ "Reflect.decorate": "undefined", preventAssignment: true }),
