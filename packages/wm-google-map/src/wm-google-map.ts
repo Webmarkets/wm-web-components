@@ -143,7 +143,6 @@ export default class WebmarketsGoogleMap extends LitElement {
       <div id="map">
         <slot @slotchange=${this.handleSlotchange}></slot>
       </div>
-      <button @click=${this.clearMarkers}>Hi There</button>
     `;
   }
 
