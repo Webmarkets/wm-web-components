@@ -1,13 +1,13 @@
-import { html, css, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { expandMoreIcon } from './icons';
+import { html, css, LitElement } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { expandMoreIcon } from "./icons";
 /**
  * An example element.
  *
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('wm-expandable')
+@customElement("wm-expandable")
 export class MyElement extends LitElement {
   static styles = css`
     .expanded-title__container {
@@ -25,12 +25,12 @@ export class MyElement extends LitElement {
       cursor: pointer;
     }
     .expand-more__icon,
-    [slot='icon'] {
+    [slot="icon"] {
       display: flex;
       transition: transform 0.3s ease-out;
     }
     :host([open]) .expand-more__icon,
-    :host([open]) [slot='icon'] {
+    :host([open]) [slot="icon"] {
       transform: rotate(180deg);
     }
     .expanded-body__container {
@@ -49,29 +49,42 @@ export class MyElement extends LitElement {
   /**
    * The name to say "Hello" to.
    */
-  @property({ type: Boolean, reflect: true, attribute: 'open' })
+  @property({ type: Boolean, reflect: true, attribute: "open" })
   isOpen: boolean = false;
-  @property({ type: String, reflect: true, attribute: 'id' })
-  id: string = 'expandable-' + Math.floor(Math.random() * 1000000).toString();
+  @property({ type: String, reflect: true, attribute: "id" })
+  id: string = "expandable-" + Math.floor(Math.random() * 1000000).toString();
 
-  contentStyle: string = 'overflow: hidden; transition: 150ms all; height: ';
+  contentStyle: string = "overflow: hidden; transition: 150ms all; height: ";
 
   firstUpdated() {
-    this.ariaLabel = 'collapsed';
-    const content = document.querySelector(`#${this.id}>.body__container`);
-    content?.setAttribute('style', `${this.contentStyle}0px;`);
+    this.setHeight();
   }
 
   public toggleOpen() {
-    const content = document.querySelector(`#${this.id}>.body__container`);
-    if (this.isOpen) {
-      this.ariaLabel = 'collapsed';
-      content?.setAttribute('style', `${this.contentStyle}0px;`);
-    } else {
-      this.ariaLabel = 'expanded';
-      content?.setAttribute('style', `${this.contentStyle}${content.scrollHeight}px;`);
-    }
     this.isOpen = !this.isOpen;
+    this.setHeight();
+
+    this.dispatchEvent(
+      new CustomEvent("expanding", {
+        bubbles: true,
+        detail: { eventHeight: this.contentStyle},
+      })
+    );
+  }
+
+  private setHeight(height?: number) {
+    const content = document.querySelector(`#${this.id}>.body__container`);
+    height = this.isOpen ? content?.scrollHeight : 0;
+    this.ariaLabel = this.isOpen ? "collapsed" : "expanded";
+    content?.setAttribute("style", `${this.contentStyle}${height}px`);
+    console.log(content?.scrollHeight);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener("expanding", (e) => {
+      this.setHeight();
+    });
   }
 
   render() {
@@ -95,6 +108,6 @@ export class MyElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'wm-expandable': MyElement;
+    "wm-expandable": MyElement;
   }
 }
