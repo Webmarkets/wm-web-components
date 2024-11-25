@@ -10,6 +10,9 @@ import { expandMoreIcon } from "./icons";
 @customElement("wm-expandable")
 export class MyElement extends LitElement {
   static styles = css`
+    :host {
+      gap: 0.5rem;
+    }
     .expanded-title__container {
       display: flex;
       align-items: center;
@@ -40,7 +43,6 @@ export class MyElement extends LitElement {
       transition: 150ms all;
     }
     :host([open]) .expanded-body__container {
-      padding-top: 1rem;
       display: block;
       transition: 150ms all;
     }
@@ -55,6 +57,7 @@ export class MyElement extends LitElement {
   id: string = "expandable-" + Math.floor(Math.random() * 1000000).toString();
 
   contentStyle: string = "overflow: hidden; transition: 150ms all; height: ";
+  oldContentHeight: string = "0";
 
   firstUpdated() {
     this.setHeight();
@@ -62,28 +65,37 @@ export class MyElement extends LitElement {
 
   public toggleOpen() {
     this.isOpen = !this.isOpen;
-    this.setHeight();
+    const heightDelta = this.setHeight();
 
     this.dispatchEvent(
       new CustomEvent("expanding", {
         bubbles: true,
-        detail: { eventHeight: this.contentStyle},
+        detail: heightDelta,
       })
     );
   }
 
-  private setHeight(height?: number) {
+  private setHeight(childHeightDelta?: number): number {
     const content = document.querySelector(`#${this.id}>.body__container`);
-    height = this.isOpen ? content?.scrollHeight : 0;
+    let height = this.isOpen ? (content?.scrollHeight as number) : 0;
+    const oldHeight = Number.parseInt(this.oldContentHeight);
+
+    if (childHeightDelta !== undefined) {
+      height += childHeightDelta;
+    }
+    this.oldContentHeight = height.toString();
     this.ariaLabel = this.isOpen ? "collapsed" : "expanded";
     content?.setAttribute("style", `${this.contentStyle}${height}px`);
-    console.log(content?.scrollHeight);
+    return height - oldHeight;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener("expanding", (e) => {
-      this.setHeight();
+    this.addEventListener("expanding", (e: Event) => {
+      if (e.target !== this) {
+        const event = e as CustomEvent;
+        this.setHeight(event.detail);
+      }
     });
   }
 
