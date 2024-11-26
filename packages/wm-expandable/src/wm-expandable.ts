@@ -78,15 +78,41 @@ export class MyElement extends LitElement {
   private setHeight(childHeightDelta?: number): number {
     const content = document.querySelector(`#${this.id}>.body__container`);
     let height = this.isOpen ? (content?.scrollHeight as number) : 0;
-    const oldHeight = Number.parseInt(this.oldContentHeight);
+    let oldHeight = Number.parseInt(this.oldContentHeight);
 
     if (childHeightDelta !== undefined) {
-      height += childHeightDelta;
+      height = oldHeight + childHeightDelta;
     }
+
     this.oldContentHeight = height.toString();
     this.ariaLabel = this.isOpen ? "collapsed" : "expanded";
     content?.setAttribute("style", `${this.contentStyle}${height}px`);
+
     return height - oldHeight;
+  }
+
+  private closeSiblings() {
+    let parentNode = this.parentElement;
+    let currentNode = parentNode?.firstChild as MyElement;
+
+    while (currentNode) {
+      if (
+        currentNode !== this &&
+        currentNode.nodeName.toLowerCase() === "wm-expandable" &&
+        currentNode.isOpen
+      ) {
+        currentNode.toggleOpen();
+      }
+      currentNode = currentNode.nextSibling as MyElement;
+    }
+  }
+
+  private handleClick() {
+    this.toggleOpen();
+
+    if (this.isOpen) {
+      this.closeSiblings();
+    }
   }
 
   connectedCallback() {
@@ -101,7 +127,7 @@ export class MyElement extends LitElement {
 
   render() {
     return html`
-      <div class="expanded-title__container" @click=${this.toggleOpen}>
+      <div class="expanded-title__container" @click=${this.handleClick}>
         <slot name="title">
           <button>Expand Me</button>
         </slot>
