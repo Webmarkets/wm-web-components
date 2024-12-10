@@ -19,6 +19,7 @@ export class MyElement extends LitElement {
       justify-content: space-between;
       cursor: pointer;
       position: relative;
+      transition: all 500ms ease;
     }
     .expanded-title__container button {
       margin-right: 0.5rem;
@@ -38,16 +39,15 @@ export class MyElement extends LitElement {
       transform: rotate(180deg);
     }
     .expanded-body__container {
-      padding-top: 0;
       box-sizing: border-box;
       font-size: inherit;
       transition: 150ms all;
     }
     :host([open]) .expanded-body__container {
       display: block;
-      transition: 150ms all;
+      border: 2px solid #d4d4d4;
     }
-    .expanded-title__container::before {
+    /*.expanded-title__container::before {
       content: "";
       position: absolute;
       bottom: 0;
@@ -60,7 +60,7 @@ export class MyElement extends LitElement {
     :host([open]) .expanded-title__container::before {
       width: 100%;
       left: 0;
-    }
+    } */
   `;
 
   /**
@@ -71,7 +71,8 @@ export class MyElement extends LitElement {
   @property({ type: String, reflect: true, attribute: "id" })
   id: string = "expandable-" + Math.floor(Math.random() * 1000000).toString();
 
-  contentStyle: string = "overflow: hidden; transition: 500ms all; height: ";
+  contentStyle: string =
+    "overflow: hidden; padding: 3px; transition: 500ms all; height: ";
   oldContentHeight: string = "0";
 
   firstUpdated() {
