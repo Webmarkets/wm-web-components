@@ -10,9 +10,13 @@
   <!-- <script type="module" src="/dist/wm-dnn-carousel.js"></script> -->
   <link rel="stylesheet" href="style.css" />
   <style>
-    wm-dnn-carousel {
+    body wm-dnn-carousel {
       --carousel-btn-size: 16px;
+      --carousel-item-gap: 0.5rem;
+      --btn-color: #45B9C5;
+      width: 1392px;
       /* height: 800px; */
+      margin: 0 auto;
     }
 
     .extra-cool-card {
@@ -25,122 +29,49 @@
       max-width: 100%;
       height: auto;
     }
+
+    body wm-dnn-carousel .prev-btn,
+    body wm-dnn-carousel .next-btn {
+      top: 100%;
+    }
+
+    body wm-dnn-carousel .prev-btn {
+      left: 2.5rem
+    }
+
+    body wm-dnn-carousel .next-btn {
+      right: 2.5rem
+    }
   </style>
 </head>
 
 <body>
-  <wm-dnn-carousel num-cards="3" transition-time="500" card-breakpoints="{'768':1,'1440':2,'3840':3}" controls-style="arrows" no-loop auto-play auto-play-interval="10000">
+  <wm-dnn-carousel num-cards="4" transition-time="500" controls-style="arrows" auto-play auto-play-interval="10000">
     <div card>
-      <div class="extra-cool-card">
-        <h1>Extra Cool Card One</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-    </div>
-
-    <div card>
-      <div class="extra-cool-card">
-        <h1>Extra Cool Card Two</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-    </div>
-
-    <div card>
-      <div class="extra-cool-card">
-        <h1>Extra Cool Card Three</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-    </div>
-
-    <div card>
-      <div class="extra-cool-card">
-        <h1>Extra Cool Card Four</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-          euismod nisi, vitae porttitor nisl nunc euismod nisi.
-        </p>
-      </div>
-    </div>
-
-    <div card>
-      <div class="extra-cool-card">
-        <h1>Extra Cool Card Five</h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod consequatur ullam perferendis impedit
-          assumenda, quibusdam commodi placeat maxime voluptates quia asperiores optio est quo nobis at voluptatum illo
-          ratione nam. Facilis beatae animi, praesentium nostrum cumque sint at commodi ipsam ab quis totam esse
-          cupiditate minus reprehenderit et, quidem consectetur sunt quas sapiente error necessitatibus blanditiis
-          numquam omnis! Dolor, cupiditate. Culpa repudiandae animi ratione, mollitia dolorem dicta ducimus! Facilis
-          necessitatibus recusandae sed voluptatibus, ipsa sunt id vitae quaerat dignissimos in quisquam officia
-          explicabo expedita deserunt quas deleniti blanditiis dolorem ratione.
-        </p>
-      </div>
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
     </div>
     <div card>
-      <img src="src/assets/placeholder.jpg" alt="">
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
+    </div>
+    <div card>
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
+    </div>
+    <div card>
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
+    </div>
+    <div card>
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
+    </div>
+    <div card>
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
+    </div>
+    <div card>
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
+    </div>
+    <div card>
+      <img src="src/assets/cat-in-suspenders.webp" alt="" />
     </div>
   </wm-dnn-carousel>
-  <!-- <wm-dnn-carousel num-cards="3" transition-time="500" card-breakpoints="{'768':1,'1440':2}" controls-style="arrows" no-loop>
-
-    <div class="extra-cool-card" slot="carousel-items">
-      <h1>Extra Cool Card One</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-        euismod nisi, vitae porttitor nisl nunc euismod nisi.
-      </p>
-    </div>
-
-
-    <div class="extra-cool-card" slot="carousel-items">
-      <h1>Extra Cool Card Two</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-        euismod nisi, vitae porttitor nisl nunc euismod nisi.
-      </p>
-    </div>
-
-
-    <div class="extra-cool-card" slot="carousel-items">
-      <h1>Extra Cool Card Three</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-        euismod nisi, vitae porttitor nisl nunc euismod nisi.
-      </p>
-    </div>
-
-
-    <div class="extra-cool-card" slot="carousel-items">
-      <h1>Extra Cool Card Four</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eu blandit consectetur, nisl nunc
-        euismod nisi, vitae porttitor nisl nunc euismod nisi.
-      </p>
-    </div>
-
-
-    <div class="extra-cool-card" slot="carousel-items">
-      <h1>Extra Cool Card Five</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod consequatur ullam perferendis impedit
-        assumenda, quibusdam commodi placeat maxime voluptates quia asperiores optio est quo nobis at voluptatum illo
-        ratione nam. Facilis beatae animi, praesentium nostrum cumque sint at commodi ipsam ab quis totam esse
-        cupiditate minus reprehenderit et, quidem consectetur sunt quas sapiente error necessitatibus blanditiis
-        numquam omnis! Dolor, cupiditate. Culpa repudiandae animi ratione, mollitia dolorem dicta ducimus! Facilis
-        necessitatibus recusandae sed voluptatibus, ipsa sunt id vitae quaerat dignissimos in quisquam officia
-        explicabo expedita deserunt quas deleniti blanditiis dolorem ratione.
-      </p>
-    </div>
-
-    <img src="src/assets/placeholder.jpg" slot="carousel-items" alt="">
-  </wm-dnn-carousel> -->
   <!-- <script type="module" src="app.ts"></script> -->
 </body>
 
