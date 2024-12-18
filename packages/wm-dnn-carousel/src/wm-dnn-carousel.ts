@@ -92,9 +92,7 @@ export class WebMarketsDNNCarousel extends LitElement {
       const breakpoints = Object.keys(this._cardBreakpoints).map((key) => {
         return Number.parseInt(key);
       });
-      let eligibleBreakpoints = breakpoints.filter(
-        (breakpoint) => breakpoint >= window.innerWidth
-      );
+      let eligibleBreakpoints = breakpoints.filter((breakpoint) => breakpoint >= window.innerWidth);
       if (eligibleBreakpoints.length > 0) {
         const currentBreakpoint = eligibleBreakpoints.sort((a, b) => a - b)[0];
         this._numCards = this._cardBreakpoints[currentBreakpoint];
@@ -111,12 +109,10 @@ export class WebMarketsDNNCarousel extends LitElement {
       this.setBreakpoint();
     }
     // push all children in slot to the array
-    let carouselItems = Array.from(this.querySelectorAll("*[card]")).map(
-      (child: Element) => {
-        console.log(child);
-        return child.cloneNode(true) as Element;
-      }
-    );
+    let carouselItems = Array.from(this.querySelectorAll("*[card]")).map((child: Element) => {
+      console.log(child);
+      return child.cloneNode(true) as Element;
+    });
     let prevBtn = this.querySelector('*[slot="prev-btn"]');
     let nextBtn = this.querySelector('*[slot="next-btn"]');
     const headStyle = document.createElement("style");
@@ -155,36 +151,15 @@ export class WebMarketsDNNCarousel extends LitElement {
         <div class="carousel-back"></div>
       </div>
       ${this.renderingButtons
-        ? html` <slot name="prev-btn"
-              ><div
-                style=${this._noControls || this._controlsStyle != "arrows"
-                  ? "display: none;"
-                  : ""}
-                class="prev-btn"
-                @click=${this.previousSlide}
-              >
-                ${lastIcon}
-              </div></slot
-            >
-            <slot name="next-btn"
-              ><div
-                style=${this._noControls || this._controlsStyle != "arrows"
-                  ? "display: none;"
-                  : ""}
-                class="next-btn"
-                @click=${this.nextSlide}
-              >
-                ${nextIcon}
-              </div></slot
-            >`
+        ? html` <slot name="prev-btn"><div role="button" aria-label="Previous Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</div></slot>
+            <slot name="next-btn"><div role="button" aria-label="Next Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</div></slot>`
         : ""}
       ${this._controlsStyle === "bubbles"
         ? html` <div class="bubbles">
             ${
               //@ts-ignore
               this._carouselChildren.map((child, key) =>
-                this._notLooping &&
-                key > this._carouselChildren.length - this._numCards
+                this._notLooping && key > this._carouselChildren.length - this._numCards
                   ? ""
                   : html`<span
                       ?active=${this._currentIndex == key}
@@ -206,11 +181,7 @@ export class WebMarketsDNNCarousel extends LitElement {
       // observer.observe(item);
       child.addEventListener("touchmove", (e: any) => {
         this.lastSwipeX = e.touches[0].clientX;
-        this._styleSlides(
-          this._carouselChildren,
-          false,
-          this.lastSwipeX - this.swipeStartX
-        );
+        this._styleSlides(this._carouselChildren, false, this.lastSwipeX - this.swipeStartX);
       });
       child.addEventListener("touchstart", (e: any) => {
         this.swipeStartX = e.touches[0].clientX;
@@ -268,12 +239,7 @@ export class WebMarketsDNNCarousel extends LitElement {
    */
   public addCarouselItems(items: CarouselItem[]) {
     let rendering = false;
-    if (
-      this._carouselChildren.length < this._numCards ||
-      this._currentIndex < (this._numCards + 2) / 2 ||
-      this._carouselChildren.length - this._currentIndex <
-        (this._numCards + 2) / 2
-    ) {
+    if (this._carouselChildren.length < this._numCards || this._currentIndex < (this._numCards + 2) / 2 || this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2) {
       rendering = true;
     }
     this._carouselChildren.push(...items);
@@ -323,11 +289,10 @@ export class WebMarketsDNNCarousel extends LitElement {
         index = this._carouselChildren.length - this._numCards;
       }
     } else {
-      while (index < 0) {
-        index += this._carouselChildren.length;
-      }
-      while (index >= this._carouselChildren.length) {
-        index -= this._carouselChildren.length;
+      if (index > this._carouselChildren.length - this._numCards) {
+        index = 0;
+      } else if (index < 0) {
+        index = this._carouselChildren.length - this._numCards;
       }
     }
     return index;
@@ -342,11 +307,7 @@ export class WebMarketsDNNCarousel extends LitElement {
     this._styleSlides(this._carouselChildren, false);
   }
 
-  private _styleSlides(
-    slideSet: Element[],
-    instant: boolean,
-    swipeOffset?: number
-  ) {
+  private _styleSlides(slideSet: Element[], instant: boolean, swipeOffset?: number) {
     slideSet.forEach((slide, index) => {
       const width = 100 / this._numCards;
       const baseStyle = `
@@ -368,11 +329,7 @@ export class WebMarketsDNNCarousel extends LitElement {
           transition-property: transform, left;`
       }
           ${baseStyle}
-          transform: translateX(${
-            swipeOffset
-              ? `calc(${percentageOffset}% + ${swipeOffset}px)`
-              : `${percentageOffset}%`
-          });
+          transform: translateX(${swipeOffset ? `calc(${percentageOffset}% + ${swipeOffset}px)` : `${percentageOffset}%`});
           visibility: visible;
           z-index: 1;`
       );
