@@ -129,6 +129,7 @@ export class WebmarketsMailchimpForm extends LitElement {
   emailMergeID = "0";
 
   render() {
+    console.log(this.mailchimpIdValue);
     return html`
       <!-- Begin Mailchimp Signup Form -->
       <!-- <link
@@ -138,9 +139,9 @@ export class WebmarketsMailchimpForm extends LitElement {
       /> -->
       <div id="mc_embed_signup">
         <p id="title">${this.title}</p>
-        <form action=${`${this.formActionURL}?u=${this.mailchimpUValue}&amp;id=${this.mailchimpIdValue}`} method="post" class="wm-mailchimp-form" accept-charset="UTF-8" enctype="multipart/form-data" data-dojo-attach-point="formNode" novalidate="">
+        <form action=${`${this.formActionURL}?u=${this.mailchimpUValue}&amp;id=${this.mailchimpIdValue}`} class="wm-mailchimp-form" accept-charset="UTF-8" enctype="multipart/form-data" data-dojo-attach-point="formNode" novalidate="">
           <input type="hidden" name="u" value=${this.mailchimpUValue} />
-          <input type="hidden" name="id" valu=${this.mailchimpIdValue} />
+          <input type="hidden" name="id" value=${this.mailchimpIdValue} />
 
           <!-- people should not fill these in and expect good things -->
           <div class="field-shift" aria-label="Please leave the following three fields empty">
