@@ -43,10 +43,6 @@ export class MyElement extends LitElement {
       font-size: inherit;
       transition: 150ms all;
     }
-    :host([open]) .expanded-body__container {
-      display: block;
-      border: 2px solid #d4d4d4;
-    }
     /*.expanded-title__container::before {
       content: "";
       position: absolute;
