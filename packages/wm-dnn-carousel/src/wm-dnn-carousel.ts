@@ -110,7 +110,6 @@ export class WebMarketsDNNCarousel extends LitElement {
     }
     // push all children in slot to the array
     let carouselItems = Array.from(this.querySelectorAll("*[card]")).map((child: Element) => {
-      console.log(child);
       return child.cloneNode(true) as Element;
     });
     let prevBtn = this.querySelector('*[slot="prev-btn"]');
