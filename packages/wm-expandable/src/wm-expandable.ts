@@ -67,8 +67,7 @@ export class MyElement extends LitElement {
   @property({ type: String, reflect: true, attribute: "id" })
   id: string = "expandable-" + Math.floor(Math.random() * 1000000).toString();
 
-  contentStyle: string =
-    "overflow: hidden; padding: 3px; transition: 500ms all; height: ";
+  contentStyle: string = "overflow: hidden; padding: 3px; transition: 500ms all; height: ";
   oldContentHeight: string = "0";
 
   firstUpdated() {
@@ -88,7 +87,7 @@ export class MyElement extends LitElement {
   }
 
   private setHeight(childHeightDelta?: number): number {
-    const content = document.querySelector(`#${this.id}>.body__container`);
+    const content = this.querySelector(`.body__container`);
     let height = this.isOpen ? (content?.scrollHeight as number) : 0;
     let oldHeight = Number.parseInt(this.oldContentHeight);
 
@@ -108,11 +107,7 @@ export class MyElement extends LitElement {
     let currentNode = parentNode?.firstChild as MyElement;
 
     while (currentNode) {
-      if (
-        currentNode !== this &&
-        currentNode.nodeName.toLowerCase() === "wm-expandable" &&
-        currentNode.isOpen
-      ) {
+      if (currentNode !== this && currentNode.nodeName.toLowerCase() === "wm-expandable" && currentNode.isOpen) {
         currentNode.toggleOpen();
       }
       currentNode = currentNode.nextSibling as MyElement;
