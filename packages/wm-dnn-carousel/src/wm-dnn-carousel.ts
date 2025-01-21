@@ -109,11 +109,11 @@ export class WebMarketsDNNCarousel extends LitElement {
       this.setBreakpoint();
     }
     // push all children in slot to the array
-    let carouselItems = Array.from(document.querySelectorAll("*[card]")).map((child: Element) => {
+    let carouselItems = Array.from(this.querySelectorAll("*[card]")).map((child: Element) => {
       return child.cloneNode(true) as Element;
     });
-    let prevBtn = document.querySelector('*[slot="prev-btn"]');
-    let nextBtn = document.querySelector('*[slot="next-btn"]');
+    let prevBtn = this.querySelector('*[slot="prev-btn"]');
+    let nextBtn = this.querySelector('*[slot="next-btn"]');
     const headStyle = document.createElement("style");
     headStyle.innerHTML = styles;
     document.head.append(headStyle);
@@ -150,8 +150,8 @@ export class WebMarketsDNNCarousel extends LitElement {
         <div class="carousel-back"></div>
       </div>
       ${this.renderingButtons
-        ? html` <slot name="prev-btn"><div style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</div></slot>
-            <slot name="next-btn"><div style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</div></slot>`
+        ? html` <slot name="prev-btn"><div role="button" aria-label="Previous Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</div></slot>
+            <slot name="next-btn"><div role="button" aria-label="Next Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</div></slot>`
         : ""}
       ${this._controlsStyle === "bubbles"
         ? html` <div class="bubbles">
@@ -288,11 +288,10 @@ export class WebMarketsDNNCarousel extends LitElement {
         index = this._carouselChildren.length - this._numCards;
       }
     } else {
-      while (index < 0) {
-        index += this._carouselChildren.length;
-      }
-      while (index >= this._carouselChildren.length) {
-        index -= this._carouselChildren.length;
+      if (index > this._carouselChildren.length - this._numCards) {
+        index = 0;
+      } else if (index < 0) {
+        index = this._carouselChildren.length - this._numCards;
       }
     }
     return index;

@@ -129,6 +129,7 @@ export class WebmarketsMailchimpForm extends LitElement {
   emailMergeID = "0";
 
   render() {
+    console.log(this.mailchimpIdValue);
     return html`
       <!-- Begin Mailchimp Signup Form -->
       <!-- <link
@@ -138,164 +139,65 @@ export class WebmarketsMailchimpForm extends LitElement {
       /> -->
       <div id="mc_embed_signup">
         <p id="title">${this.title}</p>
-        <form
-          action=${`${this.formActionURL}?u=${this.mailchimpUValue}&amp;id=${this.mailchimpIdValue}`}
-          method="POST"
-          class="wm-mailchimp-form"
-        >
+        <form action=${`${this.formActionURL}?u=${this.mailchimpUValue}&amp;id=${this.mailchimpIdValue}`} class="wm-mailchimp-form" accept-charset="UTF-8" enctype="multipart/form-data" data-dojo-attach-point="formNode" novalidate="">
           <input type="hidden" name="u" value=${this.mailchimpUValue} />
-          <input type="hidden" name="id" valu=${this.mailchimpIdValue} />
+          <input type="hidden" name="id" value=${this.mailchimpIdValue} />
 
           <!-- people should not fill these in and expect good things -->
-          <div
-            class="field-shift"
-            aria-label="Please leave the following three fields empty"
-          >
+          <div class="field-shift" aria-label="Please leave the following three fields empty">
             <label for="b_name">Name: </label>
-            <input
-              type="text"
-              name="b_name"
-              tabindex="-1"
-              value=""
-              placeholder="Freddie"
-              id="b_name"
-            />
+            <input type="text" name="b_name" tabindex="-1" value="" placeholder="Freddie" id="b_name" />
 
             <label for="b_email">Email: </label>
-            <input
-              type="email"
-              name="b_email"
-              tabindex="-1"
-              value=""
-              placeholder="youremail@gmail.com"
-              id="b_email"
-            />
+            <input type="email" name="b_email" tabindex="-1" value="" placeholder="youremail@gmail.com" id="b_email" />
 
             <label for="b_comment">Comment: </label>
-            <textarea
-              name="b_comment"
-              tabindex="-1"
-              placeholder="Please comment"
-              id="b_comment"
-            ></textarea>
+            <textarea name="b_comment" tabindex="-1" placeholder="Please comment" id="b_comment"></textarea>
           </div>
 
           ${this.fields === "default"
             ? html`
                 <div class="w-50">
-                  ${this.hideLabels
-                    ? ""
-                    : html`<label for=${`MERGE${this.fNameMergeID}`}
-                        >First Name</label
-                      >`}
-                  <input
-                    type="text"
-                    value=""
-                    required
-                    name=${`MERGE${this.fNameMergeID}`}
-                    placeholder="First Name"
-                    id=${`MERGE${this.fNameMergeID}`}
-                  />
+                  ${this.hideLabels ? "" : html`<label for="FNAME">First Name</label>`}
+                  <input type="text" required name="FNAME" placeholder="First Name" id=${`MERGE${this.fNameMergeID}`} />
                 </div>
                 <div class="w-50">
-                  ${this.hideLabels
-                    ? ""
-                    : html`<label for=${`MERGE${this.lNameMergeID}`}
-                        >Last Name</label
-                      >`}
-                  <input
-                    type="text"
-                    value=""
-                    required
-                    name=${`MERGE${this.lNameMergeID}`}
-                    placeholder="Last Name"
-                    id=${`MERGE${this.lNameMergeID}`}
-                  />
+                  ${this.hideLabels ? "" : html`<label for="LNAME">Last Name</label>`}
+                  <input type="text" required name="LNAME" placeholder="Last Name" id=${`MERGE${this.lNameMergeID}`} />
                 </div>
                 <div>
-                  ${this.hideLabels
-                    ? ""
-                    : html`<label for=${`MERGE${this.emailMergeID}`}
-                        >Email Address</label
-                      >`}
-                  <input
-                    type="email"
-                    value=""
-                    required
-                    name=${`MERGE${this.emailMergeID}`}
-                    placeholder="Email Address"
-                    id=${`MERGE${this.emailMergeID}`}
-                  />
+                  ${this.hideLabels ? "" : html`<label for="EMAIL">Email Address</label>`}
+                  <input type="email" required name="EMAIL" placeholder="Email Address" id=${`MERGE${this.emailMergeID}`} />
                 </div>
               `
             : ""}
           ${this.fields.includes("fname")
             ? html`
                 <div>
-                  ${this.hideLabels
-                    ? ""
-                    : html`<label for=${`MERGE${this.fNameMergeID}`}
-                        >First Name</label
-                      >`}
-                  <input
-                    type="text"
-                    value=""
-                    required
-                    name=${`MERGE${this.fNameMergeID}`}
-                    placeholder="First Name"
-                    id=${`MERGE${this.fNameMergeID}`}
-                  />
+                  ${this.hideLabels ? "" : html`<label for=${`MERGE${this.fNameMergeID}`}>First Name</label>`}
+                  <input type="text" value="" required name=${`MERGE${this.fNameMergeID}`} placeholder="First Name" id=${`MERGE${this.fNameMergeID}`} />
                 </div>
               `
             : ""}
           ${this.fields.includes("lname")
             ? html`
                 <div>
-                  ${this.hideLabels
-                    ? ""
-                    : html`<label for=${`MERGE${this.lNameMergeID}`}
-                        >Last Name</label
-                      >`}
-                  <input
-                    type="text"
-                    value=""
-                    required
-                    name=${`MERGE${this.lNameMergeID}`}
-                    placeholder="Last Name"
-                    id=${`MERGE${this.lNameMergeID}`}
-                  />
+                  ${this.hideLabels ? "" : html`<label for=${`MERGE${this.lNameMergeID}`}>Last Name</label>`}
+                  <input type="text" value="" required name=${`MERGE${this.lNameMergeID}`} placeholder="Last Name" id=${`MERGE${this.lNameMergeID}`} />
                 </div>
               `
             : ""}
           ${this.fields.includes("email")
             ? html`
                 <div>
-                  ${this.hideLabels
-                    ? ""
-                    : html`<label for=${`MERGE${this.emailMergeID}`}
-                        >Email Address</label
-                      >`}
-                  <input
-                    type="email"
-                    value=""
-                    required
-                    name=${`MERGE${this.emailMergeID}`}
-                    placeholder="Email Address"
-                    class="required email"
-                    id=${`MERGE${this.emailMergeID}`}
-                  />
+                  ${this.hideLabels ? "" : html`<label for=${`MERGE${this.emailMergeID}`}>Email Address</label>`}
+                  <input type="email" value="" required name=${`MERGE${this.emailMergeID}`} placeholder="Email Address" class="required email" id=${`MERGE${this.emailMergeID}`} />
                 </div>
               `
             : ""}
 
           <div>
-            <input
-              type="submit"
-              value="Subscribe"
-              name="subscribe"
-              id="mc-embedded-subscribe"
-              class="button"
-            />
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" />
           </div>
         </form>
       </div>
