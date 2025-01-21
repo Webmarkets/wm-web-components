@@ -1,71 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Lit App</title>
+    <style>
+      wm-expandable {
+        margin: 2rem auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        max-width: 500px;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + Lit App</title>
-  <style>
-    wm-expandable {
-      margin: 2rem auto;
-      display: flex;
-      flex-direction: column;
-      max-width: 300px;
-    }
-
-    /* .title__container {
+      /* .title__container {
         padding: 1rem 0;
         font-size: 2rem;
       } */
-    .body__container ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
+      .body__container ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
 
-    /* This is needed to keep the content from flashing on page load. */
-    /* .body__container {
+      /* This is needed to keep the content from flashing on page load. */
+      /* .body__container {
       height: 0;
       overflow: hidden;
     } */
-  </style>
-  <script type="module" src="/src/wm-expandable.ts"></script>
-</head>
+    </style>
+    <script type="module" src="/src/wm-expandable.ts"></script>
+  </head>
 
-<body>
-  <wm-expandable>
-    <div class="title__container" slot="title">
-      Lorem ipsum dolor sit amet consectetur
-    </div>
-    <div class="body__container" slot="body">
-      <ul>
-        <li><a href="">Test Link 1</a></li>
-        <li><a href="">Test Link 2</a></li>
-      </ul>
-    </div>
-    <img slot="icon" src="https://secondlookortho.dnn4less.net//portals/0/images/home/arrow-icon.svg" alt="">
-  </wm-expandable>
-  <wm-expandable>
-    <div slot="title">
-      Lorem ipsum dolor sit amet consectetur
-    </div>
-    <div class="body__container" slot="body">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat porro quibusdam placeat quasi laudantium quia non
-      quam? Soluta sint corrupti vel illum repellendus pariatur maiores veritatis culpa, suscipit nesciunt quas?
-    </div>
-    <img slot="icon" src="https://secondlookortho.dnn4less.net//portals/0/images/home/arrow-icon.svg" alt="">
-  </wm-expandable>
-  <wm-expandable>
-    <div slot="title">
-      Lorem ipsum dolor sit amet consectetur
-    </div>
-    <div class="body__container" slot="body">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat porro quibusdam placeat quasi laudantium quia non
-      quam? Soluta sint corrupti vel illum repellendus pariatur maiores veritatis culpa, suscipit nesciunt quas?
-    </div>
-    <img slot="icon" src="https://secondlookortho.dnn4less.net//portals/0/images/home/arrow-icon.svg" alt="">
-  </wm-expandable>
-</body>
-
+  <body>
+    <wm-expandable>
+      <div class="title__container" slot="title">non parent accordion</div>
+      <div class="body__container" slot="body">
+        <ul>
+          <li><a href="">Test Link 1</a></li>
+          <li><a href="">Test Link 2</a></li>
+          <li><a href="">Test Link 1</a></li>
+          <li><a href="">Test Link 2</a></li>
+          <li><a href="">Test Link 1</a></li>
+          <li><a href="">Test Link 2</a></li>
+        </ul>
+      </div>
+    </wm-expandable>
+  </body>
 </html>
