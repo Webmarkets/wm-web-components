@@ -84,7 +84,7 @@ const styles = `
   /* Bubble Control Scheme Styling */
   .bubbles {
     position: absolute;
-    bottom: 0;
+    bottom: -30px;
     left: 50%;
     transform: translate(-50%, 0);
     line-height: 1;
@@ -92,9 +92,9 @@ const styles = `
     gap: 0.2rem;
   }
   .nav-bubble {
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 50%;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 2rem;
     background-color: #c4c4c4;
     display: inline-block;
     cursor: pointer;
@@ -104,6 +104,7 @@ const styles = `
     background-color: var(--theme-secondary, #333);
     cursor: not-allowed;
     transition: 150ms all;
+    background-color: #67BAFF;
   }
   @media screen and (max-width: 768px) {
     wm-dnn-carousel {
