@@ -83,6 +83,11 @@ export class WebMarketsDNNCarousel extends LitElement {
   // Tracks if the carousel is currently spinning
   private _isSpinning: boolean = false;
 
+  private _clonedHead: Element[] = [];
+  private _clonedTail: Element[] = [];
+  private _hasClones: boolean = false;
+  private _cloneOffset: number = 0;
+
   public setNumCards(num: number) {
     this._numCards = num;
   }
@@ -136,7 +141,15 @@ export class WebMarketsDNNCarousel extends LitElement {
         this.nextSlide();
       }, this._autoPlayInterval);
     }
-    this._styleSlides(this._carouselChildren, true);
+    this._setupClones();
+
+    if (this._hasClones) {
+      // Start at the first real slide (after prepended clones)
+      this._currentIndex = this._cloneOffset;
+    } else {
+      this._currentIndex = 0;
+    }
+    this._styleSlides(this._getAllSlides(), true);
   }
 
   render() {
@@ -144,20 +157,40 @@ export class WebMarketsDNNCarousel extends LitElement {
       <slot name="carousel-style"></slot>
       <slot name="carousel-items"></slot>
       <div class="carousel-supreme" id="inner-wrap">
-        ${this._carouselChildren.map((item) => {
+        ${this._getAllSlides().map((item) => {
           return item;
         })}
         <div class="carousel-back"></div>
       </div>
       ${this.renderingButtons
-        ? html` <slot name="prev-btn"><div role="button" aria-label="Previous Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</div></slot>
-            <slot name="next-btn"><div role="button" aria-label="Next Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</div></slot>`
+        ? html` <slot name="prev-btn"
+              ><div
+                role="button"
+                aria-label="Previous Carousel Item"
+                style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""}
+                class="prev-btn"
+                @click=${this.previousSlide}
+              >
+                ${lastIcon}
+              </div></slot
+            >
+            <slot name="next-btn"
+              ><div
+                role="button"
+                aria-label="Next Carousel Item"
+                style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""}
+                class="next-btn"
+                @click=${this.nextSlide}
+              >
+                ${nextIcon}
+              </div></slot
+            >`
         : ""}
       ${this._controlsStyle === "bubbles"
         ? html` <div class="bubbles">
             ${
               //@ts-ignore
-              this._carouselChildren.map((child, key) =>
+              this._getAllSlides().map((child, key) =>
                 this._notLooping && key > this._carouselChildren.length - this._numCards
                   ? ""
                   : html`<span
@@ -238,7 +271,11 @@ export class WebMarketsDNNCarousel extends LitElement {
    */
   public addCarouselItems(items: CarouselItem[]) {
     let rendering = false;
-    if (this._carouselChildren.length < this._numCards || this._currentIndex < (this._numCards + 2) / 2 || this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2) {
+    if (
+      this._carouselChildren.length < this._numCards ||
+      this._currentIndex < (this._numCards + 2) / 2 ||
+      this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2
+    ) {
       rendering = true;
     }
     this._carouselChildren.push(...items);
@@ -262,53 +299,46 @@ export class WebMarketsDNNCarousel extends LitElement {
   private _handleSpin(delta: number) {
     if (!this._isSpinning) {
       const oldIndex = this._currentIndex;
-      const newIndex = this._currentIndex + delta;
+      const newIndex = oldIndex + delta;
       if (newIndex !== oldIndex) {
         this._isSpinning = true;
         this._animateSlides(delta);
+
         setTimeout(() => {
+          // If looping and moved into clones, jump to real slide instantly
+          if (this._hasClones) {
+            const total = this._carouselChildren.length;
+            if (this._currentIndex < this._cloneOffset) {
+              // Jump to end
+              this._currentIndex = total + this._currentIndex;
+              this._styleSlides(this._getAllSlides(), true);
+            } else if (this._currentIndex >= total + this._cloneOffset) {
+              // Jump to start
+              this._currentIndex = this._currentIndex - total;
+              this._styleSlides(this._getAllSlides(), true);
+            }
+          }
           this._isSpinning = false;
-          this._styleSlides(this._carouselChildren, true);
+          this._styleSlides(this._getAllSlides(), true);
         }, this._transitionTime);
       }
     }
   }
 
   /**
-   * Finds an appropriate index based on delta
-   * @param delta The index of the offset to find
-   * @returns An in-bounds index that is offset from the current index
-   */
-  private _calcIndex(delta: number) {
-    let index = this._currentIndex + delta;
-    if (this._notLooping) {
-      if (index < 0) {
-        index = 0;
-      } else if (index > this._carouselChildren.length - this._numCards) {
-        index = this._carouselChildren.length - this._numCards;
-      }
-    } else {
-      if (index > this._carouselChildren.length - this._numCards) {
-        index = 0;
-      } else if (index < 0) {
-        index = this._carouselChildren.length - this._numCards;
-      }
-    }
-    return index;
-  }
-  /**
    * Positions CarouselItems to animate to the selected slide
    * @param delta The delta of the current slide index
    */
   private _animateSlides(delta: number) {
-    this._styleSlides(this._carouselChildren, true);
-    this._currentIndex = this._calcIndex(delta);
-    this._styleSlides(this._carouselChildren, false);
+    this._styleSlides(this._getAllSlides(), true);
+    this._currentIndex += delta;
+    this._styleSlides(this._getAllSlides(), false);
   }
 
   private _styleSlides(slideSet: Element[], instant: boolean, swipeOffset?: number) {
+    const n = this._numCards;
     slideSet.forEach((slide, index) => {
-      const width = 100 / this._numCards;
+      const width = 100 / n;
       const baseStyle = `
         display: inline-flex;
         width: ${width}%;
@@ -328,7 +358,9 @@ export class WebMarketsDNNCarousel extends LitElement {
           transition-property: transform, left;`
       }
           ${baseStyle}
-          transform: translateX(${swipeOffset ? `calc(${percentageOffset}% + ${swipeOffset}px)` : `${percentageOffset}%`});
+          transform: translateX(${
+            swipeOffset ? `calc(${percentageOffset}% + ${swipeOffset}px)` : `${percentageOffset}%`
+          });
           visibility: visible;
           z-index: 1;`
       );
@@ -350,6 +382,40 @@ export class WebMarketsDNNCarousel extends LitElement {
       }
     }
   }
+
+  private _setupClones() {
+    if (this._notLooping || this._carouselChildren.length === 0) return;
+
+    // Remove previous clones if any
+    this._clonedHead = [];
+    this._clonedTail = [];
+    this._hasClones = false;
+
+    const n = this._numCards;
+    const children = this._carouselChildren;
+
+    // Clone last n slides and prepend
+    for (let i = children.length - n; i < children.length; i++) {
+      const clone = children[i].cloneNode(true) as Element;
+      clone.setAttribute("data-clone", "head");
+      this._clonedHead.push(clone);
+    }
+    // Clone first n slides and append
+    for (let i = 0; i < n; i++) {
+      const clone = children[i].cloneNode(true) as Element;
+      clone.setAttribute("data-clone", "tail");
+      this._clonedTail.push(clone);
+    }
+
+    this._hasClones = true;
+    this._cloneOffset = n;
+  }
+
+  private _getAllSlides(): Element[] {
+    if (!this._hasClones) return this._carouselChildren;
+    return [...this._clonedHead, ...this._carouselChildren, ...this._clonedTail];
+  }
+
   protected createRenderRoot(): HTMLElement | DocumentFragment {
     return this;
   }
