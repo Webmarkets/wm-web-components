@@ -59,10 +59,15 @@ export class WebMarketsDNNCarousel extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: "auto-play" })
   _autoPlay: boolean = false;
 
+  // Property for scroll direction during auto-play
+  @property({ type: String, reflect: true, attribute: "scroll-direction" })
+  _scrollDirection: "left" | "right" = "right";
+
   //TODO: Override auto-play variable if value is specified
   // Property for auto-play interval
   @property({ type: Number, reflect: true, attribute: "auto-play-interval" })
   _autoPlayInterval: number = 5000;
+  
   // Property for auto-play interval
   @property({ type: String, reflect: true, attribute: "controls-style" })
   _controlsStyle: "arrows" | "bubbles" = "arrows";
@@ -138,7 +143,11 @@ export class WebMarketsDNNCarousel extends LitElement {
     }
     if (this._autoPlay) {
       setInterval(() => {
-        this.nextSlide();
+        if (this._scrollDirection === "right") {
+          this.nextSlide();
+        } else {
+          this.previousSlide();
+        }
       }, this._autoPlayInterval);
     }
     this._setupClones();
