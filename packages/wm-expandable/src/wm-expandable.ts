@@ -87,7 +87,16 @@ export class MyElement extends LitElement {
   }
 
   private setHeight(childHeightDelta?: number): number {
-    const content = this.querySelector(`.body__container`);
+    let content;
+    const bodySlot = this.querySelector(`[slot="body"]`);
+    const bodyContainer = this.shadowRoot?.querySelector(".expanded-body__container");
+
+    if (bodySlot) {
+      content = bodySlot;
+    } else {
+      content = bodyContainer;
+    }
+
     let height = this.isOpen ? (content?.scrollHeight as number) : 0;
     let oldHeight = Number.parseInt(this.oldContentHeight);
 
