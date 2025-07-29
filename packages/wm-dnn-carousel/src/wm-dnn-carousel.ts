@@ -67,7 +67,7 @@ export class WebMarketsDNNCarousel extends LitElement {
   // Property for auto-play interval
   @property({ type: Number, reflect: true, attribute: "auto-play-interval" })
   _autoPlayInterval: number = 5000;
-  
+
   // Property for auto-play interval
   @property({ type: String, reflect: true, attribute: "controls-style" })
   _controlsStyle: "arrows" | "bubbles" = "arrows";
@@ -172,28 +172,8 @@ export class WebMarketsDNNCarousel extends LitElement {
         <div class="carousel-back"></div>
       </div>
       ${this.renderingButtons
-        ? html` <slot name="prev-btn"
-              ><div
-                role="button"
-                aria-label="Previous Carousel Item"
-                style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""}
-                class="prev-btn"
-                @click=${this.previousSlide}
-              >
-                ${lastIcon}
-              </div></slot
-            >
-            <slot name="next-btn"
-              ><div
-                role="button"
-                aria-label="Next Carousel Item"
-                style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""}
-                class="next-btn"
-                @click=${this.nextSlide}
-              >
-                ${nextIcon}
-              </div></slot
-            >`
+        ? html` <slot name="prev-btn"><div role="button" aria-label="Previous Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="prev-btn" @click=${this.previousSlide}>${lastIcon}</div></slot>
+            <slot name="next-btn"><div role="button" aria-label="Next Carousel Item" style=${this._noControls || this._controlsStyle != "arrows" ? "display: none;" : ""} class="next-btn" @click=${this.nextSlide}>${nextIcon}</div></slot>`
         : ""}
       ${this._controlsStyle === "bubbles"
         ? html` <div class="bubbles">
@@ -217,6 +197,7 @@ export class WebMarketsDNNCarousel extends LitElement {
   }
   firstUpdated() {
     const observer = new ResizeObserver((e) => this._responsiveListener(e));
+    window.addEventListener("load", () => this._setHeight(this));
     observer.observe(this);
     this._carouselChildren.forEach((child) => {
       // observer.observe(item);
@@ -238,8 +219,7 @@ export class WebMarketsDNNCarousel extends LitElement {
     this._init();
   }
 
-  private _setHeight(e: ResizeObserverEntry[]) {
-    const carousel = e[0].target as WebMarketsDNNCarousel;
+  private _setHeight(carousel: WebMarketsDNNCarousel) {
     let height = 0;
     carousel._carouselChildren.forEach((child) => {
       if (height < child.children[0].scrollHeight) {
@@ -250,7 +230,8 @@ export class WebMarketsDNNCarousel extends LitElement {
   }
 
   private _responsiveListener(e: ResizeObserverEntry[]) {
-    this._setHeight(e);
+    const carousel = e[0].target as WebMarketsDNNCarousel;
+    this._setHeight(carousel);
     this.setBreakpoint();
     if (window.innerWidth < 768) {
       this.renderingButtons = false;
@@ -280,11 +261,7 @@ export class WebMarketsDNNCarousel extends LitElement {
    */
   public addCarouselItems(items: CarouselItem[]) {
     let rendering = false;
-    if (
-      this._carouselChildren.length < this._numCards ||
-      this._currentIndex < (this._numCards + 2) / 2 ||
-      this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2
-    ) {
+    if (this._carouselChildren.length < this._numCards || this._currentIndex < (this._numCards + 2) / 2 || this._carouselChildren.length - this._currentIndex < (this._numCards + 2) / 2) {
       rendering = true;
     }
     this._carouselChildren.push(...items);
@@ -367,9 +344,7 @@ export class WebMarketsDNNCarousel extends LitElement {
           transition-property: transform, left;`
       }
           ${baseStyle}
-          transform: translateX(${
-            swipeOffset ? `calc(${percentageOffset}% + ${swipeOffset}px)` : `${percentageOffset}%`
-          });
+          transform: translateX(${swipeOffset ? `calc(${percentageOffset}% + ${swipeOffset}px)` : `${percentageOffset}%`});
           visibility: visible;
           z-index: 1;`
       );
