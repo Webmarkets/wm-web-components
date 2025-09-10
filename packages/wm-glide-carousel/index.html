@@ -1,16 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Lit + TS</title>
-    <link rel="stylesheet" href="./src/index.css" />
-    <script type="module" src="/src/my-element.ts"></script>
-  </head>
-  <body>
-    <my-element>
-      <h1>Vite + Lit</h1>
-    </my-element>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + Lit + TS</title>
+  <link rel="stylesheet" href="./src/index.css" />
+
+</head>
+
+<body>
+  <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <ul class="glide__slides">
+        <li class="glide__slide">
+          <div class="slide-anchor">
+
+            <img src="/blanco.png" alt="">
+            <div class="description">
+              <h3>Blanco</h3>
+              <h4>Pure Agave With Nothing To Hide.</h4>
+              <p>Unaged. Bold. Just enough to wake the soul.</p>
+            </div>
+          </div>
+        </li>
+        <li class="glide__slide">
+          <div class="slide-anchor">
+
+            <img src="/blanco.png" alt="">
+            <div class="description">
+              <h3>Blanco</h3>
+              <h4>Pure Agave With Nothing To Hide.</h4>
+              <p>Unaged. Bold. Just enough to wake the soul.</p>
+            </div>
+          </div>
+        </li>
+        <li class="glide__slide">
+          <div class="slide-anchor">
+
+            <img src="/blanco.png" alt="">
+            <div class="description">
+              <h3>Blanco</h3>
+              <h4>Pure Agave With Nothing To Hide.</h4>
+              <p>Unaged. Bold. Just enough to wake the soul.</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="controls-wrap">
+
+      <div class="glide__arrows" data-glide-el="controls">
+        <button data-glide-dir="<" class="prev-btn glide__arrow glide__arrow--left"><img src="/caret.svg"></button>
+      </div>
+      <div class="glide__bullets" data-glide-el="controls[nav]">
+        <button class="glide__bullet" data-glide-dir="=0"></button>
+        <button class="glide__bullet" data-glide-dir="=1"></button>
+        <button class="glide__bullet" data-glide-dir="=2"></button>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button data-glide-dir=">" class="next-btn glide__arrow glide__arrow--right"><img src="/caret.svg"></button>
+      </div>
+    </div>
+  </div>
+  <!-- Glide Stuff -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+  <script>
+    new Glide('.glide', {type: 'carousel', peek: {before: 200, after: 50}, startAt: 1}).mount()
+  </script>
+
+  <style>
+    button {
+      cursor: pointer;
+    }
+
+    .glide>.controls-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .glide__bullets {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .glide__bullet {
+      width: 0.75rem;
+      height: 0.75rem;
+      background: #F0ECE4;
+      border: none;
+      border-radius: 50%;
+      opacity: 0.2;
+      transition: 500ms all;
+    }
+
+    .glide__bullet:hover {
+      opacity: 0.75;
+      transition: 500ms all;
+    }
+
+    .glide__bullet--active {
+      width: 1rem;
+      height: 1rem;
+      opacity: 1;
+      transition: 500ms all;
+    }
+
+    .glide__arrow {
+      background: none;
+      border: none;
+      line-height: 0;
+      padding: 0;
+      height: 100%;
+      width: 0.75rem;
+      opacity: 1;
+      transition: 500ms all;
+    }
+
+    .glide__arrow:hover {
+      opacity: 0.75;
+      transition: 500ms all;
+    }
+
+    .glide__arrow>img {
+      max-width: 100%;
+      height: auto;
+      transform: rotate(180deg);
+    }
+
+    .glide__arrow--left>img {
+      transform: rotate(0);
+    }
+
+    .slide-anchor {
+      position: relative;
+      width: 100%;
+      padding: 1rem 0;
+      transition: 500ms all;
+    }
+
+    .slide-anchor>img {
+      opacity: 0.5;
+      position: relative;
+      left: 77%;
+      margin: 0 auto;
+      width: 23%;
+      transition: 500ms all;
+    }
+
+    /* Positional Animations */
+    .glide__slide--active>.slide-anchor>img {
+      opacity: 1;
+      left: 38.5%;
+      transition: 500ms all;
+    }
+
+    .glide__slide--active+.glide__slide>.slide-anchor>img {
+      opacity: 0.5;
+      left: 0;
+      transition: 500ms all;
+    }
+
+    .slide-anchor>.description {
+      position: absolute;
+      bottom: 2rem;
+      padding-left: 2rem;
+      right: -38.5%;
+      width: 38.5%;
+      visibility: hidden;
+      opacity: 0;
+      transition: 500ms all;
+    }
+
+    .slide-anchor>.description>* {
+      margin: 0;
+    }
+
+    .glide__slide--active>.slide-anchor>.description {
+      visibility: visible;
+      opacity: 1;
+      right: 0;
+      transition: 500ms all;
+    }
+  </style>
+</body>
+
 </html>
